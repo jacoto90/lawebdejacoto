@@ -1,0 +1,118 @@
+{
+    "selector_idioma_es": "Espagnol",
+  "selector_idioma_ca": "Catalan",
+  "selector_idioma_en": "Anglais",
+  "selector_idioma_fr": "Français",
+  
+  "titulo_pagina": "José Ángel Colmena - Portfolio",
+  "menu_inicio": "Accueil",
+  "menu_sobre_mi": "À propos",
+  "menu_formacion": "Formation",
+  "menu_experiencia": "Expérience",
+  "menu_servicios": "Services",
+  "menu_habilidades": "Compétences",
+  "menu_proyectos": "Projets",
+
+  "boton_tema_texto": "Thème clair",
+
+  "hero_disponibilidad": "Disponible pour projets et collaborations",
+  "hero_titulo": "José Ángel Colmena Tomás",
+  "hero_subtitulo": "Chef de projet | Consultant logiciel | Développeur Full Stack",
+  "hero_descripcion": "Plus de 3 ans d'expérience dans le développement d'applications web, d'ERPs et de solutions sur mesure. Spécialisé en .NET, Angular et technologies modernes.",
+  "hero_boton_experiencia": "Voir l'expérience",
+  "hero_boton_proyectos": "Mes projets",
+
+  "titulo_sobre_mi": "À propos de moi",
+  "sobre_mi_subtitulo": "Professionnel IT polyvalent et autodidacte",
+  "sobre_mi_ubicacion": "<strong>Localisation :</strong> Gérone, Espagne",
+  "sobre_mi_fecha_nacimiento": "<strong>Date de naissance :</strong> 19 juillet 1990",
+  "sobre_mi_permiso_conducir": "<strong>Permis de conduire :</strong> B - Véhicule personnel",
+  "sobre_mi_idiomas_titulo": "Langues",
+  "sobre_mi_idiomas_detalle": "<strong>Catalan :</strong> C1 | <strong>Espagnol :</strong> C1 | <strong>Anglais :</strong> B1",
+
+  "contacto_email": "joseangelcolmenatomas@gmail.com",
+  "contacto_cv_texto": "Télécharger le CV (PDF)",
+  "contacto_telefono": "+34 618 13 11 94",
+  "contacto_linkedin": "linkedin.com/in/joseangelcolmena",
+
+  "titulo_formacion": "Formation académique",
+  "formacion_1_titulo": "Diplôme supérieur - Développement d'applications web",
+  "formacion_1_centro": "IES Montilivi, Gérone",
+  "formacion_1_fecha": "2023",
+  "formacion_1_descripcion": "Formation avancée en développement d'applications web avec architectures modernes, bases de données, programmation backend/frontend et méthodologies agiles.",
+
+  "formacion_2_titulo": "Diplôme intermédiaire - Assistant systèmes informatiques",
+  "formacion_2_centro": "IES Salvador Espriu, Gérone",
+  "formacion_2_fecha": "2009",
+  "formacion_2_descripcion": "Formation en installation, configuration et maintenance de systèmes informatiques, réseaux locaux et gestion d'infrastructures IT.",
+
+  "titulo_experiencia": "Expérience professionnelle",
+
+  "exp_1_puesto": "Développeur Full Stack · Software & E-commerce",
+  "exp_1_empresa": "THE ANIMALS OBSERVATORY",
+  "exp_1_fecha": "2026 - Aujourd'hui",
+  "exp_1_descripcion": "Développement full stack avec Laravel/PHP pour outils internes produit et PLM, améliorations Shopify Liquid et support IT opérationnel. Validation des changements et support production.",
+
+  "exp_2_puesto": "Développeur Full Stack",
+  "exp_2_empresa": "MEIBIT - Software industriel",
+  "exp_2_fecha": "2025",
+  "exp_2_descripcion": "Software industriel sur mesure en .NET/C#, WinForms, APIs et SQL Server. Dashboards Angular avec KPIs et synchronisation local/cloud pour flux temps réel.",
+
+  "exp_3_puesto": "Développeur ERP Python",
+  "exp_3_empresa": "GISCE - Société de logiciel",
+  "exp_3_fecha": "2024",
+  "exp_3_descripcion": "Développement de modules pour le secteur électrique dans Odoo. Wizards, vues, dashboards, scripts de migration et tests unitaires. Déploiements sur serveurs Linux.",
+
+  "exp_4_puesto": "Développeur Web & SEO",
+  "exp_4_empresa": "DobleSEO - Agence SEO",
+  "exp_4_fecha": "2023",
+  "exp_4_descripcion": "Intégration d'APIs externes (Search Console, OpenAI, Midjourney). Développement de plugins WordPress avec PHP, JS et MySQL. Automatisation SEO.",
+
+  "exp_5_puesto": "Technicien systèmes & ERP",
+  "exp_5_empresa": "ECOBASICS - Secteur alimentaire",
+  "exp_5_fecha": "2022",
+  "exp_5_descripcion": "Implémentation et intégration web sous Odoo 16. Développement de modules Python personnalisés pour l'ERP de l'entreprise et amélioration de processus internes.",
+
+  "exp_6_puesto": "Technicien systèmes",
+  "exp_6_empresa": "ABM & Consulting",
+  "exp_6_fecha": "2009 - 2010",
+  "exp_6_descripcion": "Services IT pour l'entreprise. Gestion des systèmes d'exploitation et des sauvegardes physiques. Installation de réseaux, montage de postes et gestion des ressources informatiques.",
+
+  "titulo_habilidades": "Compétences techniques",
+  "habilidades_frontend_titulo": "Frontend",
+  "habilidades_backend_titulo": "Backend",
+  "habilidades_bbdd_titulo": "Bases de données",
+  "habilidades_otras_titulo": "Autres outils",
+
+  "titulo_proyectos": "Projets phares",
+
+  "titulo_servicios": "Services",
+  "servicio_1_titulo": "Développement logiciel sur mesure",
+  "servicio_1_desc": "Applications web et outils internes orientés processus, scalabilité et performance.",
+  "servicio_2_titulo": "Intégrations et automatisation",
+  "servicio_2_desc": "Connexion ERP, e-commerce et APIs pour réduire les tâches manuelles et améliorer le contrôle opérationnel.",
+  "servicio_3_titulo": "Conseil technique",
+  "servicio_3_desc": "Analyse fonctionnelle, validation des solutions et accompagnement technique en production.",
+
+  "proy_1_titulo": "JACOTO PHOTOGRAPHIE",
+  "proy_1_descripcion": "Site web complet sur mesure en PHP pour photographe professionnel. Catalogue interactif et espaces privés pour les clients. Design responsive et élégant.",
+
+  "proy_2_titulo": "SticNow",
+  "proy_2_descripcion": "Plateforme e-commerce pour la vente de produits. Intégration, gestion de commandes et synchronisation.",
+
+  "proy_3_titulo": "StrellSync · Logiciel sur mesure & conseil",
+  "proy_3_descripcion": "Site corporate pour StrellSync, cabinet de conseil technologique spécialisé dans l'intégration d'ERPs, la synchronisation de données, le contrôle de temps opérationnels et les KPIs pour le transport, la logistique et les projets digitaux.",
+
+  "proy_4_titulo": "Content Generator Pro",
+  "proy_4_descripcion": "Plugin premium WordPress pour la génération automatique de contenu avec IA. Intégration avec OpenAI GPT-4, Midjourney et analyse Search Console.",
+
+  "proy_ver_proyecto": "Voir le projet →",
+  "proy_ver_producto": "Voir le produit →",
+
+  "cta_titulo": "On parle de votre projet ?",
+  "cta_texto": "Si vous devez développer, intégrer ou faire évoluer un logiciel, je peux vous aider à transformer une idée en produit solide et maintenable.",
+  "cta_boton_email": "Envoyer email",
+  "cta_boton_linkedin": "Se connecter sur LinkedIn",
+
+  "footer_texto": "&copy; 2026 José Ángel Colmena Tomás. Tous droits réservés."
+}

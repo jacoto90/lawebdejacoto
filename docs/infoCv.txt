@@ -1,0 +1,167 @@
+Claro, te lo dejo organizado en formato limpio tipo CV:
+
+---
+
+# José Ángel Colmena Tomás
+
+**Perfil profesional:** Software / Full Stack Developer / Consultor Software
+**Email:** [joseangelcolmenatomas@gmail.com](mailto:joseangelcolmenatomas@gmail.com)
+**Teléfono:** 618 131 194
+**LinkedIn:** linkedin.com/in/joseangelcolmena
+**Portfolio:** lawebdejacoto.com
+**Ubicación:** 17006 Girona
+**Fecha de nacimiento:** 19 de julio de 1990
+
+---
+
+## Objetivo profesional
+
+Consultor Software / Gestor de proyectos / Full Stack Developer, con interés en desarrollo de software, gestión técnica de proyectos, análisis funcional, brainstorming de soluciones y mejora de procesos internos.
+
+---
+
+## Perfil técnico
+
+Perfil full stack orientado al desarrollo de software interno, e-commerce y entornos industriales. Experiencia trabajando con tecnologías como Laravel/PHP, .NET/C#, Angular, Shopify Liquid, Odoo/Python y bases de datos SQL.
+
+Experiencia en desarrollo de APIs, workers, sincronización local/nube, procedimientos SQL, dashboards, QA funcional, soporte IT, validación de cambios y soporte en producción.
+
+---
+
+## Stack técnico
+
+| Tecnología            | Experiencia aproximada |
+| --------------------- | ---------------------: |
+| .NET / C#             |                 3 años |
+| PHP                   |                 3 años |
+| WinForms / APIs       |                 3 años |
+| SQL Server / MySQL    |                 3 años |
+| Angular               |               2-3 años |
+| Odoo / Python         |                 2 años |
+| WordPress             |                 2 años |
+| Git / Linux / OpenSSH |                 2 años |
+| Laravel / Herd        |                  1 año |
+| Shopify / Liquid      |                  1 año |
+| PLM / Producto        |                  1 año |
+| IT macOS / Windows    |                 5 años |
+
+---
+
+## Idiomas
+
+**Catalán:** C1
+**Castellano:** C1
+**Inglés:** B1
+
+---
+
+## Datos adicionales
+
+**Permiso de conducir:** B
+**Vehículo propio:** Sí
+
+---
+
+## Formación académica
+
+**2021 - 2023**
+**CFGS Desarrollo de Aplicaciones Web**
+IES Montilivi, Girona
+
+**2009**
+**CFGM Técnico Asistente de Sistemas Informáticos**
+IES Salvador Espriu, Girona
+
+---
+
+## Experiencia laboral tech
+
+### 2026 - Actualidad
+
+## THE ANIMALS OBSERVATORY
+
+**Retail / E-commerce**
+
+* Desarrollo full stack con Laravel/PHP en entorno Herd para herramientas internas de producto, PLM y flujos operativos.
+* Soporte a PLM: resolución de incidencias, depuración de datos, seguimiento de cambios y coordinación con usuarios internos.
+* Desarrollo en Shopify Liquid: secciones, templates, snippets, colecciones, páginas de producto, responsive y mejoras e-commerce.
+* Servicio IT: soporte en macOS, usuarios, periféricos, impresión, plotters, configuración de equipos e incidencias.
+* Validación de cambios, pruebas funcionales, documentación operativa y soporte en producción.
+
+---
+
+### 2025
+
+## MEIBIT
+
+**Software industrial**
+
+* Desarrollo de software a medida en .NET/C#, WinForms, servicios y APIs para procesos de carga y descarga en muelles.
+* Integración de sensores de camión, calzo y puerta, gestionando estados operativos, modo Bypass, sesiones y confirmaciones.
+* Desarrollo de sistema de sincronización local/nube con Worker .NET, API ASP.NET Core, endpoints push/pull y procedimientos SQL Server.
+* Modelado de base de datos en SQL Server para procesos, etapas, usuarios, sesiones, alertas, configuración de equipos, empresas y muelles.
+* Desarrollo de dashboards en Angular con filtros, zoom, leyenda, impresión, timelines, tiempos operativos y KPIs.
+
+---
+
+### 2024
+
+## GISCE
+
+**Empresa de software**
+
+* Desarrollo en Odoo/Python para el sector eléctrico.
+* Creación de wizards, vistas, dashboards, búsquedas SQL personalizadas, scripts de migración y procesos de facturación.
+* Desarrollo de tests unitarios y funcionales.
+* Despliegues por consola en entornos Linux mediante OpenSSH.
+
+---
+
+### 2023
+
+## DOBLESEO
+
+**Agencia SEO**
+
+* Integración de APIs como Google Search Console, OpenAI y Midjourney.
+* Desarrollo de plugins WordPress con PHP, JavaScript y MySQL.
+* Automatización de procesos internos relacionados con SEO y generación de contenido.
+
+---
+
+### 2022
+
+## ECOBASICS Girona
+
+**Sector alimentario**
+
+* Trabajo con Odoo 16.
+* Maquetación web y desarrollo de módulos Python para ERP interno.
+* Soporte en personalización de procesos internos.
+
+---
+
+### 2009
+
+## ABM Group
+
+**Ingeniería & Consulting**
+
+* Servicios IT.
+* Gestión de backups.
+* Soporte hardware.
+* Gestión y mantenimiento de ERP interno a medida.
+
+---
+
+## Experiencia laboral previa
+
+### 2011 - 2021
+
+## NESTLÉ Dolce Gusto
+
+**Oficial Primera Packaging**
+
+* Experiencia en entorno industrial y de producción.
+* Trabajo con procesos operativos, control de calidad y coordinación en líneas de packaging.
+* Conocimiento práctico de dinámicas de producción, mantenimiento operativo y trabajo en equipo.

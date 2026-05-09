@@ -1,0 +1,118 @@
+{
+    "selector_idioma_es": "Espanyol",
+  "selector_idioma_ca": "Català",
+  "selector_idioma_en": "Anglès",
+  "selector_idioma_fr": "Francès",
+  
+  "titulo_pagina": "José Ángel Colmena - Portafoli",
+  "menu_inicio": "Inici",
+  "menu_sobre_mi": "Sobre mi",
+  "menu_formacion": "Formació",
+  "menu_experiencia": "Experiència",
+  "menu_servicios": "Serveis",
+  "menu_habilidades": "Habilitats",
+  "menu_proyectos": "Projectes",
+  "hero_disponibilidad": "Disponible per a projectes i col·laboracions",
+
+  "boton_tema_texto": "Tema clar",
+
+  "hero_titulo": "José Ángel Colmena Tomás",
+  "hero_subtitulo": "Gestor de Projectes | Consultor Software | Desenvolupador Full Stack",
+  "hero_descripcion": "+3 anys d'experiència en desenvolupament d'aplicacions web, ERPs i solucions a mida. Especialitzat en .NET, Angular i tecnologies modernes.",
+  "hero_boton_experiencia": "Veure experiència",
+  "hero_boton_proyectos": "Els meus projectes",
+
+  "titulo_sobre_mi": "Sobre mi",
+  "sobre_mi_subtitulo": "Professional IT versàtil i autodidacta",
+  "sobre_mi_ubicacion": "<strong>Ubicació:</strong> Girona, Espanya",
+  "sobre_mi_fecha_nacimiento": "<strong>Data de naixement:</strong> 19 de juliol de 1990",
+  "sobre_mi_permiso_conducir": "<strong>Permís de conduir:</strong> B - Vehicle propi",
+  "sobre_mi_idiomas_titulo": "Idiomes",
+  "sobre_mi_idiomas_detalle": "<strong>Català:</strong> C1 | <strong>Castellà:</strong> C1 | <strong>Anglès:</strong> B1",
+
+  "contacto_email": "joseangelcolmenatomas@gmail.com",
+  "contacto_cv_texto": "Descarregar currículum (PDF)",
+  "contacto_telefono": "618 13 11 94",
+  "contacto_linkedin": "linkedin.com/in/joseangelcolmena",
+
+  "titulo_formacion": "Formació Acadèmica",
+  "formacion_1_titulo": "CFGS - Desenvolupament d'Aplicacions Web",
+  "formacion_1_centro": "IES Montilivi, Girona",
+  "formacion_1_fecha": "2023",
+  "formacion_1_descripcion": "Formació superior en desenvolupament d'aplicacions web amb enfoc en arquitectures modernes, bases de dades, programació backend/frontend i metodologies àgils.",
+
+  "formacion_2_titulo": "CFGM - Tècnic Assistent de Sistemes Informàtics",
+  "formacion_2_centro": "IES Salvador Espriu, Girona",
+  "formacion_2_fecha": "2009",
+  "formacion_2_descripcion": "Formació en instal·lació, configuració i manteniment de sistemes informàtics, xarxes locals i gestió d'infraestructures IT.",
+
+  "titulo_experiencia": "Experiència Professional",
+
+  "exp_1_puesto": "Desenvolupador Full Stack",
+  "exp_1_empresa": "MEIBIT - Empresa de Software",
+  "exp_1_fecha": "2025 - Actualitat",
+  "exp_1_descripcion": "Desenvolupament de projectes a mida en .NET (API, serveis, WForms) i entorns web en Angular. Disseny d'estructures de dades amb SQL amb enfoc en eficiència i escalabilitat.",
+
+  "exp_2_puesto": "Desenvolupador ERP Python",
+  "exp_2_empresa": "GISCE - Empresa de Software",
+  "exp_2_fecha": "2024",
+  "exp_2_descripcion": "Desenvolupament de mòduls per al sector elèctric a Odoo. Creació de wizards, vistes, dashboards, scripts de migració i tests unitaris. Desplegament en servidors Linux.",
+
+  "exp_3_puesto": "Desenvolupador Web & SEO",
+  "exp_3_empresa": "DobleSEO - Agència SEO",
+  "exp_3_fecha": "2023",
+  "exp_3_descripcion": "Integració d'APIs externes (Search Console, OpenAI, Midjourney). Desenvolupament de plugins WordPress amb PHP, JS i MySQL. Implementació SEO en programació.",
+
+  "exp_4_puesto": "Tècnic de Sistemes & ERP",
+  "exp_4_empresa": "ECOBASICS - Sector Alimentari",
+  "exp_4_fecha": "2022",
+  "exp_4_descripcion": "Implementació i maquetació web a Odoo 16. Desenvolupament de mòduls Python personalitzats per a l'ERP de l'empresa.",
+
+  "exp_5_puesto": "Oficial Primera Packaging",
+  "exp_5_empresa": "NESTLÉ Dolce Gusto",
+  "exp_5_fecha": "2011 - 2021",
+  "exp_5_descripcion": "Gestió de línies de producció i packaging en entorn industrial. Control de qualitat, manteniment preventiu i millora contínua de processos. Treball en equip i coordinació en cadena de producció.",
+
+  "exp_6_puesto": "Tècnic de Sistemes",
+  "exp_6_empresa": "ABM & Consulting",
+  "exp_6_fecha": "2009 - 2010",
+  "exp_6_descripcion": "Serveis d'IT per a l'empresa. Gestió de sistemes operatius i còpies de seguretat físiques. Instal·lacions de xarxes, muntatge d'equips i gestió de recursos informàtics.",
+
+  "titulo_habilidades": "Habilitats Tècniques",
+  "habilidades_frontend_titulo": "Frontend",
+  "habilidades_backend_titulo": "Backend",
+  "habilidades_bbdd_titulo": "Bases de Dades",
+  "habilidades_otras_titulo": "Altres eines",
+
+  "titulo_servicios": "Serveis",
+  "servicio_1_titulo": "Desenvolupament de software a mida",
+  "servicio_1_desc": "Aplicacions web i eines internes enfocades en processos, escalabilitat i rendiment.",
+  "servicio_2_titulo": "Integracions i automatització",
+  "servicio_2_desc": "Connexió d'ERP, e-commerce i APIs per eliminar tasques manuals i millorar el control operatiu.",
+  "servicio_3_titulo": "Consultoria tècnica",
+  "servicio_3_desc": "Anàlisi funcional, validació de solucions i acompanyament tècnic en producció.",
+
+  "titulo_proyectos": "Projectes Destacats",
+
+  "proy_1_titulo": "JACOTO FOTOGRAFIA",
+  "proy_1_descripcion": "Desenvolupament web complet per a fotògraf professional amb PHP a mida. Catàleg interactiu i books privats per a clients. Disseny responsive i elegant.",
+
+  "proy_2_titulo": "SticNow",
+  "proy_2_descripcion": "Plataforma de comerç electrònic per a venda de producte. Integració, gestió de comandes i sincronització.",
+
+  "proy_3_titulo": "StrellSync · Software a mida & consultoria",
+  "proy_3_descripcion": "Web corporativa per a StrellSync, consultoria tecnològica especialitzada en integració d'ERPs, sincronització de dades entre sistemes, control de temps operatius i disseny de KPIs per a transport, logística i projectes digitals.",
+
+  "proy_4_titulo": "Content Generator Pro",
+  "proy_4_descripcion": "Plugin premium de WordPress per a generació automàtica de contingut amb IA. Integració amb OpenAI GPT-4, Midjourney i anàlisi de Search Console.",
+
+  "proy_ver_proyecto": "Veure projecte →",
+  "proy_ver_producto": "Veure producte →",
+
+  "cta_titulo": "Parlem del teu projecte?",
+  "cta_texto": "Si necessites desenvolupar, integrar o escalar software, et puc ajudar a convertir una idea en un producte sòlid i mantenible.",
+  "cta_boton_email": "Enviar email",
+  "cta_boton_linkedin": "Connectar a LinkedIn",
+
+  "footer_texto": "&copy; 2026 José Ángel Colmena Tomás. Tots els drets reservats."
+}

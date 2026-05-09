@@ -1,0 +1,11 @@
+{
+  "name": "jacoto/portfolio",
+  "description": "Component-based professional portfolio",
+  "type": "project",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Jacoto\\Portfolio\\": "src/"
+    }
+  }
+}

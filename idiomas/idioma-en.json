@@ -1,0 +1,118 @@
+{
+    "selector_idioma_es": "Spanish",
+  "selector_idioma_ca": "Catalan",
+  "selector_idioma_en": "English",
+  "selector_idioma_fr": "French",
+  
+  "titulo_pagina": "José Ángel Colmena - Portfolio",
+  "menu_inicio": "Home",
+  "menu_sobre_mi": "About me",
+  "menu_formacion": "Education",
+  "menu_experiencia": "Experience",
+  "menu_servicios": "Services",
+  "menu_habilidades": "Skills",
+  "menu_proyectos": "Projects",
+  "hero_disponibilidad": "Available for projects and collaborations",
+
+  "boton_tema_texto": "Light theme",
+
+  "hero_titulo": "José Ángel Colmena Tomás",
+  "hero_subtitulo": "Full Stack developer and software consultant focused on outcomes",
+  "hero_descripcion": "I build web and ERP products that automate workflows and improve business performance. Core stack: .NET, Angular, PHP, Python and APIs.",
+  "hero_boton_experiencia": "See business impact",
+  "hero_boton_proyectos": "Explore projects",
+
+  "titulo_sobre_mi": "About me",
+  "sobre_mi_subtitulo": "Versatile and self-taught IT professional",
+  "sobre_mi_ubicacion": "<strong>Location:</strong> Girona, Spain",
+  "sobre_mi_fecha_nacimiento": "<strong>Date of birth:</strong> July 19th, 1990",
+  "sobre_mi_permiso_conducir": "<strong>Driving license:</strong> B - Own vehicle",
+  "sobre_mi_idiomas_titulo": "Languages",
+  "sobre_mi_idiomas_detalle": "<strong>Catalan:</strong> C1 | <strong>Spanish:</strong> C1 | <strong>English:</strong> B1",
+
+  "contacto_email": "joseangelcolmenatomas@gmail.com",
+  "contacto_cv_texto": "Download CV (PDF)",
+  "contacto_telefono": "+34 618 13 11 94",
+  "contacto_linkedin": "linkedin.com/in/joseangelcolmena",
+
+  "titulo_formacion": "Education",
+  "formacion_1_titulo": "Higher Degree - Web Application Development",
+  "formacion_1_centro": "IES Montilivi, Girona",
+  "formacion_1_fecha": "2023",
+  "formacion_1_descripcion": "Advanced training in web application development with modern architectures, databases, backend/frontend programming and agile methodologies.",
+
+  "formacion_2_titulo": "Intermediate Degree - IT Systems Assistant",
+  "formacion_2_centro": "IES Salvador Espriu, Girona",
+  "formacion_2_fecha": "2009",
+  "formacion_2_descripcion": "Training in installation, configuration and maintenance of IT systems, local networks and infrastructure management.",
+
+  "titulo_experiencia": "Professional Experience",
+
+  "exp_1_puesto": "Full Stack Developer · Software & E-commerce",
+  "exp_1_empresa": "THE ANIMALS OBSERVATORY",
+  "exp_1_fecha": "2026 - Present",
+  "exp_1_descripcion": "Full stack development with Laravel/PHP for internal product and PLM tooling, Shopify Liquid enhancements and operational IT support. Change validation and production support.",
+
+  "exp_2_puesto": "Full Stack Developer",
+  "exp_2_empresa": "MEIBIT - Industrial Software",
+  "exp_2_fecha": "2025",
+  "exp_2_descripcion": "Custom industrial software in .NET/C#, WinForms, APIs and SQL Server. Angular dashboards with KPIs and local/cloud synchronisation for real-time operational flows.",
+
+  "exp_3_puesto": "ERP Python Developer",
+  "exp_3_empresa": "GISCE - Software Company",
+  "exp_3_fecha": "2024",
+  "exp_3_descripcion": "Module development for the electrical sector in Odoo. Wizards, views, dashboards, migration scripts and unit tests. Linux server deployments.",
+
+  "exp_4_puesto": "Web & SEO Developer",
+  "exp_4_empresa": "DobleSEO - SEO Agency",
+  "exp_4_fecha": "2023",
+  "exp_4_descripcion": "Integration of external APIs (Search Console, OpenAI, Midjourney). WordPress plugin development with PHP, JS and MySQL. SEO automation in code.",
+
+  "exp_5_puesto": "Systems & ERP Technician",
+  "exp_5_empresa": "ECOBASICS - Food Sector",
+  "exp_5_fecha": "2022",
+  "exp_5_descripcion": "Implementation and web layout in Odoo 16. Custom Python modules for the company's ERP and internal process improvements.",
+
+  "exp_6_puesto": "Systems Technician",
+  "exp_6_empresa": "ABM & Consulting",
+  "exp_6_fecha": "2009 - 2010",
+  "exp_6_descripcion": "IT services for the company. OS management and physical backups. Network installation, hardware setup and IT resources management.",
+
+  "titulo_habilidades": "Technical Skills",
+  "habilidades_frontend_titulo": "Frontend",
+  "habilidades_backend_titulo": "Backend",
+  "habilidades_bbdd_titulo": "Databases",
+  "habilidades_otras_titulo": "Other tools",
+
+  "titulo_servicios": "Services",
+  "servicio_1_titulo": "Custom software development",
+  "servicio_1_desc": "Web applications and internal tools focused on process efficiency, scalability and performance.",
+  "servicio_2_titulo": "Integrations and automation",
+  "servicio_2_desc": "ERP, e-commerce and API integrations to remove manual tasks and improve operational control.",
+  "servicio_3_titulo": "Technical consulting",
+  "servicio_3_desc": "Functional analysis, solution validation and technical guidance through production delivery.",
+
+  "titulo_proyectos": "Highlighted Projects",
+
+  "proy_1_titulo": "JACOTO PHOTOGRAPHY",
+  "proy_1_descripcion": "Full custom PHP website for a professional photographer. Interactive gallery and private client areas. Responsive and elegant design.",
+
+  "proy_2_titulo": "SticNow",
+  "proy_2_descripcion": "E-commerce platform for product sales. Integration, order management and synchronisation.",
+
+  "proy_3_titulo": "StrellSync · Custom software & consulting",
+  "proy_3_descripcion": "Corporate site for StrellSync, tech consulting focused on ERP integration, data synchronisation, time tracking and KPIs for transport, logistics and digital projects.",
+
+  "proy_4_titulo": "Content Generator Pro",
+  "proy_4_descripcion": "Premium WordPress plugin for automatic AI content generation. Integration with OpenAI GPT-4, Midjourney and Search Console analysis. 500+ active installs.",
+
+  "proy_ver_proyecto": "View project →",
+  "proy_ver_producto": "View product →",
+
+  "cta_titulo": "Shall we talk about your project?",
+  "cta_texto": "If you need to build, integrate or scale software, I can help turn your idea into a solid and maintainable product.",
+  "cta_boton_email": "Send email",
+  "cta_boton_linkedin": "Connect on LinkedIn",
+
+  "footer_texto": "&copy; 2026 José Ángel Colmena Tomás. All rights reserved."
+}

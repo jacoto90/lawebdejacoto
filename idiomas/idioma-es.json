@@ -1,0 +1,118 @@
+{
+    "selector_idioma_es": "Español",
+  "selector_idioma_ca": "Catalán",
+  "selector_idioma_en": "Inglés",
+  "selector_idioma_fr": "Francés",
+
+  "titulo_pagina": "José Ángel Colmena - Portfolio",
+  "menu_inicio": "Inicio",
+  "menu_sobre_mi": "Sobre mí",
+  "menu_formacion": "Formación",
+  "menu_experiencia": "Experiencia",
+  "menu_servicios": "Servicios",
+  "menu_habilidades": "Habilidades",
+  "menu_proyectos": "Proyectos",
+
+  "boton_tema_texto": "Tema claro",
+
+  "hero_disponibilidad": "Disponible para proyectos y colaboraciones",
+  "hero_titulo": "José Ángel Colmena Tomás",
+  "hero_subtitulo": "Desarrollador Full Stack y consultor software orientado a resultados",
+  "hero_descripcion": "Construyo productos web y ERP que automatizan procesos y mejoran negocio. Stack principal: .NET, Angular, PHP, Python y APIs.",
+  "hero_boton_experiencia": "Ver impacto real",
+  "hero_boton_proyectos": "Explorar proyectos",
+
+  "titulo_sobre_mi": "Sobre mí",
+  "sobre_mi_subtitulo": "Profesional IT versátil y autodidacta",
+  "sobre_mi_ubicacion": "<strong>Ubicación:</strong> Girona, España",
+  "sobre_mi_fecha_nacimiento": "<strong>Fecha de nacimiento:</strong> 19 de julio de 1990",
+  "sobre_mi_permiso_conducir": "<strong>Permiso de conducir:</strong> B - Vehículo propio",
+  "sobre_mi_idiomas_titulo": "Idiomas",
+  "sobre_mi_idiomas_detalle": "<strong>Catalán:</strong> C1 | <strong>Castellano:</strong> C1 | <strong>Inglés:</strong> B1",
+
+  "contacto_email": "joseangelcolmenatomas@gmail.com",
+  "contacto_cv_texto": "Descargar Curriculum (PDF)",
+  "contacto_telefono": "618 13 11 94",
+  "contacto_linkedin": "linkedin.com/in/joseangelcolmena",
+
+  "titulo_formacion": "Formación Académica",
+  "formacion_1_titulo": "CFGS - Desarrollo de Aplicaciones Web",
+  "formacion_1_centro": "IES Montilivi, Girona",
+  "formacion_1_fecha": "2023",
+  "formacion_1_descripcion": "Formación superior en desarrollo de aplicaciones web con enfoque en arquitecturas modernas, bases de datos, programación backend/frontend y metodologías ágiles.",
+
+  "formacion_2_titulo": "CFGM - Técnico Asistente de Sistemas Informáticos",
+  "formacion_2_centro": "IES Salvador Espriu, Girona",
+  "formacion_2_fecha": "2009",
+  "formacion_2_descripcion": "Formación en instalación, configuración y mantenimiento de sistemas informáticos, redes locales y gestión de infraestructuras IT.",
+
+  "titulo_experiencia": "Experiencia Profesional",
+
+  "exp_1_puesto": "Desarrollador Full Stack · Software & E-commerce",
+  "exp_1_empresa": "THE ANIMALS OBSERVATORY",
+  "exp_1_fecha": "2026 - Actualidad",
+  "exp_1_descripcion": "Desarrollo full stack con Laravel/PHP en herramientas internas de producto y PLM, mejoras Shopify Liquid y soporte técnico operativo. Validación de cambios y soporte en producción.",
+
+  "exp_2_puesto": "Desarrollador Full Stack",
+  "exp_2_empresa": "MEIBIT - Software Industrial",
+  "exp_2_fecha": "2025",
+  "exp_2_descripcion": "Software a medida en .NET/C#, WinForms, APIs y SQL Server para operaciones industriales. Dashboards Angular con KPIs y sincronización local/nube para flujos en tiempo real.",
+
+  "exp_3_puesto": "Desarrollador ERP Python",
+  "exp_3_empresa": "GISCE - Empresa de Software",
+  "exp_3_fecha": "2024",
+  "exp_3_descripcion": "Desarrollo de módulos para el sector eléctrico en Odoo. Creación de wizards, vistas, dashboards, scripts de migración y tests unitarios. Despliegue en servidores Linux.",
+
+  "exp_4_puesto": "Desarrollador Web & SEO",
+  "exp_4_empresa": "DobleSEO - Agencia SEO",
+  "exp_4_fecha": "2023",
+  "exp_4_descripcion": "Integración de APIs externas (Search Console, OpenAI y Midjourney). Desarrollo de plugins WordPress con PHP, JavaScript y MySQL. Automatización de procesos SEO.",
+
+  "exp_5_puesto": "Técnico de Sistemas & ERP",
+  "exp_5_empresa": "ECOBASICS - Sector Alimentario",
+  "exp_5_fecha": "2022",
+  "exp_5_descripcion": "Implementación y maquetación web en Odoo 16. Desarrollo de módulos Python personalizados para el ERP de la empresa y mejora de procesos internos.",
+
+  "exp_6_puesto": "Técnico de Sistemas",
+  "exp_6_empresa": "ABM & Consulting",
+  "exp_6_fecha": "2009 - 2010",
+  "exp_6_descripcion": "Servicios IT, gestión de sistemas operativos, backups físicos y soporte de hardware/redes. Mantenimiento y soporte de ERP interno.",
+
+  "titulo_servicios": "Servicios",
+  "servicio_1_titulo": "Desarrollo de software a medida",
+  "servicio_1_desc": "Aplicaciones web y herramientas internas con enfoque en procesos, escalabilidad y rendimiento.",
+  "servicio_2_titulo": "Integraciones y automatización",
+  "servicio_2_desc": "Conexión de ERP, e-commerce y APIs para eliminar tareas manuales y ganar control operativo.",
+  "servicio_3_titulo": "Consultoría técnica",
+  "servicio_3_desc": "Análisis funcional, validación de soluciones y acompañamiento técnico en producción.",
+
+  "titulo_habilidades": "Habilidades Técnicas",
+  "habilidades_frontend_titulo": "Frontend",
+  "habilidades_backend_titulo": "Backend",
+  "habilidades_bbdd_titulo": "Bases de Datos",
+  "habilidades_otras_titulo": "Otras Herramientas",
+
+  "titulo_proyectos": "Proyectos Destacados",
+
+  "proy_1_titulo": "JACOTO FOTOGRAFÍA",
+  "proy_1_descripcion": "Desarrollo web completo para fotógrafo profesional con PHP a medida. Catálogo interactivo y books privados para clientes. Diseño responsive y elegante.",
+
+  "proy_2_titulo": "SticNow",
+  "proy_2_descripcion": "Plataforma de comercio electrónico para venta de producto. Integración, gestión de pedidos y sincronización.",
+
+  "proy_3_titulo": "StrellSync · Software a medida & consultoría",
+  "proy_3_descripcion": "Web corporativa para StrellSync, consultoría tecnológica especializada en integración de ERPs, sincronización de datos entre sistemas, control de tiempos operativos y diseño de KPIs para transporte, logística e iniciativas digitales.",
+
+  "proy_4_titulo": "Content Generator Pro",
+  "proy_4_descripcion": "Plugin premium de WordPress para generación automática de contenido con IA. Integración con OpenAI GPT-4, Midjourney y análisis de Search Console. Más de 500 instalaciones activas.",
+
+  "proy_ver_proyecto": "Ver proyecto →",
+  "proy_ver_producto": "Ver producto →",
+
+  "cta_titulo": "¿Hablamos de tu proyecto?",
+  "cta_texto": "Si necesitas desarrollar, integrar o escalar tu software, puedo ayudarte a convertir una idea en un producto sólido y mantenible.",
+  "cta_boton_email": "Enviar email",
+  "cta_boton_linkedin": "Conectar en LinkedIn",
+
+  "footer_texto": "&copy; 2026 José Ángel Colmena Tomás. Todos los derechos reservados."
+}
