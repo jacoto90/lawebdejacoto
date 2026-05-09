@@ -48,4 +48,9 @@ Options -Indexes
     RewriteEngine On
     RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
     RewriteRule .* - [F,L]
+
+    # Clean routes (/, /sobre-mi, /en/about, etc.)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L,QSA]
 </IfModule>

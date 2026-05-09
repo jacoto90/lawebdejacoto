@@ -1,10 +1,66 @@
 <?php
 $profile = require __DIR__ . '/data/profile.php';
 $translations = require __DIR__ . '/data/translations.php';
-$lang = $_GET['lang'] ?? 'es';
+$routeSlugs = [
+    'home' => ['es' => '', 'en' => ''],
+    'about' => ['es' => 'sobre-mi', 'en' => 'about'],
+    'experience' => ['es' => 'experiencia', 'en' => 'experience'],
+    'services' => ['es' => 'servicios', 'en' => 'services'],
+    'projects' => ['es' => 'proyectos', 'en' => 'projects'],
+    'hobby' => ['es' => 'hobbies', 'en' => 'hobbies'],
+    'contact' => ['es' => 'hablemos', 'en' => 'contact'],
+];
+
+$targetIds = [
+    'home' => 'top',
+    'about' => 'about',
+    'experience' => 'experience',
+    'services' => 'services',
+    'projects' => 'projects',
+    'hobby' => 'hobby',
+    'contact' => 'contact',
+];
+
+$lang = 'es';
+$currentRouteKey = 'home';
+
+$requestPath = trim((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+$segments = array_values(array_filter(explode('/', $requestPath), 'strlen'));
+
+if (!empty($segments) && $segments[0] === 'index.php') {
+    array_shift($segments);
+}
+
+if (!empty($segments) && in_array($segments[0], ['es', 'en'], true)) {
+    $lang = $segments[0];
+    array_shift($segments);
+}
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en'], true)) {
+    $lang = $_GET['lang'];
+}
+
 if (!isset($translations[$lang])) {
     $lang = 'es';
 }
+
+$slug = $segments[0] ?? '';
+if ($slug !== '') {
+    foreach ($routeSlugs as $key => $langs) {
+        if ($slug === $langs['es'] || $slug === $langs['en']) {
+            $currentRouteKey = $key;
+            break;
+        }
+    }
+}
+
+$urlFor = static function (string $routeKey = 'home', ?string $forceLang = null) use ($routeSlugs, $lang): string {
+    $useLang = $forceLang ?? $lang;
+    $prefix = $useLang === 'en' ? '/en' : '';
+    $slug = $routeSlugs[$routeKey][$useLang] ?? '';
+    return $slug === '' ? ($prefix === '' ? '/' : $prefix) : $prefix . '/' . $slug;
+};
+
 $t = $translations[$lang];
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -15,7 +71,7 @@ $t = $translations[$lang];
     <meta name="description" content="<?= htmlspecialchars($t['meta_description']) ?>">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
-<body>
+<body data-scroll-target="<?= htmlspecialchars($targetIds[$currentRouteKey] ?? 'top') ?>">
 <div id="pageLoader" class="page-loader" aria-hidden="true">
     <div class="loader-card">
         <span></span>

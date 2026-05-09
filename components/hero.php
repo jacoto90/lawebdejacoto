@@ -1,4 +1,4 @@
-<?php /** @var array $profile */ /** @var array $t */ /** @var string $lang */ ?>
+<?php /** @var array $profile */ /** @var array $t */ /** @var string $lang */ /** @var callable $urlFor */ ?>
 <section class="hero" id="top">
     <div class="container hero-grid">
         <div>
@@ -15,7 +15,7 @@
             <p class="hero-role"><?= htmlspecialchars($profile['role'][$lang] ?? $profile['role']['es']) ?></p>
             <p class="hero-text"><?= htmlspecialchars($profile['bio'][$lang] ?? $profile['bio']['es']) ?></p>
             <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary"><?= htmlspecialchars($t['hero_view_projects']) ?></a>
+                <a href="<?= htmlspecialchars($urlFor('projects')) ?>" class="btn btn-primary"><?= htmlspecialchars($t['hero_view_projects']) ?></a>
                 <a href="<?= htmlspecialchars($profile['cv']) ?>" class="btn btn-ghost" download="<?= htmlspecialchars($profile['cv_download_name']) ?>"><?= htmlspecialchars($t['hero_download_cv']) ?></a>
             </div>
             <div class="highlight-grid">

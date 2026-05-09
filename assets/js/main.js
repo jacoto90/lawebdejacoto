@@ -9,6 +9,16 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     });
 });
 
+const scrollTarget = document.body.getAttribute('data-scroll-target');
+if (scrollTarget) {
+    const targetNode = document.getElementById(scrollTarget);
+    if (targetNode) {
+        window.requestAnimationFrame(() => {
+            targetNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+}
+
 const menuBtn = document.getElementById('menuBtn');
 const mainNav = document.getElementById('mainNav');
 const menuOverlay = document.getElementById('menuOverlay');
