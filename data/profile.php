@@ -46,7 +46,7 @@ return [
             'label' => ['es' => 'proyectos entregados', 'en' => 'projects shipped'],
         ],
         [
-            'metric' => '3+',
+            'metric' => '5+',
             'label' => ['es' => 'años tech', 'en' => 'years in tech'],
         ],
         [
