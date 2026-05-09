@@ -67,6 +67,7 @@ $t = $translations[$lang];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
     <title><?= htmlspecialchars($profile['name']) ?> · Portfolio</title>
     <meta name="description" content="<?= htmlspecialchars($t['meta_description']) ?>">
     <link rel="stylesheet" href="assets/css/main.css">
