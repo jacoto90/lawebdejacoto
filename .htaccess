@@ -1,22 +1,37 @@
 # Security baseline
 Options -Indexes
 
-# Disable server signature
-ServerSignature Off
-
 # Block hidden files and VCS
 <FilesMatch "(^\.|\.git|\.svn|\.hg)">
-    Require all denied
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
 # Block sensitive config and backup files
 <FilesMatch "(composer\.(json|lock)|\.env|\.ini|\.log|\.sql|\.bak|\.old|\.swp)$">
-    Require all denied
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
 # Prevent direct access to internal docs/data text
 <FilesMatch "^(infoCv\.txt|inodos\.txt)$">
-    Require all denied
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
 # Basic hardening headers
