@@ -43,15 +43,15 @@ return [
     'highlights' => [
         [
             'metric' => '20+',
-            'label' => ['es' => 'proyectos entregados', 'en' => 'projects shipped'],
+            'label' => ['es' => 'proyectos', 'en' => 'projects'],
         ],
         [
             'metric' => '5+',
-            'label' => ['es' => 'años tech', 'en' => 'years in tech'],
+            'label' => ['es' => 'años tech', 'en' => 'tech years'],
         ],
         [
             'metric' => '12+',
-            'label' => ['es' => 'años industrial', 'en' => 'industrial years'],
+            'label' => ['es' => 'años indust.', 'en' => 'indust. years'],
         ],
     ],
     'experience' => [

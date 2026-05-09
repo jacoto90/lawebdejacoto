@@ -853,16 +853,16 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
 
     .highlight-card {
         min-width: 0;
-        padding: 0.48rem 0.4rem;
+        padding: 0.58rem 0.5rem;
     }
 
     .highlight-card strong {
-        font-size: 0.9rem;
+        font-size: 1.56rem;
     }
 
     .highlight-card span {
-        font-size: 0.5rem;
-        letter-spacing: 0.05em;
+        font-size: 0.80rem;
+        letter-spacing: 0.06em;
     }
 
     .timeline-item,
