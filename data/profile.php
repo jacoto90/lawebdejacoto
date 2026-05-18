@@ -92,6 +92,11 @@ return [
                 [
                     'es' => 'Sistema de registro de tiempos operativos en muelles con eventos de camión, puerta y calzo en tiempo real.',
                     'en' => 'Built a dock-time tracking system with real-time truck, door, and wheel chock events.',
+                    'url' => 'proyecto-logistica/?lang=%lang%',
+                    'url_label' => [
+                        'es' => 'Ver proyecto+',
+                        'en' => 'View project+',
+                    ],
                 ],
                 [
                     'es' => 'Worker de sincronización local/nube con API ASP.NET Core y procesos SQL para continuidad operativa offline/online.',

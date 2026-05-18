@@ -1,0 +1,485 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MANUAL DE USUARIO
+portal web
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MANUAL DE USUARIO
+Plataforma Web de gestión de control de tiempos en entornos logísticos de muelles de Carga/Descarga
+ÍNDICE
+Descripción
+Dashboard
+Timeline (Muelle)
+Timeline (Carretillero)
+Vista Mapa
+Vista Card
+Alertas
+Estadísticas de Muelles
+Estadísticas de Carretilleros
+Estadísticas de Alertas
+Configuración (Usuario Administrador)
+11.1. Gestión de Estados de Muelle
+11.2. Gestión de Equipos
+11.3. Gestión de Etapas
+11.4. Gestión de Muelles
+11.5. Gestión de Usuarios
+11.6. Gestión de Horas Laborales
+11.7. Configuración de Alertas
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Descripción
+Esta aplicación web está diseñada para la gestión del control de tiempos en entornos logísticos de muelles de carga y descarga. Proporciona un entorno de control avanzado que permite administrar usuarios, dispositivos y registros de actividad de tiempos de manera centralizada y eficiente. Su objetivo es optimizar las operaciones de carga/descarga, monitorear el desempeño en tiempo real y analizar indicadores clave para mejorar la eficiencia logística.
+Entre sus principales funcionalidades se incluyen:
+Login: Acceso al portal web mediante un usuario con contraseña
+Dashboard: Visión general semanal de la operación, mostrando datos relacionados con los tiempos de procesos, sus etapas, rankings de carretilleros, alertas y gráficos de ocupación de muelles.
+Timeline (Muelle): Vista cronológica gráfica de todas las actividades ocurridas en un muelle específico durante un día seleccionado, incluyendo el estado en tiempo real.
+Timeline (Carretillero): Vista cronológica gráfica de las actividades de un operador de carretilla elevadora durante un día seleccionado, con detalle de sus sesiones y estado en tiempo real.
+Vista Mapa: Visualización en un mapa de la planta logística, mostrando la ubicación de los muelles y sus estados en tiempo real. Permite crear y gestionar diferentes vistas del mapa de muelles.
+Vista Card: Visualización en forma de tarjetas de cada muelle en tiempo real, indicando si están ocupados, libres, offline o bloqueados, junto con la etapa actual de la sesión y cualquier alerta activa en ese muelle.
+Alertas: Listado y filtrado de todas las alertas generadas por el sistema, con posibilidad de filtrarlas por rango de fechas, estado y carretillero, para un seguimiento y gestión de incidencias.
+Estadísticas de Muelles: Indicadores clave de rendimiento (KPI) relacionados con la utilización de los muelles, filtrables por fechas, muelles y zonas, con opción de exportar informes en PDF y Excel. Incluye información sobre eficiencia, horas pico de actividad, número de sesiones por muelle y tiempo de puerta abierta, entre otros.
+Estadísticas de Carretilleros: KPI sobre el desempeño de los operadores de carretillas, filtrables por fechas, muelles y zonas, con exportación a PDF/Excel. Muestra sesiones totales, porcentaje de sesiones óptimas, duración media por sesión, horas pico de trabajo, tiempos muertos, eficiencia del operario, top operadores más efectivos y aquellos con menos alertas, además de gráficos comparativos.
+Estadísticas de Alertas: KPI sobre las alertas registradas, filtrables por fechas, muelles y zonas, exportables a PDF/Excel. Proporciona el total de alertas en el periodo, la categoría principal de alertas más frecuente, y gráficos de alertas distribuidas por categoría, por día y por hora.
+Configuración (Administrador): Módulo destinado a usuarios administradores para gestionar la configuración del sistema. Permite personalizar estados de muelle, configurar equipos (dispositivos), definir etapas del proceso (tiempos esperados por etapa), asignar equipos a muelles, gestionar usuarios y sus permisos, establecer parámetros de horas laborales y configurar las alertas del sistema.
+Nota: Este manual describe en detalle cada una de estas funcionalidades, proporcionando al usuario una guía paso a paso para el uso eficaz de la plataforma. A continuación, se presentan cada uno de los módulos y sus características principales.
+(imagen)
+2. Dashboard
+El Dashboard es la pantalla principal que ofrece una visión general de la operación logística a lo largo de la última semana (u otro periodo seleccionado). Esta sección reúne información resumida y visual para entender rápidamente el rendimiento de los muelles y la actividad de los carretilleros.
+En el Dashboard, el usuario puede encontrar:
+Métricas de tiempos de proceso: Valores promedio o totales de duración de las cargas/descargas y desglose por etapas del proceso, para evaluar la eficiencia temporal.
+Ranking de carretilleros: Una clasificación de los operadores de carretilla según criterios de desempeño (por ejemplo, número de sesiones completadas, eficiencia o menos alertas generadas) durante la semana.
+Alertas recientes o acumuladas: El número de alertas ocurridas en la semana y posiblemente detalles de las más recientes o críticas, dando visibilidad a incidentes o demoras.
+Gráficos de ocupación de muelles: Representaciones visuales (gráficos de barras o líneas) que muestran la utilización de los muelles a lo largo de la semana, identificando períodos de mayor actividad (picos) y de menor uso.
+El Dashboard filtrar la información durante los pasados 7 dias. Además, cada componente del Dashboard podría permitir interacción; por ejemplo, hacer clic en un gráfico o en un carretillero o muelles). La información está presentada de manera resumida con el fin de brindar una visión rápida del estado general de la operativa.
+En la imagen anterior, se aprecia el Dashboard con sus distintos paneles de información. El usuario puede ver rápidamente el estado de la última semana: los tiempos promedio de cada etapa del proceso, qué operador destaca en rendimiento, cuántas alertas se produjeron y cuándo hubo mayor ocupación de muelles. Esta vista general ayuda a identificar áreas que requieren atención o mejora sin tener que profundizar en los datos detallados de inmediato.
+3. Timeline Grafico (Muelle)
+La funcionalidad Timeline (Muelle) ofrece una vista cronológica detallada de las actividades de un muelle específico a lo largo de un día. Esta línea de tiempo permite visualizar gráficamente cómo transcurrieron las sesiones de carga/descarga en ese muelle, mostrando cada etapa del proceso con su duración y los intervalos de tiempo sin actividad. Es una herramienta muy útil para analizar el uso de un muelle en particular en una jornada y detectar ineficiencias o tiempos muertos.
+Uso: El usuario puede filtrar la línea de tiempo seleccionando:
+Fecha: Elegir el día que se desea analizar.
+Muelle: Seleccionar el muelle de interés (en caso de que la vista Timeline permita elegir distintos muelles desde la misma pantalla).
+Una vez aplicados los filtros, se presenta una línea de tiempo horizontal que abarca de 00:00 a 24:00 del día seleccionado. Sobre esta línea se delinean bloques o segmentos de diferentes colores, donde cada bloque representa una sesión de carga/descarga en ese muelle. La posición y longitud de cada bloque indican la hora de inicio y la duración de la sesión, respectivamente. Además, dentro o junto a cada bloque, se suelen indicar las etapas del proceso (como por ejemplo cuándo se puso el retenedor, cuándo se abrió la puerta, etc.) y cualquier alerta ocurrida durante esa sesión.
+En la ilustración de la Timeline de Muelle, cada sesión está codificada visualmente. Por ejemplo, un bloque verde puede indicar una sesión que se desarrolló dentro de los tiempos esperados, mientras que un bloque rojo podría señalar que la sesión excedió el tiempo previsto (mostrando un exceso de tiempo respecto a los KPI definidos). La suma de los tiempos previstos por etapa (definidos en la configuración de etapas) se utiliza como referencia: si la sesión sobrepasa esa suma, la parte excedente puede resaltarse para alertar de una demora.
+La Timeline también muestra el estado en tiempo real: si en el momento actual hay un camión en proceso en ese muelle, se puede marcar con un indicador (por ejemplo, una línea vertical indicando la hora actual) o un resaltado en el bloque en curso. De esta forma, el usuario sabe no solo lo que ocurrió durante el día, sino lo que está ocurriendo ahora mismo en el muelle seleccionado.
+
+Mediante esta vista, es posible identificar fácilmente periodos de inactividad (franjas horarias donde el muelle estuvo libre) y periodos de alta utilización. También se pueden detectar cuellos de botella; por ejemplo, si ciertas etapas sistemáticamente toman más tiempo de lo previsto (bloques con secciones excedidas en rojo), el supervisor puede investigar las causas y tomar acciones correctivas.
+4. Timeline Gráfico (Carretillero)
+La funcionalidad Timeline (Carretillero) proporciona una vista cronológica de la actividad de un operador de carretilla a lo largo de un día específico. Su presentación es similar a la Timeline de Muelle, pero en este caso enfocada en el trabajo de un carretillero individual, independientemente de qué muelle haya utilizado. Esto permite analizar cómo el operador distribuyó su tiempo entre distintas sesiones y detectar, por ejemplo, periodos de inactividad o traslados entre muelles.
+Uso: El usuario puede filtrar la información seleccionando:
+Fecha: El día que se desea examinar.
+Carretillero: El nombre o identificador del operador cuyo desempeño diario se quiere visualizar.
+Tras aplicar los filtros, se muestra una línea de tiempo horizontal de 24 horas para ese día, marcando todas las sesiones en las que participó el carretillero seleccionado. Cada bloque o segmento representa una sesión de trabajo del carretillero, indicando en qué horarios estuvo ocupado en una carga/descarga y en qué muelle. Dentro de cada bloque, se pueden reflejar las etapas del proceso de esa sesión, similares a la Timeline por muelle, y también cualquier alerta asociada a las acciones del carretillero (por ejemplo, si hubo alguna alerta por procedimiento incorrecto durante su operación).
+
+En la imagen de ejemplo de la Timeline del Carretillero, observamos cómo las sesiones del operador se distribuyeron a lo largo del día. Entre bloque y bloque, es fácil distinguir los tiempos muertos (periodos en los que el carretillero no estuvo asignado a ninguna tarea de carga/descarga). Esto proporciona información valiosa sobre la productividad del operario: muchos espacios en blanco podrían indicar tiempos de espera o baja utilización del recurso, mientras que un día muy lleno de bloques muestra alta actividad.
+Al igual que en la vista por muelle, la Timeline del Carretillero destaca si alguna de sus sesiones excedió los tiempos previstos. Cualquier exceso de tiempo en una sesión donde el carretillero estuvo involucrado puede señalarse, ayudando a identificar si ciertas demoras son atribuibles a la operativa del carretillero o a condiciones del muelle. Además, esta vista en tiempo real indicará si el carretillero actualmente está en medio de una sesión (por ejemplo, con un marcador en la hora actual si está activo).
+
+Gracias a esta herramienta, los supervisores pueden evaluar el rendimiento individual de cada operador, comparando cuántas sesiones completó, cuánto duraron en promedio, y cuántas alertas ocurrieron bajo su responsabilidad. Es un componente clave para gestionar al personal y detectar necesidades de capacitación o ajustes en la asignación de tareas.
+5. Vista Mapa
+La Vista Mapa ofrece una representación visual de la zona de muelles en forma de plano o mapa, mostrando la ubicación y estado en tiempo real de cada muelle. Esta sección es especialmente útil para tener una comprensión espacial de la operación: de un vistazo se puede ver qué muelles están ocupados, cuáles están libres, si alguno está fuera de servicio (offline) o bloqueado.
+Características principales de la Vista Mapa:
+Mapa interactivo: Se carga un plano de la instalación logística (por ejemplo, un mapa del almacén o patio de muelles). Sobre este plano se colocan iconos o marcadores que representan cada muelle físicamente en su ubicación real.
+Estados en tiempo real: Cada muelle en el mapa cambia de color o estado visual según su situación actual. Por ejemplo, un muelle Libre puede mostrarse en verde, uno Ocupado en rojo, Bloqueado en amarillo, y Offline en gris (estos colores son ejemplos típicos). Esta codificación por color permite identificar rápidamente la disponibilidad de los muelles.
+Información al pasar o hacer clic: Al interactuar con un muelle en el mapa (por ejemplo, pasando el cursor sobre él o tocándolo), suele aparecer información adicional, como el nombre o número del muelle, su estado detallado, y posiblemente la sesión en curso (etapa actual, tiempo transcurrido, etc.). De esta forma, el mapa no solo muestra estados sino que brinda detalles contextuales cuando se requieren.
+Además, la plataforma permite la creación de vistas de muelles múltiples. Esto significa que si la operación logística está dividida en zonas o áreas (por ejemplo, diferentes almacenes, plantas o secciones de muelles), se pueden configurar distintas vistas o secciones en el mapa. El usuario podría, por ejemplo, seleccionar ver "Zona Norte" o "Almacén A" para enfocarse en un subconjunto de muelles en esa área. La configuración de vistas usualmente la realiza un administrador, subiendo distintos planos o filtrando grupos de muelles por vista, para luego alternar entre ellas fácilmente desde la interfaz.
+En el ejemplo mostrado arriba, el mapa refleja varios muelles con sus estados: algunos marcados en verde (libres), otros en rojo (ocupados con camión presente), y uno en gris (offline, posiblemente por mantenimiento o fallo de conexión del equipo). Esto permite, por ejemplo, que un coordinador de muelle decida rápidamente dónde puede asignar el próximo camión que llega, viendo en tiempo real qué muelle está disponible.
+
+La Vista Mapa, al ser dinámica, se actualiza conforme ocurren los cambios: cuando un camión ocupa un muelle, su icono cambiará a ocupado; al terminar y quedar libre, volverá a su indicador de libre. De esta manera, el mapa funciona como un tablero de control visual de la operación en el patio de carga, facilitando decisiones rápidas y una visión global de la actividad.
+6. Vista Card
+La Vista Card presenta la información de cada muelle en formato de tarjeta individual, ofreciendo un resumen en tiempo real de su estado y detalles de la sesión en curso (si la hay). En una sola pantalla, el usuario verá un conjunto de tarjetas, cada una correspondiente a un muelle distinto, permitiendo monitorear múltiples muelles simultáneamente de forma ordenada.
+Cada tarjeta de muelle incluye:
+Estado actual del muelle: Indicador claro si el muelle está Ocupado, Libre, Bloqueado o Offline. Esto suele estar representado por colores, texto destacado o un ícono específico en la tarjeta.
+Etapa actual de la sesión: Si el muelle está en proceso (ocupado con un camión), la tarjeta muestra en qué etapa del flujo de carga/descarga se encuentra la sesión actualmente. Las etapas típicas de una sesión son:
+Camión en Muelle
+Retenedor Puesto
+Puerta Abierta
+Rampa puesta
+Iniciar proceso (carga/descarga en marcha)
+Finalizar proceso (carga/descarga terminada)
+Rampa quitada
+Puerta Cerrada
+Retenedor Quitado
+Salida de camión
+La tarjeta resaltará la etapa actual (por ejemplo, con texto en negrita o un icono iluminado), indicando exactamente en qué punto del proceso se encuentra el muelle.
+Alertas de la sesión: Si durante la sesión actual se ha generado alguna alerta (por ejemplo, "Puerta abierta demasiado tiempo" o "Tiempo de carga excedido"), la tarjeta mostrará un aviso o icono de alerta. El usuario podrá ver el tipo de alerta e incluso cuántas alertas han ocurrido en esa sesión.
+
+En la ilustración de Vista Card, se puede observar cada tarjeta representando un muelle diferente. Por ejemplo, el Muelle 5 puede mostrar el estado Ocupado con un camión en proceso, indicando "Etapa: Puerta Abierta". Esto significa que el camión en ese muelle ha llegado, se ha colocado el retenedor, y en este momento la puerta está abierta preparando la rampa para iniciar la carga. Si hubiera una alerta (por ejemplo, porque ha pasado demasiado tiempo con la puerta abierta sin iniciar el proceso), un ícono de advertencia aparecería en la tarjeta del Muelle 5.
+Otra tarjeta, digamos el Muelle 3, podría mostrarse en Libre (color verde), indicando que actualmente no está en uso y listo para asignar a un próximo camión. Si un muelle está Bloqueado, su tarjeta podría aparecer en color amarillo con la etiqueta "Bloqueado", lo que le dice al usuario que no se debe usar ese muelle (posiblemente por mantenimiento o por decisión manual). Un muelle Offline (gris) indicaría que el sistema no está recibiendo datos de ese muelle (quizás por desconexión del equipo IoT), y el administrador debería revisar la situación.
+
+Esta vista tipo tarjeta es muy útil en una pantalla de monitoreo en tiempo real. Por ejemplo, en la oficina del coordinador, se pueden tener todas las tarjetas visibles para ver instantáneamente qué está pasando en cada muelle. Con dos o tres tarjetas por fila, la información permanece legible y organizada. Además, si un usuario necesita más detalles de un muelle en particular, podría hacer clic en su tarjeta para ir a otra sección (como el Timeline de ese muelle o detalles de la sesión actual). En resumen, la Vista Card ofrece un panel de control compacto y eficaz de la situación actual de todos los muelles.
+7. Alertas
+El módulo de Alertas recopila todas las notificaciones y avisos generados por el sistema relacionados con incumplimientos, demoras o situaciones inusuales ocurridas durante la operación. Esta sección permite a los usuarios ver, filtrar y analizar las alertas para tomar acciones correctivas y mejorar la seguridad y eficiencia del proceso logístico.
+En la pantalla de Alertas, típicamente se presenta un listado de alertas en forma de tabla, donde cada fila corresponde a una alerta individual con información como:
+Fecha y hora: Momento en que se generó la alerta.
+Muelle o ubicación: El muelle asociado (o equipo) donde ocurrió el evento que disparó la alerta.
+Carretillero: El operador involucrado, si corresponde, cuando se produjo la alerta (por ejemplo, si es una alerta de procedimiento probablemente indica qué usuario la provocó).
+Tipo o categoría de alerta: Una descripción breve de la alerta, por ejemplo "Puerta abierta demasiado tiempo", "Tiempo de carga excedido", "Muelle bloqueado manualmente", etc. Estas categorías ayudan a identificar rápidamente la naturaleza del problema.
+Estado de la alerta: Posiblemente indica si la alerta está activa, revisada o resuelta. Esto depende de si el sistema permite confirmar o cerrar alertas una vez gestionadas.
+Para manejar eficientemente un gran número de alertas, la plataforma ofrece opciones de filtrado. El usuario puede filtrar las alertas por:
+Rango de fechas: Especificar un período de interés (fecha inicial y final) para centrarse en alertas recientes o históricas de ese intervalo.
+Muelle o zona: Filtrar por un muelle específico o por zona de muelles, si solo interesa ver alertas ocurridas en cierta área.
+Carretillero: Filtrar por operador, para ver todas las alertas asociadas a un determinado usuario (útil para revisar si un operario requiere capacitación adicional).
+Categoría o tipo de alerta: (En caso de que la interfaz lo permita) por ejemplo, ver solo alertas de seguridad, o solo alertas de demoras de tiempo.
+Estado de alerta: Ver únicamente alertas activas/no resueltas, o todas.
+En la imagen de la pantalla de Alertas, se observa el uso de los filtros en la parte superior y la tabla de resultados debajo. Al ajustar los filtros (por ejemplo, seleccionando la última semana y una categoría "Tiempo excedido"), la lista se actualizará mostrando solo las alertas que coinciden con esos criterios. Cada alerta listada proporciona suficiente detalle para iniciar una investigación. Por ejemplo, una entrada podría leerse: "03/11/2025 03:37 - - Operador: Juan Pérez ".
+El usuario administrador o supervisor puede revisar esta lista regularmente para identificar patrones (como repetidas alertas del mismo tipo o en el mismo muelle). Algunas plataformas permiten además exportar este listado o generar informes de alertas, aunque en este caso la sección de estadísticas de alertas cubrirá el análisis cuantitativo. Aquí en la sección Alertas, el enfoque es operativo: brindar la información necesaria para atender cada incidente.
+Al dar seguimiento a las alertas, es posible que la interfaz permita hacer clic en una alerta para ver más detalles (por ejemplo, una descripción más larga o las acciones recomendadas). También podría ofrecer la opción de marcar una alerta como revisada o agregar comentarios de qué se hizo al respecto. En cualquier caso, este módulo es crucial para mantener la seguridad y la disciplina operativa, asegurándose de que se atiendan rápidamente situaciones anómalas, como un camión tardando demasiado en cargar o un equipo desconectado inesperadamente.
+8. Estadísticas de Muelles
+La sección Estadísticas de Muelles proporciona indicadores clave de rendimiento (KPI) y datos estadísticos sobre la utilización de los muelles en un período determinado. Estos indicadores ayudan a la gestión a comprender la eficiencia de la operación en los muelles, identificando cuán bien se están aprovechando y dónde hay oportunidades de mejora.
+El usuario puede filtrar las estadísticas por:
+Fecha o rango de fechas: Permite seleccionar un día específico o un intervalo (por ejemplo, una semana, un mes) para el cual se calcularán los indicadores.
+Muelle o conjunto de muelles: Posibilidad de enfocar el análisis en un muelle individual, varios muelles seleccionados o todos en conjunto. También podría filtrar por zona si los muelles están categorizados en áreas, facilitando analizar una sección particular de la operación.
+
+
+Una vez aplicados los filtros, la pantalla mostrará varios KPI e informes, entre ellos:
+Eficiencia de uso del muelle: Generalmente expresada como un porcentaje, indica el grado de utilización del muelle en el tiempo seleccionado. Por ejemplo, un 75% de eficiencia podría significar que el muelle estuvo ocupado un 75% del tiempo laboral disponible. Esta métrica tiene en cuenta las horas laborales configuradas y descuenta períodos de inactividad planificada como descansos (definidos en horas laborales).
+Horas pico de actividad: Identifica las franjas horarias del día en las que los muelles tienen mayor actividad. Por ejemplo, podría indicar que la mayor concentración de sesiones ocurre de 10:00 a 12:00. Esto ayuda en la planificación de recursos, asegurando disponibilidad de personal y equipos en los momentos más críticos.
+Número de sesiones por muelle: Cantidad total de sesiones de carga/descarga completadas en el periodo, desglosado por cada muelle. Esto puede presentarse en un gráfico de barras comparando muelles, o en una lista ordenada. Permite ver cuál muelle tuvo más uso y cuál menos, identificando posibles desequilibrios en la asignación de andenes.
+Tiempo de puerta abierta: Mide el tiempo total (o promedio por sesión) que las puertas de muelle permanecieron abiertas. Este indicador es importante por razones de seguridad y eficiencia energética; un tiempo excesivo de puerta abierta puede sugerir demoras en el proceso o mal aprovechamiento (por ejemplo, puerta abierta sin camión presente).
+Además de estos indicadores principales, la sección podría presentar gráficos para facilitar la interpretación: por ejemplo, un gráfico de líneas o áreas que muestre la ocupación a lo largo del tiempo, o un gráfico comparativo de cada muelle.
+
+En la ilustración de Estadísticas de Muelles se observan varios KPI destacados en recuadros en la parte superior (eficiencia, sesiones totales, etc.), seguidos de gráficos detallados. Un gráfico de barras muestra las sesiones por muelle durante el mes de análisis, resaltando que el Muelle 4 tuvo 50 sesiones mientras el Muelle 2 solo 30, por ejemplo. A la derecha, un gráfico de líneas podría mostrar la ocupación promedio diaria, evidenciando picos de utilización los miércoles y jueves, y menor uso los lunes.
+El usuario tiene la opción de exportar estos datos para informes externos: mediante botones de descarga en PDF o Excel, puede generar un informe estático con todos estos indicadores, ya sea para presentaciones, reportes mensuales o archivado.
+Esta información de estadística de muelles es fundamental para la toma de decisiones estratégicas en la operación logística: conociendo qué tan cerca están los muelles de su capacidad máxima, se puede decidir si es necesario habilitar turnos adicionales, re-distribuir cargas entre muelles, o invertir en más infraestructura. También permite medir el impacto de mejoras implementadas (por ejemplo, si tras una acción correctiva la eficiencia subió en el siguiente mes).
+9. Estadísticas de Carretilleros
+La sección Estadísticas de Carretilleros está dedicada a evaluar el desempeño de los operadores de carretilla elevadora a través de diversos indicadores. Con esta herramienta, los supervisores pueden identificar a los operadores más eficientes, detectar necesidades de capacitación y equilibrar la carga de trabajo entre el personal.
+Al igual que otras secciones de estadísticas, se pueden filtrar los datos por:
+Fecha o rango de fechas: Para analizar un día, semana, mes o cualquier periodo personalizado de desempeño.
+Muelles o zonas: (Opcional) si se quiere ver estadísticas de operadores en ciertas áreas específicas, aunque normalmente estos KPI se centran en el operario independientemente del muelle.
+Grupo de usuarios: (Opcional) si existen grupos de carretilleros (por turnos, por tipo de tarea), se podría filtrar por grupo.
+Una vez definidas las condiciones, se muestran varios KPI de carretilleros, tales como:
+Sesiones totales realizadas: El número de sesiones de carga/descarga completadas por cada carretillero en el periodo. Esto indica la carga de trabajo y experiencia acumulada.
+Porcentaje de sesiones óptimas: Cuota de sesiones del operario que se completaron dentro de los tiempos previstos (sin exceder los tiempos estándar por etapa). Un porcentaje alto sugiere que el carretillero trabaja eficientemente dentro de los parámetros esperados; un porcentaje bajo indicaría que muchas de sus sesiones tuvieron retrasos o incidencias.
+Duración media por sesión: El tiempo promedio que toma el carretillero en completar una sesión. Esto permite comparar la rapidez de los distintos operarios, teniendo cuidado de considerar que diferentes cargas pueden requerir distintos tiempos.
+Horas pico de actividad del operario: Las horas del día en las que el carretillero suele estar más activo. Por ejemplo, puede revelarse que cierto operario concentra la mayoría de sus sesiones en la mañana. Esto puede relacionarse con la asignación de turnos o con la preferencia del coordinador al asignarle tareas.
+Tiempos muertos: Cantidad total de tiempo (o porcentaje del tiempo de trabajo) que el carretillero estuvo inactivo (sin realizar sesiones) durante el periodo. Un valor elevado de tiempos muertos podría indicar que el operador no estuvo plenamente aprovechado o que hubo espera excesiva entre camiones.
+Eficiencia del operario: Un índice global que considera varios factores (por ejemplo, combinación de sesiones totales, duración media y cumplimiento de tiempos previstos) para calificar la eficiencia de cada carretillero.
+Top efectivo: El operario con mejor rendimiento global en el periodo (por ejemplo, el que tiene mayor número de sesiones óptimas o mayor eficiencia). Se puede destacar su nombre y valor de desempeño.
+Menos alarmas: El operario que generó menos alertas en el periodo analizado. Esto identifica quién trabaja con más cuidado o dentro de los procedimientos sin desencadenar incidencias.
+Junto con estos indicadores, la sección presenta gráficos comparativos:
+Un gráfico de columnas puede mostrar las sesiones totales por carretillero, ordenadas de mayor a menor, conformando un ranking visual.
+Otro gráfico podría ilustrar el número de alertas por carretillero, resaltando si alguno tuvo significativamente más alertas que otros.
+Gráficos de línea o área podrían mostrar la distribución de la actividad de los carretilleros a lo largo del tiempo (por ejemplo, cuántas sesiones en promedio realizan a distintas horas del día).
+También podría haber un gráfico de pastel o barra acumulada para el porcentaje de sesiones óptimas por operario, facilitando la comparación directa.
+En la imagen de ejemplo de Estadísticas de Carretilleros, se aprecian en la parte superior indicadores numéricos: por ejemplo, Operarios analizados: Todos, Sesiones promedio por operario: 44, Eficiencia promedio: 95%, etc., seguidos de destacados como "Operador más eficiente: Lucía " y "Menos alertas: admin ".
+
+Estos datos permiten a la gerencia premiar el buen desempeño (por ejemplo, reconociendo al "Top efectivo") y enfocar capacitación donde sea necesario (por ejemplo, si un operador tiene muchas alertas o un porcentaje bajo de sesiones óptimas, podría necesitar apoyo adicional). También ayuda a distribuir la carga de trabajo equitativamente, asegurándose de que ningún operador esté sobrecargado en comparación con sus compañeros.
+10. Estadísticas de Alertas
+La sección Estadísticas de Alertas brinda un análisis cuantitativo de todas las alertas registradas en el sistema durante un periodo de tiempo. A diferencia de la lista de Alertas (sección 7), que muestra detalle operativo de cada evento, aquí se agregan los datos para entender tendencias y frecuencias, lo cual es útil para mejorar procesos y aumentar la seguridad y eficiencia.
+Los filtros disponibles suelen incluir:
+Fecha o rango de fechas: Para delimitar el periodo de estudio de las alertas (por día, mes, trimestre, etc.).
+Muelles o zonas: Para enfocar el análisis en ciertas áreas o equipos, en caso de que se desee ver si las alertas se concentran más en unos muelles que en otros.
+Categoría de alerta: Posibilidad de filtrar por tipo de alerta específico si se quiere analizar solo, por ejemplo, alertas de seguridad versus alertas de tiempo.
+
+Con el filtro aplicado, se presentan los siguientes KPI y gráficos de alertas:
+Total de alertas: La cantidad total de alertas generadas en el periodo seleccionado. Esto da una idea del volumen de incidentes o excepciones que ocurrieron. Un número alto de alertas puede indicar problemas frecuentes en la operación que deben abordarse.
+Top categoría de alertas: Identifica cuál fue la categoría de alerta más común. Por ejemplo, podría revelar que la mayoría de alertas fueron “Tiempo de carga excedido” o “Muelle sin confirmar cierre de puerta”. Conocer la categoría principal ayuda a priorizar acciones (si la mayoría de alertas son por demoras, se trabajará en eficiencia; si son de seguridad, se reforzarán protocolos, etc.).
+Gráfico de alertas por categoría: Un diagrama (posiblemente de columnas o un gráfico de pastel) que muestra la distribución de todas las alertas clasificadas por tipo. Cada sección o barra representa una categoría y su tamaño refleja cuántas alertas de ese tipo ocurrieron. Esto permite visualizar fácilmente qué tipos de alertas predominan.
+Gráfico de alertas por día: Un gráfico (típicamente de líneas) que distribuye el número de alertas a lo largo del periodo día por día. Así se puede ver si hubo días particularmente problemáticos. Por ejemplo, se podría notar un pico de alertas el 15 de cierto mes, lo que amerita investigar qué sucedió en la operación ese día.
+Gráfico de alertas por hora: Este gráfico muestra la frecuencia de alertas según la hora del día (acumuladas de todos los días del periodo). Puede presentarse como un histograma de 24 barras (una por cada hora). Así se identifica en qué horarios suelen ocurrir más alertas. Tal vez se descubra que hay más alertas en las últimas horas del turno, lo que podría indicar fatiga del personal o apresuramiento para cumplir con horarios.
+
+Esta sección permite a los administradores y responsables de calidad identificar tendencias preocupantes y medir el impacto de las mejoras. Por ejemplo, si se implementó una nueva capacitación a mediados de mes, podrían esperar ver una disminución en alertas de seguridad en las semanas posteriores. O si cierto horario es problemático, se podría escalonar mejor el horario de personal para reforzar la vigilancia en esas horas. Las estadísticas de alertas son una herramienta poderosa para la mejora continua, basándose en datos objetivos sobre las incidencias registradas.
+11. Configuración (Usuario Administrador)
+La sección de Configuración está destinada a los usuarios administradores de la plataforma. Aquí se encuentran todas las opciones para personalizar y ajustar el sistema de acuerdo a las necesidades operativas de la organización. Solo los usuarios con permisos de administrador pueden acceder a este módulo, ya que los cambios que se realizan impactan el funcionamiento global de la aplicación y los datos que se registran.
+En Configuración, el administrador podrá gestionar aspectos como los estados de los muelles, la configuración de los equipos instalados en cada muelle, los tiempos estándar por etapa del proceso, la asignación de equipos a muelles, la administración de usuarios y permisos, la definición de horarios laborales y la configuración de las alertas del sistema.
+
+A continuación, se describen cada una de estas opciones de configuración en detalle:
+11.1. Gestión de Estados de Muelle
+En esta sección, el administrador puede configurar los estados operativos de los muelles. Por defecto, el sistema maneja cuatro estados básicos para un muelle: Libre, En Proceso, Bloqueado y Offline.
+Libre: Indica que el muelle está disponible para ser usado (sin camión presente y sin impedimentos).
+En Proceso: Significa que actualmente hay una operación de carga/descarga en marcha en ese muelle (un camión está asignado y se están realizando las etapas del proceso).
+Bloqueado: Señala que el muelle no puede ser utilizado temporalmente. Esto puede ser por diversas razones: mantenimiento, avería, o decisión administrativa de reservarlo. En estado bloqueado, no se permitirán nuevas sesiones en ese muelle hasta que se desbloquee.
+Offline: Refleja que el sistema no tiene comunicación con el equipo del muelle (por ejemplo, si el dispositivo IoT o terminal en ese muelle está desconectado o apagado). Alternativamente, podría usarse cuando el muelle está fuera de servicio de forma prolongada.
+El administrador tiene la posibilidad de activar o desactivar ciertos estados y de renombrarlos según la terminología que prefiera la organización. Por ejemplo, podría cambiar "Libre" por "Disponible" o "En Proceso" por "Ocupado". Renombrar estados permite adaptar la interfaz a la jerga interna de la empresa o al idioma local de los operarios.
+También puede darse el caso de que alguna empresa no utilice el estado "Offline" (si todos los dispositivos están siempre conectados) y decida ocultarlo; la configuración permitiría desactivar ese estado para que no aparezca en las vistas. Sin embargo, normalmente los cuatro estados se mantienen porque cubren situaciones distintas importantes.
+La pantalla de configuración de estados mostrará una lista de los estados actuales con opciones de edición. Cada estado podría tener un interruptor para activarlo/desactivarlo y un campo de texto para modificar su nombre. El administrador debe guardar los cambios para que tengan efecto. Una vez personalizados, estos estados se verán reflejados en toda la plataforma (Dashboard, Vista Mapa, Vista Card, etc.), asegurándose de que la nomenclatura sea consistente con la definida.
+Es importante manejar esta sección con precaución: si se cambian nombres, todos los usuarios deberán familiarizarse con los nuevos términos. Por ello, suele ser algo que se configura durante la fase de implementación o cuando se hace un cambio organizacional en la forma de llamar a las cosas, y no con mucha frecuencia en el día a día.
+11.2. Gestión de Equipos
+En Gestión de Equipos, el administrador configura los parámetros de cada equipo o dispositivo asociado a los muelles. Aquí, "equipo" se refiere típicamente al hardware instalado en cada muelle (p. ej., sensores, retenedores automáticos, paneles de control) que interactúa con la plataforma para registrar eventos (como puerta abierta/cerrada, presencia de camión, etc.). Cada equipo tiene opciones específicas que determinan cómo opera e interactúa con los usuarios (carretilleros) en el muelle.
+Para cada equipo (generalmente identificado por un nombre o código y vinculado a un número de muelle), se pueden editar las siguientes configuraciones:
+Bypass: Esta opción permite habilitar o deshabilitar el modo bypass en el dispositivo. Cuando el bypass está activado, el equipo puede omitir ciertas seguridades o pasos automáticos. Por ejemplo, podría permitir operar manualmente el muelle sin algunas de las comprobaciones usuales. Es útil en situaciones de emergencia o mantenimiento, pero normalmente debe estar desactivado durante la operación normal para asegurar que todos los pasos de seguridad se cumplan.
+Bloquear muelle: Controla si el muelle puede ser bloqueado desde el sistema. Si está activada la opción de bloquear muelle, el administrador o supervisor podría remotamente marcar un muelle como bloqueado (quizás a través de la plataforma) y el equipo físico acataría ese estado, impidiendo ciertas funciones. Si la opción está desactivada, el muelle no se puede bloquear vía software (tendría que hacerse manualmente).
+Login Obligatorio: Determina si es obligatorio que un carretillero se identifique (inicie sesión) en el dispositivo antes de operar el muelle. Si está activo, cada vez que un operador vaya a usar ese muelle, tendrá que introducir sus credenciales o identificación en el panel del muelle. Esta medida aumenta el control, asegurando que todas las actividades queden asociadas a un usuario. Si está desactivada, las sesiones podrían iniciarse sin usuario (anónimas), lo cual puede restar trazabilidad.
+Cambio de usuario: Especifica si se permite cambiar de usuario durante una sesión en curso. Por ejemplo, si un operador inicia el proceso pero a mitad otro lo releva, esta opción permitiría registrar el cambio en el sistema. Si está desactivada, una vez iniciada una sesión por un usuario, no se podrá cambiar hasta finalizar.
+Multiusuario: Indica si el equipo soporta múltiples usuarios simultáneamente. Normalmente en un muelle un solo operador debería encargarse de una sesión, por lo que esta opción suele estar deshabilitada. Pero si por diseño un proceso involucrara dos operadores trabajando conjuntamente en el mismo muelle (situación poco común), podría habilitarse. En la mayoría de casos, MultiUsuario estará apagado para evitar confusiones.
+Idioma: Permite seleccionar el idioma de la interfaz local del equipo. Si los operarios hablan un idioma diferente al predeterminado, se puede ajustar para que las instrucciones y mensajes en el panel del muelle estén en, por ejemplo, español, inglés, etc. Esta configuración mejora la usabilidad y la comprensión para los usuarios finales.
+Nombre de equipo: Campo editable para asignar o cambiar el nombre identificativo del equipo. Puede ser útil para darle un alias descriptivo, como "Retenedor Muelle 5" o "Sensor Andén A", especialmente si la nomenclatura interna difiere del número de muelle. Cambiar el nombre aquí suele reflejarse en la lista de equipos y posiblemente en las vistas (por ejemplo, en Vista Mapa al pasar el cursor podría mostrar este nombre).
+
+La interfaz de Gestión de Equipos presentará un listado de todos los equipos registrados, cada fila con el nombre del equipo, el muelle asociado, y los valores actuales de estas configuraciones con controles (casillas, desplegables, etc.) para cambiarlos. El administrador puede seleccionar un equipo y ver sus detalles, modificar las opciones necesarias y guardar cambios. Es recomendable documentar cualquier cambio en configuración de equipos, ya que opciones como Bypass o Login Obligatorio afectan directamente la seguridad y registro de operaciones en el muelle.
+
+A través de esta sección, la plataforma se adapta a las políticas de la empresa: por ejemplo, si se decide que a partir de ahora todos los muelles requieran identificación, el administrador activará Login Obligatorio en todos los equipos. O si un dispositivo está fallando y se necesita operarlo manualmente por un día, se podría activar el Bypass temporalmente. Siempre tras la intervención, conviene monitorear que todo funciona según lo esperado.
+
+11.3. Gestión de Etapas
+En Gestión de Etapas, el administrador define los tiempos estándar (previstos) para cada etapa del proceso de carga/descarga en un muelle. Como mencionamos en la Vista Card, una sesión típica se divide en etapas secuenciales (Camión en muelle, Retenedor puesto, Puerta abierta, etc.). Esta configuración permite establecer cuántos minutos se espera que dure cada etapa bajo condiciones normales.
+La lista de etapas configurables incluye todas las etapas operativas por las que atraviesa una sesión:
+Camión en Muelle (desde que el camión se posiciona hasta que inicia el aseguramiento)
+Retenedor Puesto (colocación del sistema de retención de camión, asegurando que no se mueva)
+Puerta Abierta (apertura de las puertas del muelle y del camión)
+Rampa puesta (colocación de la rampa que conecta el muelle con el camión)
+Iniciar Proceso (momento en que comienza efectivamente la carga o descarga de mercancía)
+Finalizar Proceso (momento en que se concluye la carga o descarga)
+Rampa quitada (retirada de la rampa una vez terminado el proceso)
+Puerta Cerrada (cierre de las puertas del muelle tras retirar la rampa)
+Retenedor Quitado (liberación del sistema de retención del camión)
+Salida de Camión (el camión abandona el muelle, dejándolo libre)
+Para cada una de estas etapas, la plataforma permite ingresar un tiempo estimado (en minutos) que se considera óptimo o esperado. Por ejemplo, quizás "Retenedor Puesto" se espera realizar en 2 minutos, "Puerta Abierta" en 1 minuto, "Iniciar Proceso" hasta "Finalizar Proceso" podría ser un rango grande, digamos 30 minutos, etc. Estos valores deben basarse en la experiencia operativa o en objetivos de rendimiento que la empresa quiere alcanzar.
+La suma de todos estos tiempos configurados dará el tiempo total estándar de una sesión completa. Este tiempo total se utiliza luego en las otras partes del sistema para determinar excedentes: si una sesión real excede este tiempo total, el exceso se marcará (por ejemplo, en rojo en la Timeline) indicando que hubo una demora respecto al plan. Incluso a nivel de KPI, el porcentaje de sesiones óptimas se calcula viendo cuántas terminaron dentro de este tiempo estándar total.
+
+La pantalla de Gestión de Etapas presentará cada etapa con un campo numérico para minutos. El administrador introduce o ajusta los valores y guarda la configuración. Es importante que estos tiempos sean realistas y alcanzables; de lo contrario, el sistema generaría alertas o marcaciones de demora constantemente. A menudo, la empresa ajusta estos valores periódicamente: si se logra mejorar un proceso, tal vez reduzcan el tiempo estándar para reflejar la nueva meta, o viceversa, si se ve que sistemáticamente una etapa toma más tiempo por razones justificadas, se podría aumentar el tiempo estándar para que no se considere alerta en el futuro.
+
+Cabe destacar que, aunque estos son los tiempos "previstos", la operación real puede variar. El propósito principal es tener una referencia para detectar outliers y áreas de mejora. La configuración de etapas brinda la flexibilidad de adaptar el sistema a la realidad operativa de cada centro logístico.
+11.4. Gestión de Muelles
+En la sección de Gestión de Muelles (también llamada Configuración de Muelles), el administrador puede visualizar y modificar la asignación de equipos a muelles, así como otros atributos específicos de cada muelle.
+Cada muelle de carga/descarga en la instalación está representado en el sistema, normalmente con un número o código único (por ejemplo, Muelle 1, Muelle A3, etc.). A cada muelle físico le corresponde un equipo (el dispositivo IoT o control instalado allí). Esta sección muestra un listado de los muelles y permite confirmar qué equipo está asociado a cada uno, cambiar asociaciones si es necesario y observar el estado actual.
+Las funcionalidades típicas de Gestión de Muelles incluyen:
+Listado de muelles: Una tabla enumerando todos los muelles configurados en el sistema. Por cada muelle, se puede indicar su nombre, la zona a la que pertenece (si se manejan zonas o ubicaciones), el equipo asignado actualmente, y posiblemente su estado en vivo (Libre, Ocupado, etc., para referencia rápida).
+Asignar/Reasignar equipo: Si un equipo físico se cambia de lugar o si un muelle recibe un dispositivo nuevo, el administrador puede actualizar la asignación. Por ejemplo, si el Equipo 5 antes correspondía al Muelle 5 pero ahora se ha instalado en el Muelle 7, aquí se reflejará ese cambio seleccionando el equipo correcto para el muelle correspondiente.
+Editar información del muelle: Puede haber opciones para editar el nombre del muelle (por ejemplo, cambiar "Muelle 01" por "Andén Principal"), o su zona/ubicación si la estructura ha cambiado. Esto permite mantener la información del sistema alineada con la realidad física del almacén.
+
+
+En la pantalla de ejemplo de Gestión de Muelles, vemos una lista: Muelle 1 - Equipo: EQ-01 - Estado: Libre, Muelle 2 - Equipo: EQ-02 - Estado: En Proceso, etc. Si se desea cambiar, el administrador podría hacer clic en Muelle 2 y seleccionar un diferente equipo en un menú desplegable si, por alguna razón, el Equipo EQ-02 tuviera que ser reemplazado por otro. Tras guardar, el sistema empezará a tomar los datos del nuevo equipo para las operaciones de ese muelle.
+
+Es fundamental que la asociación muelle-equipo esté correcta, ya que todas las métricas e información (timelines, alertas, etc.) dependen de que los eventos de un equipo se atribuyan al muelle adecuado. Una configuración incorrecta podría causar confusión en los datos (por ejemplo, lecturas de un muelle apareciendo bajo otro). Por tanto, esta sección suele utilizarse principalmente durante la instalación inicial o cuando hay cambios físicos en los dispositivos.
+Al margen de la asignación, el administrador puede aprovechar esta vista para tener un panorama general del estado de todos los muelles en un solo lugar, aunque para monitoreo en tiempo real es más útil la Vista Card o Mapa. Aquí, en cambio, el foco está en la configuración correcta del sistema. Si un muelle queda fuera de uso permanente, el administrador podría eliminarlo o desactivarlo en la configuración, aunque esto no suele hacerse a menos que la infraestructura cambie.
+11.5. Gestión de Usuarios
+La Gestión de Usuarios permite al administrador crear y administrar las cuentas de usuario que podrán acceder a la plataforma o a los dispositivos, definiendo sus roles y permisos correspondientes. En un entorno logístico, los usuarios típicos podrían ser: administradores del sistema, supervisores, carretilleros (operadores), personal de mantenimiento, etc. Cada grupo podría tener diferentes niveles de acceso a las funciones de la aplicación.
+Las acciones principales en esta sección son:
+Crear nuevo usuario: Registrar a un nuevo empleado o miembro del equipo en el sistema. Se le asigna un nombre de usuario, contraseña (o método de autenticación), y datos personales relevantes (nombre completo, identificación, etc.). Lo más importante, se le asigna un rol o grupo. Por ejemplo, "Carretillero" para un operario de muelle, "Supervisor" para alguien que supervisa las operaciones, "Administrador" para quien puede ver y cambiar la configuración, etc. Estos roles determinan qué partes de la plataforma puede ver o modificar el usuario.
+Editar usuario existente: Modificar la información o permisos de un usuario ya creado. Esto incluye poder reestablecer su contraseña si la olvidó, cambiar su rol (por ejemplo, ascender un operario a supervisor en el sistema), actualizar datos personales o desactivar su cuenta temporalmente.
+Asociación a grupos específicos: En lugar de roles predefinidos individuales, el sistema puede manejar grupos de usuarios. Un grupo aglutina un conjunto de permisos. La interfaz de gestión permitirá asignar usuarios a uno o varios grupos. Por ejemplo, un usuario podría estar en el grupo "Administración" y en el grupo "Mantenimiento". Los permisos combinados de esos grupos determinarán su acceso.
+Eliminar o desactivar usuarios: Si alguien deja la empresa o ya no requiere acceso, el administrador puede dar de baja su cuenta. A veces se prefiere desactivar (para conservar el historial asociado a ese usuario en reportes, pero impedir futuros accesos) en lugar de eliminar completamente.
+
+
+
+
+La pantalla de Gestión de Usuarios típicamente muestra un listado de usuarios con columnas como: Nombre, Usuario (login), Rol/Grupo, Estado (activo/inactivo). El administrador puede seleccionar un usuario para ver detalles y editar. Por ejemplo, al abrir el perfil de Juan Pérez, se vería que es del grupo Carretilleros, creado el 01/09/2025, última conexión el 20/11/2025, etc., con opciones para cambiar su grupo a Supervisores si correspondiera un ascenso.
+
+Una correcta gestión de usuarios es crucial para la seguridad del sistema. Solo usuarios autorizados deben tener acceso a las funciones administrativas, mientras que los operarios posiblemente solo tienen acceso a las partes operativas (como iniciar/cerrar sesiones en los muelles, ver sus propios datos, etc.). Al mismo tiempo, la asociación de la actividad con los usuarios (gracias al login obligatorio en los equipos, si está configurado) permite trazabilidad: cada alerta o sesión queda vinculada a quien la realizó. Por ello, mantener el listado de usuarios actualizado y correctamente categorizado asegura integridad en los datos y en los controles de acceso.
+11.6. Gestión de Horas Laborales
+Esta sección permite configurar los parámetros relacionados con la jornada laboral y tiempos no productivos, de modo que el sistema pueda calcular correctamente ciertos KPI de eficiencia y tiempos muertos. Las horas laborales definen el marco temporal en el cual la operación está prevista que ocurra, y dentro de ese marco se consideran los tiempos activos e inactivos.
+Las configuraciones típicas aquí incluyen:
+Duración de la jornada laboral: Cuántas horas conforman un día de trabajo estándar para el cálculo. Por ejemplo, 8 horas, 16 horas (dos turnos), 24 horas (operación continua). Esto dependerá de si el almacén opera en uno, dos o tres turnos, etc. Puede que se especifique por separado los turnos (mañana, tarde, noche) si se quiere un análisis más detallado, aunque a efectos de KPI global, un total diario puede bastar.
+Tiempo de descanso/pausa: El total de minutos u horas dentro de la jornada que se consideran pausa programada (por ejemplo, almuerzo, descansos reglamentarios). Estos tiempos se descuentan de la jornada efectiva al calcular ciertas eficiencias, ya que durante ellos es esperable que no haya actividad. Por ejemplo, en una jornada de 8 horas podría haber 30 minutos de comida y 2 pausas de 15 minutos, total 1 hora de descanso; entonces el tiempo productivo máximo teórico sería 7 horas.
+Tiempos muertos previstos: Se puede configurar cuánto tiempo de inactividad se considera "normal" o esperado dentro de una jornada. Por ejemplo, entre la salida de un camión y la entrada del siguiente es razonable un intervalo de 5-10 minutos para preparar el muelle. Si la empresa quiere hacer seguimiento de tiempos muertos, puede definir un valor de referencia. Todo lo que exceda ese valor configurado podría contarse como tiempo muerto excedente.
+Horas extra o periodos especiales: En algunos sistemas, se puede especificar horarios excepcionales donde la operación se detiene (días festivos, mantenimiento programado) para que el sistema no los cuente como tiempo disponible. Aunque no se mencionó explícitamente en la descripción dada, vale tener en cuenta que ciertos KPI de eficiencia solo tienen sentido respecto al tiempo laboral planificado.
+
+La interfaz de Horas Laborales podría presentar campos para ingresar, por ejemplo: Horas laborales diarias: 8h, Descanso total: 1h, Tiempo planificado de trabajo efectivo: 7h, Intervalo típico entre sesiones: 10 min. En algunos casos, podría permitir configurar por día de la semana (si los fines de semana tienen distinto horario) o por turno.
+Una vez configurados estos parámetros, el sistema utiliza la información para cálculos como:
+Eficiencia de uso de muelle: dividir el tiempo ocupado real de un muelle entre el tiempo planificado disponible (por ejemplo, si un muelle estuvo ocupado 5 horas de las 7 horas planificadas, ~71% eficiencia).
+Tiempos muertos totales: sumando todos los periodos en que un muelle estuvo libre durante las horas laborales, y comparándolo con lo previsto (si se esperaba 10 min entre sesiones y realmente hubo en promedio 20 min, hay margen de mejora).
+Horas pico: deben ser determinadas dentro de la jornada laboral, para no considerar horas fuera de turno donde naturalmente no hay actividad.
+Mantener esta configuración precisa asegura que los KPI reflejen la realidad. De lo contrario, se podría penalizar erróneamente la eficiencia. Por ejemplo, si no se descuentan los descansos, un turno de 8 horas con 1 hora de almuerzo vería un máximo teórico de 8h ocupadas, pero en la práctica solo 7h son posibles; el sistema debe saberlo para no interpretar esa hora sin actividad como ineficiencia.
+En resumen, Gestión de Horas Laborales adapta el sistema a la planificación operativa humana, haciendo que las métricas de rendimiento sean justas y útiles.
+11.7. Configuración de Alertas
+En Configuración de Alertas, el administrador define cómo y cuándo el sistema genera alertas, así como la clasificación de las mismas. Dado que las alertas son fundamentales para señalar desviaciones o problemas, es importante calibrarlas adecuadamente: ni tan sensibles que generen alarmas innecesarias, ni tan laxas que pasen por alto eventos importantes.
+Las opciones típicas que se pueden encontrar aquí incluyen:
+Tipos o categorías de alerta: Listado de todas las alertas posibles en el sistema. Por ejemplo: Demora en etapa, Exceso de tiempo total de sesión, Retenedor no colocado, Puerta abierta manualmente, Equipo sin comunicación, etc. El administrador puede editar el nombre de la alerta para que sea claro para los usuarios (o en el idioma deseado), agruparlas en categorías (seguridad, eficiencia, mantenimiento) o incluso activar/desactivar ciertas alertas. Si por alguna razón una empresa no quiere monitorizar cierto evento como alerta, podría deshabilitarlo.
+Parámetros de disparo: Para alertas basadas en tiempo u otras condiciones numéricas, se configuran los umbrales. Por ejemplo, “Puerta abierta demasiado tiempo” puede tener un parámetro editable de X minutos (si X=5, la alerta se genera cuando la puerta lleva abierta más de 5 minutos sin que inicie el proceso). Otro ejemplo: “Tiempo de carga excedido” podría dispararse si la etapa de proceso supera Y minutos, siendo Y configurable.
+Prioridad o nivel de severidad: Posiblemente, se permite asignar un nivel (informativa, advertencia, crítica) a cada tipo de alerta. Esto sirve para que el sistema destaque las más críticas (por ejemplo, seguridad) y quizás envíe notificaciones inmediatas, mientras que las menores pueden solo registrarse para análisis.
+Notificaciones asociadas: En algunos sistemas, la configuración de alertas incluye a quién o cómo se notifica cuando ocurre una alerta. Por ejemplo, se puede configurar que las alertas críticas envíen un correo al supervisor, o que suenen alarmas sonoras en planta. Si la plataforma tiene esa capacidad, el administrador la gestiona aquí, ligando cada tipo de alerta con acciones de notificación (correo, SMS, pop-up en pantalla, etc.).
+Mensajes personalizados: Posibilidad de editar el texto descriptivo de la alerta que verá el usuario, asegurando que esté en el idioma correcto y sea entendible. Por ejemplo, cambiar "Overtime Stage 1" por "Demora en Retenedor Puesto" si se quiere un mensaje más específico.
+
+La pantalla de Configuración de Alertas podría listar algo como:
+- Alerta: Tiempo de puerta abierta excedido – Umbral: 5 min – Estado: Activada – Severidad: Media.
+- Alerta: Equipo sin respuesta (Offline) – Umbral: 1 min sin señal – Estado: Activada – Severidad: Alta.
+- Alerta: Muelle Bloqueado Manualmente – Estado: Activada – Severidad: Baja – (esta quizá sin parámetro de tiempo, se dispara instantáneamente cuando alguien bloquea un muelle).
+El administrador puede seleccionar una alerta para modificar sus parámetros. Por ejemplo, tras una evaluación, decide que 5 minutos es muy poco para la puerta abierta y lo extiende a 7 minutos para reducir "falsos positivos". Guarda los cambios, y a partir de entonces el sistema usará el nuevo valor.
+Mediante la Configuración de Alertas, la empresa afina el balance entre sensibilidad y ruido en la monitorización. Es un proceso iterativo: inicialmente se configuran según las políticas deseadas (p. ej., ninguna puerta más de 5 min abierta), luego se observa la operación real. Si hay demasiadas alertas no accionables, quizás se ajustan los umbrales. O si sucedió un incidente no captado por una alerta existente, tal vez se añade una nueva categoría de alerta. Esta flexibilidad asegure que el sistema de alertas apoye efectivamente la seguridad y eficiencia, enviando señales cuando realmente se necesitan y evitando alarmar cuando no corresponde.
+
+Fin del Manual de Usuario. En este documento se han descrito todas las características principales de la plataforma web de control de tiempos en muelles de carga/descarga. Siguiendo estas indicaciones, el usuario podrá navegar por el sistema, interpretar la información presentada y aprovechar las herramientas de análisis y configuración para optimizar la operación logística. Se recomienda complementariamente capacitar al personal con sesiones prácticas en la plataforma para afianzar los conceptos aquí presentados. ¡Gracias por usar nuestra aplicación de gestión de tiempos logísticos!
+
+
+----------------------------------------------------
+
+tablet pc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MANUAL DE USUARIO
+TABLET PC 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+ÍNDICE
+1. Descripción
+2. Pantalla principal de espera
+3. Paneles de la interfaz
+   3.1. Panel superior de estado
+   3.2. Panel izquierdo – Usuario y conexión
+   3.3. Panel central – Estado del muelle y proceso
+   3.4. Panel derecho – Sensores y tiempos
+4. Flujo de operación estándar
+   4.1. Llegada del camión
+   4.2. Estado “CARGA/DESC. PERMITIDA”
+   4.3. Inicio de proceso
+   4.4. Proceso en curso
+   4.5. Finalización del proceso
+   4.6. Salida de camión y reset de muelle
+5. Modos especiales y pantallas adicionales
+   5.1. Modo Bypass y confirmación de salida de camión
+   5.2. Modo mantenimiento
+   5.3. Pantalla de información técnica (overlay)
+
+
+
+
+1. Descripción
+Esta aplicación de escritorio (Forms) está instalada en una tablet o PC táctil situada en cada muelle de carga y descarga. Su función principal es mostrar en tiempo real el estado del muelle (sensores de camión, retenedor, puerta y rampa), y guiar al operario en el inicio y fin de los procesos de carga/descarga. Todos los eventos que se producen (cambios de sensores, inicios y finales de proceso, alertas, etc.) se registran automáticamente en la base de datos para permitir su análisis posterior en la plataforma web.
+El operario solo necesita interactuar con unos pocos elementos: comprobar que el estado de la pantalla es el correcto, pulsar “Iniciar” cuando vaya a comenzar la operación y pulsar “Finalizar” cuando haya terminado. El resto de la lógica (apertura y cierre de sesiones, control de tiempos por sensor, alarmas y validación del orden de los sensores) es gestionada de forma automática por el sistema.1
+
+
+2. Pantalla principal de espera
+Al arrancar la aplicación, o cuando el muelle no cumple las condiciones mínimas de seguridad, se muestra la pantalla principal de espera. Esta pantalla se caracteriza por un fondo rojo, un icono central de cruz (❌) y el mensaje “CARGA/DESC. NO” acompañado normalmente del texto “Esperando sensores”. En este estado, el sistema indica que NO está permitido iniciar carga ni descarga todavía.
+
+Mientras la pantalla está en rojo y aparece este mensaje, los sensores pueden estar activos o no, pero el muelle aún no está listo para iniciar un proceso. El operario debe asegurarse de que el camión está correctamente posicionado, de que se aplica el calzo y de que se abre la puerta y la rampa según el procedimiento de seguridad de la empresa. Cuando todas las condiciones de seguridad se cumplen, la aplicación cambiará automáticamente al estado de muelle permitido para carga/descarga.
+
+3. Paneles de la interfaz
+3.1. Panel superior de estado
+En la parte superior de la pantalla se muestra el panel de estado principal. En él aparecen el texto general de situación del muelle (por ejemplo, “CARGA/DESC. NO PERMITIDA”, “CARGA/DESC. PERMITIDA” o “PROCESO EN CURSO”), el indicador de si el muelle está Libre u Ocupado, y el botón de configuración con forma de rueda dentada. Este botón da acceso a opciones avanzadas que normalmente están reservadas a personal de mantenimiento o supervisión.
+
+El usuario de muelle, en su día a día, solo necesita fijarse en el texto principal de estado y en si el muelle aparece como Libre u ocupado. Cualquier cambio de color o mensaje en esta franja superior indica un cambio importante en la situación del muelle.
+
+3.2. Panel izquierdo – Usuario y conexión
+El panel izquierdo muestra la información de conexión y del usuario. En la parte superior se visualiza el icono de red o WiFi, que indica si la tablet está correctamente conectada al sistema central. Debajo aparece la zona de usuario, que puede mostrar “No identificado” (fondo gris) si no hay nadie identificado o el nombre del operario con un color de fondo diferente cuando se ha realizado el login.
+Durante un proceso es posible cambiar de usuario (si la configuración lo permite). El sistema reparte los tiempos de la sesión entre los distintos usuarios que han intervenido, lo que permite medir de forma precisa el rendimiento por operario en los informes posteriores.
+Si el hay usuario registrado o usuarios saldan dentro de aqui y su relleno sera en color azul
+
+3.3. Panel central – Estado del muelle y proceso
+El panel central ocupa la mayor parte de la pantalla y es el que indica de forma visual el estado del muelle. Su color de fondo y el icono principal cambian según la situación: rojo con cruz (❌) cuando no está permitido cargar/descargar, otro color y mensajes específicos durante el proceso, y verde con check (✔) cuando el proceso ha finalizado correctamente.
+En este panel también se encuentran los botones de acción “Iniciar” y “Finalizar”. El botón “Iniciar” solo aparece cuando se cumplen las condiciones de seguridad (camión presente, calzo aplicado, puerta abierta, etc.). El botón “Finalizar” aparece durante el proceso y permite darlo por terminado manualmente. El resto del comportamiento (cierre automático cuando el camión se va, tiempos, etc.) se controla internamente.
+(imagen: panel central en modo espera, en proceso y al finalizar)
+3.4. Panel derecho – Sensores y tiempos
+En la columna derecha se muestran los cuatro sensores principales del muelle con su icono y un temporizador individual: camión, retendor, puerta y rampa. Cuando un sensor está activo, su icono aparece en verde y se pone en marcha un contador de tiempo. Cuando se desactiva, el contador se detiene. De este modo, el operario puede ver de un vistazo cuánto tiempo lleva cada elemento en su estado actual.
+La aplicación utiliza estos sensores para decidir si el muelle está en condiciones de permitir carga/descarga y para generar alarmas si algún elemento permanece demasiado tiempo activo o se cambia en un orden no permitido (por ejemplo, quitar el retenedor en mitad del proceso). Además, con estos datos se controla el semáforo externo que indica permiso o bloqueo al camión.
+
+4. Flujo de operación estándar
+4.1. Llegada del camión
+Cuando un camión llega al muelle y el sensor de presencia detecta su posición, el icono de camión pasa a verde y comienza a contar su temporizador. El sistema crea o continua una sesión para registrar todos los eventos asociados a ese camión. Aunque el camión ya esté presente, la pantalla puede seguir indicando “CARGA/DESC. NO” hasta que el resto de sensores (calzo, puerta, rampa) estén en el estado correcto.
+
+
+
+4.2. Estado “CARGA/DESC. PERMITIDA”
+Una vez que el camión está correctamente posicionado, se aplica el retenedor, se abre la puerta y se coloca la rampa, todos los sensores pasan a estado activo. En ese momento, la aplicación cambia el mensaje superior a “CARGA/DESC. PERMITIDA” y habilita el botón “Iniciar”. El semáforo del muelle también pasa a indicar permiso de carga/descarga según la configuración del sistema.
+El operario debe comprobar visualmente que todo está en orden y, solo entonces, pulsar “Iniciar” para comenzar el proceso. Hasta que no se pulse este botón, el sistema no considerará que la sesión de carga/descarga está en curso, aunque los sensores estén activos.
+
+4.3. Inicio de proceso
+Al pulsar el botón “Iniciar”, el sistema registra la hora de inicio del proceso y pone en marcha un temporizador general de proceso. El panel central cambia a un mensaje de “PROCESO EN CURSO” o similar, y el botón “Iniciar” desaparece, dejando visible únicamente el botón “Finalizar”. A partir de ese momento, cada cambio en los sensores se asocia a este proceso concreto.
+
+4.4. Proceso en curso
+Durante el proceso, el sistema sigue registrando todas las etapas: si se recoloca el calzo, se modifica la posición de la rampa o se cierra y abre la puerta, cada cambio queda grabado con su hora y se comprueba si el orden de los sensores es correcto. Si se produce una situación no permitida (por ejemplo, liberar el calzo mientras el proceso sigue activo), la aplicación genera una alerta que se mostrará en pantalla y quedará registrada en la base de datos.
+El operario puede seguir la evolución del proceso gracias al temporizador general y a los contadores individuales de cada sensor. No es necesario realizar otras acciones sobre la interfaz mientras la carga/descarga se desarrolla con normalidad.
+
+4.5. Finalización del proceso( opcion de reiniciarlo)
+Una vez terminada la carga o descarga, el operario pulsa el botón “Finalizar”. El sistema detiene el temporizador de proceso, registra la hora de fin y marca el proceso como completado. El panel central cambia a un estado de cierre, normalmente con icono de check (✔) y un mensaje indicando que el proceso ha finalizado correctamente. En este momento, los sensores pueden seguir activos (el camión todavía está en el muelle), pero la parte de carga/descarga ya se considera concluida.
+
+
+Se puede volver a seguir ese proceso siempre que no se quite el retenedor mas de 20 seg o camión mas de 20 seg, lo cual finalizara la sesión automáticamente .
+4.6. (Salida de camión) o (salida de retenedor) y reset de muelle
+Cuando el camión o retendeor abandona el muelle y el sensor de presencia pasa a estado inactivo, el sistema interpreta que la sesión ha terminado completamente. Si por algún motivo no se había pulsado “Finalizar” antes, el propio sistema cierra el proceso automáticamente al detectar la salida del camión, registrando la hora de cierre en ese instante. A continuación, se cierra la sesión de trabajo asociada y se limpian las alertas.
+Tras la salida del camión, la pantalla muestra durante unos segundos un estado final (por ejemplo, con fondo verde o morado) y posteriormente se reinicia al modo de espera, listo para recibir el siguiente camión. Los temporizadores de los sensores vuelven a cero y el muelle se marca como Libre.
+
+Si la configuración está basada en el camión, será el camión el que finalice la sesión al irse.
+Sil la configuración está basada en el retenedor, será el retenedor el que finalice la sesión al irse
+
+
+)5. Modos especiales y pantallas adicionales
+5.1. Modo Bypass y confirmación de salida de camión
+En algunos equipos, se puede activar el modo Bypass. Cuando este modo está activo y el sistema detecta la salida del camión mientras existe un proceso en curso, en lugar de cerrar automáticamente el proceso y la sesión, la aplicación muestra una ventana de confirmación. Esta ventana pregunta explícitamente al usuario si el camión se ha ido realmente.
+Si el operario confirma la salida, el sistema cierra el proceso y la sesión como en el flujo normal. Si, por el contrario, cancela la confirmación, no se realiza ningún cierre y el proceso continua activo. Este comportamiento está pensado para evitar cierres indeseados cuando el sensor de camión produce una lectura puntual incorrecta o se está realizando alguna maniobra especial.
+
+5.2. Modo mantenimiento
+El modo mantenimiento se activa a través de un sensor o de una opción especial del sistema. Cuando está activo, la aplicación bloquea el inicio de nuevos procesos y muestra una pantalla específica indicándolo. Este modo se usa durante intervenciones técnicas, revisiones o pruebas en el muelle, evitando que se registren sesiones de operación mientras se trabaja sobre el equipo.
+Al desactivar el modo mantenimiento, la aplicación recupera su comportamiento habitual y el muelle vuelve a quedar disponible para la operativa diaria. Es importante utilizar este modo para que los datos almacenados reflejen únicamente operaciones reales de carga y descarga.
+
+5.3. Pantalla de información técnica (overlay) password 1000
+Mediante el botón de configuración de la esquina superior derecha es posible mostrar una capa adicional (overlay) con información técnica del dispositivo. En esta pantalla se pueden ver los estados en bruto de cada sensor, datos del equipo, información de red y otros parámetros útiles para soporte técnico. Mientras el overlay está visible, la aplicación sigue recibiendo y mostrando los cambios de los sensores en tiempo real.
+Esta pantalla no está pensada para el uso diario del operario, sino para tareas de diagnóstico y mantenimiento. Cuando se termina la revisión, se cierra el overlay y se vuelve a la vista normal del muelle.
+
+
+
+
+
+y la configuracion que tenga este muelle:
+
+
+Inicio de sesion obligatorio,poder cambiar de usuario en el mismo proceso, poder tener multiples usuarios en un mismo proceso, bloquear el mulle, o activar el bypass. Finalmente un selector de 4 idiomas para toda la interfaz del forms.
