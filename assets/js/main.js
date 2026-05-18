@@ -149,25 +149,36 @@ const updateHeroScaleOnScroll = () => {
 window.addEventListener('scroll', updateHeroScaleOnScroll, { passive: true });
 updateHeroScaleOnScroll();
 
-// Dark theme toggle
+// Theme segmented control
 (function() {
     const STORAGE_KEY = 'lawebdejacoto_theme';
     const DARK = 'dark';
     const LIGHT = 'light';
 
+    const segment = document.getElementById('themeSegment');
+    if (!segment) return;
+
     const saved = localStorage.getItem(STORAGE_KEY);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const theme = saved || (prefersDark ? DARK : LIGHT);
 
-    document.documentElement.setAttribute('data-theme', theme);
+    const applyTheme = (t) => {
+        document.documentElement.setAttribute('data-theme', t);
+        segment.querySelectorAll('.theme-opt').forEach((opt) => {
+            const checked = opt.getAttribute('data-theme-val') === t;
+            opt.setAttribute('aria-checked', checked ? 'true' : 'false');
+        });
+    };
 
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('#themeToggle');
-        if (!btn) return;
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === DARK ? LIGHT : DARK;
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(theme);
+
+    segment.addEventListener('click', (e) => {
+        const opt = e.target.closest('.theme-opt');
+        if (!opt) return;
+        const val = opt.getAttribute('data-theme-val');
+        if (val === document.documentElement.getAttribute('data-theme')) return;
+        applyTheme(val);
+        localStorage.setItem(STORAGE_KEY, val);
     });
 })();
 
