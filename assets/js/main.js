@@ -152,28 +152,21 @@ updateHeroScaleOnScroll();
 // Dark theme toggle
 (function() {
     const STORAGE_KEY = 'lawebdejacoto_theme';
-    const LIGHT = 'light';
     const DARK = 'dark';
+    const LIGHT = 'light';
 
     const saved = localStorage.getItem(STORAGE_KEY);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const theme = saved || (prefersDark ? DARK : LIGHT);
 
-    const applyTheme = (t) => {
-        document.documentElement.setAttribute('data-theme', t);
-        const btn = document.getElementById('themeToggle');
-        if (btn) {
-            btn.textContent = t === DARK ? '\u{1F319}' : '\u{2600}\u{FE0F}';
-        }
-    };
-
-    applyTheme(theme);
+    document.documentElement.setAttribute('data-theme', theme);
 
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('#themeToggle');
         if (!btn) return;
-        const next = document.documentElement.getAttribute('data-theme') === DARK ? LIGHT : DARK;
-        applyTheme(next);
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === DARK ? LIGHT : DARK;
+        document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem(STORAGE_KEY, next);
     });
 })();
