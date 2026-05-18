@@ -717,7 +717,7 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
 .hero-timeline-ornament {
     position: relative;
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
     min-height: 220px;
     border-radius: 22px;
     border: 1px solid #bfdbfe;
@@ -784,8 +784,8 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
     border: 1px solid rgba(147, 197, 253, 0.9);
     background: rgba(255, 255, 255, 0.96);
     color: #1e293b;
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 500;
     line-height: 1.15;
     box-shadow: 0 10px 18px rgba(37, 99, 235, 0.14);
     opacity: 0;
@@ -1465,21 +1465,22 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
     }
 
     .hero-timeline-ornament {
-        width: 128px;
-        max-width: 128px;
+        width: 108px;
+        max-width: 108px;
         min-height: 208px;
         border-radius: 16px;
+        overflow: visible;
     }
 
     .hero-line {
-        left: 20px;
+        left: 16px;
         top: 16px;
         bottom: 16px;
         width: 2px;
     }
 
     .hero-dot {
-        left: 11px;
+        left: 7px;
         width: 18px;
         height: 18px;
         font-size: 0.48rem;
@@ -1498,12 +1499,12 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
     }
 
     .hero-comic-bubble {
-        left: 35px;
-        max-width: 84px;
-        padding: 0.3rem 0.38rem;
+        left: 32px;
+        max-width: 130px;
+        padding: 0.32rem 0.45rem;
         border-radius: 10px;
-        font-size: 0.53rem;
-        line-height: 1.08;
+        font-size: 0.55rem;
+        line-height: 1.1;
     }
 
     .hero-comic-bubble::after {
@@ -1514,20 +1515,24 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
     }
 
     .bubble-1 {
-        top: 16px;
+        top: 14px;
     }
 
     .bubble-2 {
-        top: 78px;
+        top: 76px;
     }
 
     .bubble-3 {
-        top: 140px;
+        top: 138px;
     }
 
     .logistic-headline-mobile {
         display: block;
         line-height: 1.04;
+    }
+
+    .logistic-headline-mobile span {
+        font-size: 2.37rem;
     }
 
     .logistic-headline-default {
