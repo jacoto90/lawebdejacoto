@@ -92,3 +92,80 @@ const updateHeroScaleOnScroll = () => {
 
 window.addEventListener('scroll', updateHeroScaleOnScroll, { passive: true });
 updateHeroScaleOnScroll();
+
+const timelinePoints = document.querySelectorAll('.timeline-point');
+const timelineVisual = document.getElementById('timelineVisual');
+const timelineVisualCaption = document.getElementById('timelineVisualCaption');
+
+if (timelinePoints.length && timelineVisual) {
+    const activateTimelinePoint = (point) => {
+        if (!point || point.classList.contains('is-active')) return;
+
+        timelinePoints.forEach((item) => item.classList.remove('is-active'));
+        point.classList.add('is-active');
+
+        const nextSrc = point.dataset.visualSrc;
+        const nextAlt = point.dataset.visualAlt || '';
+        if (!nextSrc) return;
+
+        timelineVisual.classList.add('is-switching');
+        window.setTimeout(() => {
+            timelineVisual.src = nextSrc;
+            timelineVisual.alt = nextAlt;
+            if (timelineVisualCaption) {
+                timelineVisualCaption.textContent = nextAlt;
+            }
+            timelineVisual.classList.remove('is-switching');
+        }, 120);
+    };
+
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                activateTimelinePoint(entry.target);
+            }
+        });
+    }, { rootMargin: '-35% 0px -45% 0px', threshold: 0.1 });
+
+    timelinePoints.forEach((point) => timelineObserver.observe(point));
+}
+
+const mediaModal = document.getElementById('mediaModal');
+const mediaModalImage = document.getElementById('mediaModalImage');
+const mediaModalCaption = document.getElementById('mediaModalCaption');
+
+if (mediaModal && mediaModalImage && mediaModalCaption) {
+    const openMediaModal = (src, caption) => {
+        mediaModalImage.src = src;
+        mediaModalImage.alt = caption;
+        mediaModalCaption.textContent = caption;
+        mediaModal.classList.add('is-open');
+        mediaModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMediaModal = () => {
+        mediaModal.classList.remove('is-open');
+        mediaModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('[data-modal-src]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const src = trigger.getAttribute('data-modal-src');
+            const caption = trigger.getAttribute('data-modal-title') || '';
+            if (!src) return;
+            openMediaModal(src, caption);
+        });
+    });
+
+    mediaModal.querySelectorAll('[data-modal-close]').forEach((closer) => {
+        closer.addEventListener('click', closeMediaModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && mediaModal.classList.contains('is-open')) {
+            closeMediaModal();
+        }
+    });
+}

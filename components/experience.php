@@ -20,7 +20,11 @@
                                     <li>
                                         <?= htmlspecialchars($project[$lang] ?? $project['es']) ?>
                                         <?php if (!empty($project['url'])): ?>
-                                            <a href="<?= htmlspecialchars($project['url']) ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($project['url']) ?></a>
+                                            <?php
+                                            $projectUrl = str_replace('%lang%', $lang, $project['url']);
+                                            $projectLinkLabel = $project['url_label'][$lang] ?? $project['url_label']['es'] ?? $projectUrl;
+                                            ?>
+                                            <a href="<?= htmlspecialchars($projectUrl) ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($projectLinkLabel) ?></a>
                                         <?php endif; ?>
                                     </li>
                                 <?php endforeach; ?>
