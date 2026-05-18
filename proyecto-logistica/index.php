@@ -6,6 +6,20 @@ if (!isset($translations[$lang])) {
     $lang = 'es';
 }
 $mainCssVersion = filemtime(__DIR__ . '/../assets/css/main.css');
+$headlineMobileLines = null;
+if ($lang === 'es') {
+    $headlineMobileLines = [
+        'Timeline de',
+        'operaciones',
+        'logísticas',
+        'y control',
+        'de tiempos',
+        'en muelles',
+    ];
+}
+$heroComicBubbles = $lang === 'es'
+    ? ['Muelle listo', 'Sync cloud', 'KPI en vivo']
+    : ['Dock ready', 'Cloud sync', 'Live KPIs'];
 $assetWithVersion = static function (string $webPath): string {
     $relativePath = ltrim(str_replace('/', DIRECTORY_SEPARATOR, $webPath), DIRECTORY_SEPARATOR);
     $absolutePath = __DIR__ . '/../' . $relativePath;
@@ -147,9 +161,35 @@ $copy = [
 <main class="logistic-main" id="top">
     <section class="hero logistic-hero section">
         <div class="container logistic-wrap-narrow">
-            <p class="eyebrow"><?= htmlspecialchars($copy['eyebrow']) ?></p>
-            <h1><?= htmlspecialchars($copy['headline']) ?></h1>
-            <p class="logistic-intro"><?= htmlspecialchars($copy['subheadline']) ?></p>
+            <div class="logistic-hero-top">
+                <div class="logistic-hero-copy">
+                    <p class="eyebrow"><?= htmlspecialchars($copy['eyebrow']) ?></p>
+                    <h1 class="logistic-headline">
+                        <?php if (is_array($headlineMobileLines)): ?>
+                            <span class="logistic-headline-default"><?= htmlspecialchars($copy['headline']) ?></span>
+                            <span class="logistic-headline-mobile" aria-hidden="true">
+                                <?php foreach ($headlineMobileLines as $line): ?>
+                                    <span><?= htmlspecialchars($line) ?></span>
+                                <?php endforeach; ?>
+                            </span>
+                        <?php else: ?>
+                            <?= htmlspecialchars($copy['headline']) ?>
+                        <?php endif; ?>
+                    </h1>
+                    <p class="logistic-intro"><?= htmlspecialchars($copy['subheadline']) ?></p>
+                </div>
+                <div class="logistic-hero-art" aria-hidden="true">
+                    <div class="hero-timeline-ornament">
+                        <div class="hero-line"></div>
+                        <span class="hero-dot dot-1">01</span>
+                        <span class="hero-dot dot-2">02</span>
+                        <span class="hero-dot dot-3">03</span>
+                        <span class="hero-comic-bubble bubble-1"><?= htmlspecialchars($heroComicBubbles[0]) ?></span>
+                        <span class="hero-comic-bubble bubble-2"><?= htmlspecialchars($heroComicBubbles[1]) ?></span>
+                        <span class="hero-comic-bubble bubble-3"><?= htmlspecialchars($heroComicBubbles[2]) ?></span>
+                    </div>
+                </div>
+            </div>
             <p class="project-summary-note"><?= htmlspecialchars($copy['project_summary']) ?></p>
         </div>
     </section>
