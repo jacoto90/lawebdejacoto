@@ -151,6 +151,7 @@ $copy = [
             <a href="#kpis"><?= htmlspecialchars($copy['nav_kpi']) ?></a>
             <a href="#value"><?= htmlspecialchars($copy['nav_value']) ?></a>
             <a href="<?= $lang === 'en' ? '/en' : '/' ?>" class="nav-portfolio">Portfolio</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
             <div class="lang-switch">
                 <a href="?lang=es" class="<?= $lang === 'es' ? 'active' : '' ?>">ES</a>
                 <a href="?lang=en" class="<?= $lang === 'en' ? 'active' : '' ?>">EN</a>

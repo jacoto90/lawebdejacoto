@@ -149,6 +149,35 @@ const updateHeroScaleOnScroll = () => {
 window.addEventListener('scroll', updateHeroScaleOnScroll, { passive: true });
 updateHeroScaleOnScroll();
 
+// Dark theme toggle
+(function() {
+    const STORAGE_KEY = 'lawebdejacoto_theme';
+    const LIGHT = 'light';
+    const DARK = 'dark';
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? DARK : LIGHT);
+
+    const applyTheme = (t) => {
+        document.documentElement.setAttribute('data-theme', t);
+        const btn = document.getElementById('themeToggle');
+        if (btn) {
+            btn.textContent = t === DARK ? '\u{1F319}' : '\u{2600}\u{FE0F}';
+        }
+    };
+
+    applyTheme(theme);
+
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('#themeToggle');
+        if (!btn) return;
+        const next = document.documentElement.getAttribute('data-theme') === DARK ? LIGHT : DARK;
+        applyTheme(next);
+        localStorage.setItem(STORAGE_KEY, next);
+    });
+})();
+
 const timelinePoints = document.querySelectorAll('.timeline-point');
 const timelineVisual = document.getElementById('timelineVisual');
 const timelineVisualCaption = document.getElementById('timelineVisualCaption');
