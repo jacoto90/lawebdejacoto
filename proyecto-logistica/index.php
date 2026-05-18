@@ -143,13 +143,14 @@ $copy = [
 <header class="site-header">
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="container nav-wrap">
-        <a class="brand" href="/index.php?lang=<?= urlencode($lang) ?>">JACOTO</a>
+        <a class="brand" href="/">JACOTO</a>
         <button class="menu-btn" type="button" id="menuBtn" aria-label="menu">Menu</button>
         <nav class="main-nav" id="mainNav">
             <a href="#top"><?= htmlspecialchars($copy['nav_overview']) ?></a>
             <a href="#timeline"><?= htmlspecialchars($copy['nav_timeline']) ?></a>
             <a href="#kpis"><?= htmlspecialchars($copy['nav_kpi']) ?></a>
             <a href="#value"><?= htmlspecialchars($copy['nav_value']) ?></a>
+            <a href="<?= $lang === 'en' ? '/en' : '/' ?>" class="nav-portfolio">Portfolio</a>
             <div class="lang-switch">
                 <a href="?lang=es" class="<?= $lang === 'es' ? 'active' : '' ?>">ES</a>
                 <a href="?lang=en" class="<?= $lang === 'en' ? 'active' : '' ?>">EN</a>
