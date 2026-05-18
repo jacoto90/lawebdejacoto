@@ -90,12 +90,12 @@ return [
             'tags' => ['.NET', 'C#', 'Angular', 'SQL Server', 'APIs'],
             'projects' => [
                 [
-                    'es' => 'Sistema de registro de tiempos operativos en muelles con eventos de camión, puerta y calzo en tiempo real.',
+                    'es' => 'Sistema de registro de tiempos operativos en muelles con eventos de camión, puerta y retenedor en tiempo real.',
                     'en' => 'Built a dock-time tracking system with real-time truck, door, and wheel chock events.',
                     'url' => 'proyecto-logistica/?lang=%lang%',
                     'url_label' => [
-                        'es' => 'Ver proyecto+',
-                        'en' => 'View project+',
+                        'es' => 'Proyecto Logística',
+                        'en' => 'Logistics Project',
                     ],
                 ],
                 [
@@ -222,6 +222,26 @@ return [
                 'en' => 'E-commerce platform with integrations, order workflows, and conversion-oriented UX.',
             ],
             'url' => 'https://sticnow.com',
+        ],
+        [
+            'name' => 'Proyecto Logístico MEIBIT',
+            'type' => ['es' => 'Proyecto para MEIBIT', 'en' => 'Project for MEIBIT'],
+            'logo' => 'MB',
+            'description' => [
+                'es' => 'Solución de control de tiempos en muelles con timeline operativo, zona KPI interactiva y trazabilidad de sesiones.',
+                'en' => 'Dock-time control solution with operational timeline, interactive KPI area, and session traceability.',
+            ],
+            'url' => '/proyecto-logistica/index.php?lang=%lang%',
+        ],
+        [
+            'name' => 'Content Generator Pro',
+            'type' => ['es' => 'Proyecto para DobleSEO', 'en' => 'Project for DobleSEO'],
+            'logo' => 'DS',
+            'description' => [
+                'es' => 'Plugin premium para WordPress orientado a automatización de contenido con IA e integración en flujos editoriales SEO.',
+                'en' => 'Premium WordPress plugin focused on AI content automation and SEO editorial workflow integration.',
+            ],
+            'url' => 'https://contentgeneratorpro.com/',
         ],
     ],
     'services' => [

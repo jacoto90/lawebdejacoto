@@ -20,7 +20,7 @@ return [
         'experience_projects' => 'Proyectos clave',
         'experience_toggle' => 'Ver detalles',
         'services_title' => 'Servicios',
-        'projects_title' => 'Proyectos propios',
+        'projects_title' => 'Proyectos',
         'hobby_title' => 'Hobbies',
         'projects_visit' => 'Ver proyecto',
         'contact_title' => 'Construyamos algo útil',

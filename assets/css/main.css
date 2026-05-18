@@ -980,20 +980,24 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
 .kpi-hotspot-image img {
     position: absolute;
     inset: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     display: block;
     max-height: none;
     object-fit: cover;
+    pointer-events: none;
 }
 
 .kpi-zone {
     position: absolute;
+    z-index: 2;
     left: 0;
     right: 0;
     border: 0;
     background: transparent;
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 .kpi-zone::after {
