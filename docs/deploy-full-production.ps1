@@ -73,7 +73,14 @@ function Ensure-Dir($url) {
 function Upload-Dir($local, $remote) {
   Ensure-Dir $remote
   Get-ChildItem -LiteralPath $local -Force | ForEach-Object {
-    if ($_.Name -in @('.git', '.idea', '.vscode')) { return }
+    $excludedDirs = @('.git', '.idea', '.vscode', 'storage')
+    $excludedFiles = @('.env', '.env.local', 'database.php')
+    $excludedExtensions = @('.sqlite', '.sqlite-shm', '.sqlite-wal', '.log')
+
+    if ($_.PSIsContainer -and $_.Name -in $excludedDirs) { return }
+    if (-not $_.PSIsContainer -and $_.Name -in $excludedFiles) { return }
+    if (-not $_.PSIsContainer -and $_.Extension -in $excludedExtensions) { return }
+
     if ($_.PSIsContainer) {
       Upload-Dir $_.FullName "$remote/$($_.Name)"
     } else {
