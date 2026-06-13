@@ -74,11 +74,12 @@ function Upload-Dir($local, $remote) {
   Ensure-Dir $remote
   Get-ChildItem -LiteralPath $local -Force | ForEach-Object {
     $excludedDirs = @('.git', '.idea', '.vscode', 'storage')
-    $excludedFiles = @('.env', '.env.local', 'database.php')
+    $excludedFiles = @('.env', '.env.local')
     $excludedExtensions = @('.sqlite', '.sqlite-shm', '.sqlite-wal', '.log')
 
     if ($_.PSIsContainer -and $_.Name -in $excludedDirs) { return }
     if (-not $_.PSIsContainer -and $_.Name -in $excludedFiles) { return }
+    if (-not $_.PSIsContainer -and $_.Name -eq 'database.php' -and (Split-Path $_.DirectoryName -Leaf) -eq 'config') { return }
     if (-not $_.PSIsContainer -and $_.Extension -in $excludedExtensions) { return }
 
     if ($_.PSIsContainer) {
