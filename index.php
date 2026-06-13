@@ -1,6 +1,11 @@
 <?php
-$profile = require __DIR__ . '/data/profile.php';
-$translations = require __DIR__ . '/data/translations.php';
+define('APP_BASE_PATH', __DIR__);
+require __DIR__ . '/app/env.php';
+require __DIR__ . '/app/database.php';
+require __DIR__ . '/app/content.php';
+
+$profile = app_public_profile(__DIR__ . '/data/profile.php');
+$translations = app_public_translations(__DIR__ . '/data/translations.php');
 $routeSlugs = [
     'home' => ['es' => '', 'en' => ''],
     'about' => ['es' => 'sobre-mi', 'en' => 'about'],

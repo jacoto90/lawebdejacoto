@@ -14,9 +14,13 @@ yarn-error.log*
 # Env
 .env
 .env.*
+!.env.example
+config/database.php
 
 # Build/cache
 node_modules/
 dist/
 build/
 .cache/
+storage/*.sqlite
+storage/*.sqlite-*

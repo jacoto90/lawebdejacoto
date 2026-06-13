@@ -693,6 +693,314 @@ h3 { margin: 0 0 0.95rem; font-size: clamp(1.45rem, 3vw, 2rem); }
 
 .contact-box .hero-actions { justify-content: center; }
 
+.admin-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(780px 320px at 15% -10%, rgba(139, 92, 246, 0.16), transparent 68%),
+        radial-gradient(680px 280px at 90% 0%, rgba(14, 165, 233, 0.12), transparent 62%),
+        var(--bg);
+}
+
+.admin-shell {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+}
+
+.admin-card {
+    width: min(520px, 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    backdrop-filter: blur(18px);
+}
+
+.admin-card h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 8vw, 3.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+}
+
+.admin-form {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+}
+
+.admin-form label {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.admin-form input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+    outline: none;
+}
+
+.admin-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.13);
+}
+
+.admin-alert {
+    border-radius: 18px;
+    padding: 0.85rem 0.95rem;
+    margin: 0.7rem 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.admin-alert code {
+    font-size: 0.82em;
+}
+
+.admin-alert-error {
+    border: 1px solid #fecdd3;
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.admin-alert-warning {
+    border: 1px solid #fcd34d;
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.admin-alert-success {
+    border: 1px solid #86efac;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.admin-muted,
+.admin-help {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.admin-help {
+    margin: 0;
+}
+
+.admin-dashboard {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-next-box {
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: var(--surface-soft);
+    padding: 1rem;
+}
+
+.admin-next-box h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+}
+
+.admin-next-box p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.admin-editor-shell {
+    width: min(1180px, 94%);
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+}
+
+.admin-editor-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin-editor-head h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+}
+
+.admin-editor-actions,
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.admin-tabs {
+    margin: 1rem 0 1.4rem;
+}
+
+.admin-tabs a {
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.55rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.admin-tabs a.active {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
+    border-color: var(--color-accent);
+}
+
+.admin-editor-card,
+.admin-edit-row {
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: var(--shadow-soft);
+}
+
+.admin-editor-card {
+    padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.admin-editor-card h2,
+.admin-edit-row h3,
+.admin-nested h4 {
+    margin: 0 0 0.9rem;
+}
+
+.admin-edit-row {
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.admin-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.admin-form textarea,
+.admin-inline-form input,
+.admin-form textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.85rem 0.95rem;
+    font: inherit;
+    outline: none;
+    resize: vertical;
+}
+
+.admin-form textarea:focus,
+.admin-inline-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.13);
+}
+
+.admin-inline-form {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) 110px auto auto auto;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.admin-add-form {
+    border-bottom: 0;
+    margin-top: 0.8rem;
+}
+
+.admin-check {
+    display: inline-flex !important;
+    grid-template-columns: none !important;
+    align-items: center;
+    gap: 0.35rem !important;
+    color: var(--muted) !important;
+    font-weight: 800;
+}
+
+.admin-check input {
+    width: auto;
+}
+
+.admin-nested {
+    margin-top: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+}
+
+.admin-nested-form {
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 0.85rem;
+    margin: 0.75rem 0;
+}
+
+[data-theme="dark"] .admin-editor-card,
+[data-theme="dark"] .admin-edit-row,
+[data-theme="dark"] .admin-tabs a,
+[data-theme="dark"] .admin-form textarea,
+[data-theme="dark"] .admin-inline-form input,
+[data-theme="dark"] .admin-nested-form {
+    background: var(--surface);
+}
+
+@media (max-width: 780px) {
+    .admin-editor-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-grid-two,
+    .admin-inline-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+[data-theme="dark"] .admin-card,
+[data-theme="dark"] .admin-form input,
+[data-theme="dark"] .admin-next-box {
+    background: var(--surface);
+}
+
+[data-theme="dark"] .admin-alert-error {
+    border-color: rgba(244, 63, 94, 0.28);
+    background: rgba(244, 63, 94, 0.12);
+    color: #fda4af;
+}
+
+[data-theme="dark"] .admin-alert-warning {
+    border-color: rgba(245, 158, 11, 0.28);
+    background: rgba(245, 158, 11, 0.12);
+    color: #fcd34d;
+}
+
+[data-theme="dark"] .admin-alert-success {
+    border-color: rgba(34, 197, 94, 0.28);
+    background: rgba(34, 197, 94, 0.12);
+    color: #86efac;
+}
+
 .hobby-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;

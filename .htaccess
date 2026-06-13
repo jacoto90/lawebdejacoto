@@ -55,6 +55,9 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
     RewriteRule .* - [F,L]
 
+    # Internal PHP/config files are include-only and must never be served directly
+    RewriteRule ^(app|config|storage)(/|$) - [F,L]
+
     # Clean routes (/, /sobre-mi, /en/about, etc.)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

@@ -138,6 +138,28 @@ if (pageLoader) {
     });
 }
 
+const pythonOdooChip = Array.from(document.querySelectorAll('.skill-cloud span'))
+    .find((chip) => chip.textContent.trim() === 'Python / Odoo');
+
+if (pythonOdooChip) {
+    let adminTapCount = 0;
+    let adminTapTimer = null;
+
+    pythonOdooChip.addEventListener('click', () => {
+        adminTapCount += 1;
+        window.clearTimeout(adminTapTimer);
+
+        if (adminTapCount >= 3) {
+            window.location.href = '/admin/';
+            return;
+        }
+
+        adminTapTimer = window.setTimeout(() => {
+            adminTapCount = 0;
+        }, 1400);
+    });
+}
+
 const updateHeroScaleOnScroll = () => {
     if (window.scrollY > 36) {
         document.body.classList.add('hero-scrolled');
