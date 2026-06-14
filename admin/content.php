@@ -15,7 +15,7 @@ if (!$currentUser) {
     exit;
 }
 
-$sections = ['profile', 'texts', 'skills', 'highlights', 'studies', 'services', 'projects', 'experience'];
+$sections = ['profile', 'texts', 'skills', 'highlights', 'studies', 'services', 'projects', 'experience', 'hero'];
 $section = (string) ($_GET['section'] ?? 'profile');
 if (!in_array($section, $sections, true)) {
     $section = 'profile';
@@ -92,6 +92,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 'cv' => admin_post('cv'),
                 'cv_download_name' => admin_post('cv_download_name'),
                 'photo' => admin_post('photo'),
+                'cv_photo' => admin_post('cv_photo') ?: 'images/perfil_joseangel_linkedin.jpg',
                 'golf_photo' => admin_post('golf_photo'),
                 'updated_at' => app_now(),
             ]);
@@ -246,6 +247,37 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             admin_delete_by_id($pdo, 'portfolio_experience_projects', 'id', $id);
             admin_redirect('experience');
         }
+
+        if ($action === 'save_hero_texts') {
+            $es = trim((string) ($_POST['hero_typewriter_es'] ?? ''));
+            $en = admin_en_or_es(trim((string) ($_POST['hero_typewriter_en'] ?? '')), $es);
+            app_upsert($pdo, 'portfolio_texts', ['text_key', 'lang'], ['text_key' => 'hero_typewriter', 'lang' => 'es', 'text_value' => $es]);
+            app_upsert($pdo, 'portfolio_texts', ['text_key', 'lang'], ['text_key' => 'hero_typewriter', 'lang' => 'en', 'text_value' => $en]);
+            admin_redirect('hero');
+        }
+
+        if ($action === 'save_hero_card' || $action === 'add_hero_card') {
+            $id = $action === 'add_hero_card' ? app_uid() : admin_post('id');
+            app_upsert($pdo, 'portfolio_hero_cards', ['id'], ['id' => $id, 'name' => admin_post('name'), 'label' => admin_post('label'), 'sort_order' => admin_int('sort_order'), 'is_active' => admin_bool('is_active')]);
+            admin_redirect('hero');
+        }
+        if ($action === 'delete_hero_card') {
+            $id = admin_post('id');
+            admin_delete_by_id($pdo, 'portfolio_hero_card_items', 'card_id', $id);
+            admin_delete_by_id($pdo, 'portfolio_hero_cards', 'id', $id);
+            admin_redirect('hero');
+        }
+
+        if ($action === 'save_hero_item' || $action === 'add_hero_item') {
+            $id = $action === 'add_hero_item' ? app_uid() : admin_post('id');
+            $cardId = admin_post('card_id');
+            app_upsert($pdo, 'portfolio_hero_card_items', ['id'], ['id' => $id, 'card_id' => $cardId, 'label' => admin_post('label'), 'url' => admin_post('url'), 'sort_order' => admin_int('sort_order'), 'is_active' => admin_bool('is_active')]);
+            admin_redirect('hero');
+        }
+        if ($action === 'delete_hero_item') {
+            admin_delete_by_id($pdo, 'portfolio_hero_card_items', 'id', admin_post('id'));
+            admin_redirect('hero');
+        }
     }
 }
 
@@ -310,7 +342,7 @@ function admin_rows(PDO $pdo, string $sql): array
             <input type="hidden" name="action" value="save_profile">
             <h2>Perfil, hero y hobby</h2>
             <div class="admin-grid-two">
-                <?php foreach (['name' => 'Nombre', 'email' => 'Email', 'phone' => 'Teléfono', 'linkedin' => 'LinkedIn', 'cv' => 'Ruta CV', 'cv_download_name' => 'Nombre descarga CV', 'photo' => 'Foto perfil', 'golf_photo' => 'Foto golf'] as $field => $label): ?>
+                <?php foreach (['name' => 'Nombre', 'email' => 'Email', 'phone' => 'Teléfono', 'linkedin' => 'LinkedIn', 'cv' => 'Ruta CV', 'cv_download_name' => 'Nombre descarga CV', 'photo' => 'Foto perfil', 'cv_photo' => 'Foto CV / LinkedIn', 'golf_photo' => 'Foto golf'] as $field => $label): ?>
                     <label><?= e($label) ?><input name="<?= e($field) ?>" value="<?= e((string) ($base[$field] ?? '')) ?>" required></label>
                 <?php endforeach; ?>
             </div>
@@ -376,6 +408,84 @@ function admin_rows(PDO $pdo, string $sql): array
             <article class="admin-edit-row"><form class="admin-form" method="post"><input type="hidden" name="csrf_token" value="<?= e($csrf) ?>"><input type="hidden" name="id" value="<?= e($row['id']) ?>"><input type="hidden" name="action" value="save_experience"><h3><?= e($row['company']) ?></h3><div class="admin-grid-two"><label>Empresa<input name="company" value="<?= e($row['company']) ?>"></label><label>Orden<input name="sort_order" type="number" value="<?= e((string) $row['sort_order']) ?>"></label><label>Fecha inicio<input name="start_date" type="date" value="<?= e((string) ($row['start_date'] ?? '')) ?>"></label><label>Fecha fin <small>(vacío = actualidad)</small><input name="end_date" type="date" value="<?= e((string) ($row['end_date'] ?? '')) ?>"></label><label>Tags separados por coma<input name="tags" value="<?= e(admin_experience_tags($pdo, $row['id'])) ?>"></label><label class="admin-check"><input type="checkbox" name="is_active" <?= (int) $row['is_active'] === 1 ? 'checked' : '' ?>> activo</label><label>Periodo ES<input name="period_es" value="<?= e((string) ($i18n['es']['period'] ?? '')) ?>"></label><label>Periodo EN<input name="period_en" value="<?= e((string) ($i18n['en']['period'] ?? '')) ?>"></label><label>Título ES<input name="title_es" value="<?= e((string) ($i18n['es']['title'] ?? '')) ?>"></label><label>Título EN<input name="title_en" value="<?= e((string) ($i18n['en']['title'] ?? '')) ?>"></label><label>Resumen ES<textarea name="summary_es" rows="3"><?= e((string) ($i18n['es']['summary'] ?? '')) ?></textarea></label><label>Resumen EN<textarea name="summary_en" rows="3"><?= e((string) ($i18n['en']['summary'] ?? '')) ?></textarea></label></div><button class="btn btn-primary">Guardar experiencia</button><button class="btn btn-ghost" name="action" value="delete_experience" onclick="return confirm('Eliminar experiencia completa?')">Eliminar</button></form>
             <div class="admin-nested"><h4>Proyectos clave</h4><?php $projects = $pdo->prepare('SELECT * FROM portfolio_experience_projects WHERE experience_id = :id ORDER BY sort_order ASC'); $projects->execute(['id' => $row['id']]); foreach ($projects->fetchAll() as $project): $pi18n = admin_i18n($pdo, 'portfolio_experience_project_i18n', 'project_id', $project['id']); ?><form class="admin-form admin-nested-form" method="post"><input type="hidden" name="csrf_token" value="<?= e($csrf) ?>"><input type="hidden" name="id" value="<?= e($project['id']) ?>"><input type="hidden" name="experience_id" value="<?= e($row['id']) ?>"><input type="hidden" name="action" value="save_exp_project"><div class="admin-grid-two"><label>Texto ES<textarea name="text_value_es" rows="2"><?= e((string) ($pi18n['es']['text_value'] ?? '')) ?></textarea></label><label>Texto EN<textarea name="text_value_en" rows="2"><?= e((string) ($pi18n['en']['text_value'] ?? '')) ?></textarea></label><label>URL<input name="url" value="<?= e($project['url']) ?>"></label><label>Orden<input name="sort_order" type="number" value="<?= e((string) $project['sort_order']) ?>"></label><label>Label URL ES<input name="url_label_es" value="<?= e((string) ($pi18n['es']['url_label'] ?? '')) ?>"></label><label>Label URL EN<input name="url_label_en" value="<?= e((string) ($pi18n['en']['url_label'] ?? '')) ?>"></label></div><label class="admin-check"><input type="checkbox" name="is_active" <?= (int) $project['is_active'] === 1 ? 'checked' : '' ?>> activo</label><button class="btn btn-primary">Guardar proyecto</button><button class="btn btn-ghost" name="action" value="delete_exp_project" onclick="return confirm('Eliminar proyecto clave?')">Eliminar</button></form><?php endforeach; ?><form class="admin-form admin-nested-form" method="post"><input type="hidden" name="csrf_token" value="<?= e($csrf) ?>"><input type="hidden" name="experience_id" value="<?= e($row['id']) ?>"><input type="hidden" name="action" value="add_exp_project"><div class="admin-grid-two"><label>Texto ES<textarea name="text_value_es" rows="2"></textarea></label><label>Texto EN<textarea name="text_value_en" rows="2"></textarea></label><label>URL<input name="url"></label><label>Orden<input name="sort_order" type="number" value="99"></label><label>Label URL ES<input name="url_label_es"></label><label>Label URL EN<input name="url_label_en"></label></div><label class="admin-check"><input type="checkbox" name="is_active" checked> activo</label><button class="btn btn-primary">Añadir proyecto clave</button></form></div></article>
         <?php endforeach; ?><form class="admin-edit-row admin-form" method="post"><input type="hidden" name="csrf_token" value="<?= e($csrf) ?>"><input type="hidden" name="action" value="add_experience"><h3>Nueva experiencia</h3><div class="admin-grid-two"><label>Empresa<input name="company"></label><label>Orden<input name="sort_order" type="number" value="99"></label><label>Fecha inicio<input name="start_date" type="date"></label><label>Fecha fin <small>(vacío = actualidad)</small><input name="end_date" type="date"></label><label>Tags<input name="tags"></label><label class="admin-check"><input type="checkbox" name="is_active" checked> activo</label><label>Periodo ES<input name="period_es"></label><label>Periodo EN<input name="period_en"></label><label>Título ES<input name="title_es"></label><label>Título EN<input name="title_en"></label><label>Resumen ES<textarea name="summary_es" rows="3"></textarea></label><label>Resumen EN<textarea name="summary_en" rows="3"></textarea></label></div><button class="btn btn-primary">Añadir experiencia</button></form></section>
+    <?php endif; ?>
+
+    <?php if ($section === 'hero'): ?>
+        <?php $heroTypewriterEs = $pdo->prepare("SELECT text_value FROM portfolio_texts WHERE text_key = 'hero_typewriter' AND lang = 'es'"); $heroTypewriterEs->execute(); $heroTypewriterEsVal = (string) $heroTypewriterEs->fetchColumn(); ?>
+        <?php $heroTypewriterEn = $pdo->prepare("SELECT text_value FROM portfolio_texts WHERE text_key = 'hero_typewriter' AND lang = 'en'"); $heroTypewriterEn->execute(); $heroTypewriterEnVal = (string) $heroTypewriterEn->fetchColumn(); ?>
+        <form class="admin-editor-card admin-form" method="post">
+            <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+            <input type="hidden" name="action" value="save_hero_texts">
+            <h2>Texto de presentación hero</h2>
+            <div class="admin-grid-two">
+                <label>ES <small>(máquina de escribir)</small><textarea name="hero_typewriter_es" rows="3"><?= e($heroTypewriterEsVal) ?></textarea></label>
+                <label>EN <small>(typewriter)</small><textarea name="hero_typewriter_en" rows="3"><?= e($heroTypewriterEnVal) ?></textarea></label>
+            </div>
+            <button class="btn btn-primary">Guardar texto</button>
+        </form>
+
+        <section class="admin-editor-card"><h2>Chips del hero</h2>
+        <?php foreach (admin_rows($pdo, 'SELECT * FROM portfolio_hero_cards ORDER BY sort_order ASC') as $row): ?>
+            <article class="admin-edit-row">
+                <form class="admin-form" method="post">
+                    <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                    <input type="hidden" name="id" value="<?= e($row['id']) ?>">
+                    <input type="hidden" name="action" value="save_hero_card">
+                    <h3><?= e($row['label']) ?></h3>
+                    <div class="admin-grid-two">
+                        <label>Nombre interno<input name="name" value="<?= e($row['name']) ?>"></label>
+                        <label>Etiqueta visible<input name="label" value="<?= e($row['label']) ?>"></label>
+                        <label>Orden<input name="sort_order" type="number" value="<?= e((string) $row['sort_order']) ?>"></label>
+                        <label class="admin-check"><input type="checkbox" name="is_active" <?= (int) $row['is_active'] === 1 ? 'checked' : '' ?>> activo</label>
+                    </div>
+                    <button class="btn btn-primary">Guardar chip</button>
+                    <button class="btn btn-ghost" name="action" value="delete_hero_card" onclick="return confirm('Eliminar chip y sus subchips?')">Eliminar</button>
+                </form>
+                <div class="admin-nested"><h4>Subchips</h4>
+                <?php $items = $pdo->prepare('SELECT * FROM portfolio_hero_card_items WHERE card_id = :id ORDER BY sort_order ASC'); $items->execute(['id' => $row['id']]); foreach ($items->fetchAll() as $item): ?>
+                    <form class="admin-form admin-nested-form" method="post">
+                        <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                        <input type="hidden" name="id" value="<?= e($item['id']) ?>">
+                        <input type="hidden" name="card_id" value="<?= e($row['id']) ?>">
+                        <input type="hidden" name="action" value="save_hero_item">
+                        <div class="admin-grid-two">
+                            <label>Texto<input name="label" value="<?= e($item['label']) ?>"></label>
+                            <label>URL <small>(#seccion, https://... o ruta interna)</small><input name="url" value="<?= e($item['url']) ?>"></label>
+                            <label>Orden<input name="sort_order" type="number" value="<?= e((string) $item['sort_order']) ?>"></label>
+                            <label class="admin-check"><input type="checkbox" name="is_active" <?= (int) $item['is_active'] === 1 ? 'checked' : '' ?>> activo</label>
+                        </div>
+                        <button class="btn btn-primary">Guardar subchip</button>
+                        <button class="btn btn-ghost" name="action" value="delete_hero_item" onclick="return confirm('Eliminar subchip?')">Eliminar</button>
+                    </form>
+                <?php endforeach; ?>
+                    <form class="admin-form admin-nested-form" method="post">
+                        <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                        <input type="hidden" name="card_id" value="<?= e($row['id']) ?>">
+                        <input type="hidden" name="action" value="add_hero_item">
+                        <div class="admin-grid-two">
+                            <label>Texto<input name="label"></label>
+                            <label>URL<input name="url" placeholder="#projects"></label>
+                            <label>Orden<input name="sort_order" type="number" value="99"></label>
+                            <label class="admin-check"><input type="checkbox" name="is_active" checked> activo</label>
+                        </div>
+                        <button class="btn btn-primary">Añadir subchip</button>
+                    </form>
+                </div>
+            </article>
+        <?php endforeach; ?>
+            <form class="admin-edit-row admin-form" method="post">
+                <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                <input type="hidden" name="action" value="add_hero_card">
+                <h3>Nuevo chip</h3>
+                <div class="admin-grid-two">
+                    <label>Nombre interno<input name="name"></label>
+                    <label>Etiqueta visible<input name="label"></label>
+                    <label>Orden<input name="sort_order" type="number" value="99"></label>
+                    <label class="admin-check"><input type="checkbox" name="is_active" checked> activo</label>
+                </div>
+                <button class="btn btn-primary">Añadir chip</button>
+            </form>
+        </section>
     <?php endif; ?>
 </main>
 </body>

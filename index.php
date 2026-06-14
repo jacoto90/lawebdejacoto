@@ -6,6 +6,8 @@ require __DIR__ . '/app/content.php';
 
 $profile = app_public_profile(__DIR__ . '/data/profile.php');
 $translations = app_public_translations(__DIR__ . '/data/translations.php');
+$heroCards = [];
+try { $pdo = app_db(); $heroCards = app_portfolio_hero_cards($pdo); } catch (Throwable $e) { $heroCards = []; }
 $routeSlugs = [
     'home' => ['es' => '', 'en' => ''],
     'about' => ['es' => 'sobre-mi', 'en' => 'about'],
@@ -67,6 +69,8 @@ $urlFor = static function (string $routeKey = 'home', ?string $forceLang = null)
 };
 
 $t = $translations[$lang];
+$heroCards = [];
+try { $pdo = app_db(); $heroCards = app_portfolio_hero_cards($pdo); } catch (Throwable $e) { $heroCards = []; }
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>

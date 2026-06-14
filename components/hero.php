@@ -1,4 +1,8 @@
-<?php /** @var array $profile */ /** @var array $t */ /** @var string $lang */ /** @var callable $urlFor */ ?>
+<?php /** @var array $profile */ /** @var array $t */ /** @var string $lang */ /** @var callable $urlFor */ /** @var array $heroCards */ ?>
+<?php
+$hw = $heroCards ?: [];
+$typewriterText = $t['hero_typewriter'] ?? 'Hola, soy José Angel. Desarrollo soluciones, aplicaciones top y webs que venden.';
+?>
 <section class="hero" id="top">
     <div class="container hero-grid">
         <div>
@@ -29,7 +33,32 @@
         </div>
         <aside class="profile-card">
             <div class="profile-photo-wrap" id="profilePhotoWrap">
-                <img src="<?= htmlspecialchars($profile['photo']) ?>" alt="Profile photo" class="profile-photo-main">
+                <?php $cvPhoto = $profile['cv_photo'] ?? 'images/perfil_joseangel_linkedin.jpg'; ?>
+                <img src="<?= htmlspecialchars($cvPhoto) ?>" alt="Jose Angel profile portrait" class="profile-photo-main profile-photo-single">
+                <div class="hero-type-signature" aria-live="polite">
+                    <span class="type-line" data-typewriter="<?= htmlspecialchars($typewriterText) ?>"><?= htmlspecialchars($typewriterText) ?></span>
+                </div>
+                <div class="hero-word-orbit" aria-label="Explorar especialidades">
+                    <?php
+                    if (empty($hw)) {
+                        $defaultCards = [
+                            ['name' => 'fullstack', 'label' => 'Full Stack', 'items' => [['label' => 'Laravel / PHP', 'url' => '#experience'], ['label' => '.NET / C#', 'url' => '#experience'], ['label' => 'Angular', 'url' => '#experience'], ['label' => 'SQL / APIs', 'url' => '#services']]],
+                            ['name' => 'erp', 'label' => 'ERP', 'items' => [['label' => 'Odoo', 'url' => '#experience'], ['label' => 'SAP', 'url' => '#experience'], ['label' => 'Automatizaciones', 'url' => '#services'], ['label' => 'Procesos internos', 'url' => '#services']]],
+                            ['name' => 'ecommerce', 'label' => 'E-commerce', 'items' => [['label' => 'Shopify', 'url' => '#experience'], ['label' => 'SticNow', 'url' => 'https://sticnow.com'], ['label' => 'Checkout', 'url' => '#services'], ['label' => 'Conversión', 'url' => '#projects']]],
+                            ['name' => 'logistica', 'label' => 'Logística', 'items' => [['label' => 'Paso Seguro', 'url' => 'https://pasoseguro.pro'], ['label' => 'Proyecto Logístico', 'url' => '/proyecto-logistica/index.php?lang=' . htmlspecialchars($lang)], ['label' => 'Trazabilidad', 'url' => '#projects'], ['label' => 'Dashboards', 'url' => '#services']]],
+                            ['name' => 'producto', 'label' => 'Producto', 'items' => [['label' => 'Jacoto Fotografía', 'url' => 'https://jacotofotografia.com'], ['label' => 'Landings', 'url' => '#services'], ['label' => 'SEO técnico', 'url' => '#projects'], ['label' => 'Analítica', 'url' => '#contact']]],
+                        ];
+                        $hw = $defaultCards;
+                    }
+                    ?>
+                    <?php foreach ($hw as $ci => $card): ?>
+                        <?php
+                        $itemsStr = implode('|', array_map(static fn($it) => htmlspecialchars(($it['label'] ?? '') . '::' . ($it['url'] ?? '#projects')), $card['items']));
+                        ?>
+                        <button class="word word-<?= $ci + 1 ?>" type="button" data-hero-stack="<?= $itemsStr ?>"><?= htmlspecialchars($card['label']) ?></button>
+                    <?php endforeach; ?>
+                </div>
+                <div class="hero-stack-burst" id="heroStackBurst" aria-live="polite"></div>
             </div>
             <h2><?= htmlspecialchars($profile['name']) ?></h2>
             <p><?= htmlspecialchars($profile['location'][$lang] ?? $profile['location']['es']) ?></p>

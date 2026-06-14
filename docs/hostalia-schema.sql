@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS portfolio_profile (
     cv VARCHAR(255) NOT NULL,
     cv_download_name VARCHAR(255) NOT NULL,
     photo VARCHAR(255) NOT NULL,
+    cv_photo VARCHAR(255) NOT NULL DEFAULT '',
     golf_photo VARCHAR(255) NOT NULL,
     updated_at VARCHAR(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

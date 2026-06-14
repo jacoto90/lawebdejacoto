@@ -126,6 +126,7 @@ if ($skillDetails === []) {
 
 $firstPageJobs = array_slice(($profile['experience'] ?? []), 0, 2);
 $remainingJobs = array_slice(($profile['experience'] ?? []), 2);
+$cvPhoto = $profile['cv_photo'] ?? $profile['photo'];
 ?>
 <!DOCTYPE html>
 <html lang="<?= cv_e($lang) ?>">
@@ -504,7 +505,7 @@ $remainingJobs = array_slice(($profile['experience'] ?? []), 2);
 <article class="cv-page">
     <div class="cv-shell">
         <aside class="cv-side">
-            <img class="cv-photo" src="<?= cv_e($profile['photo']) ?>" alt="<?= cv_e($profile['name']) ?>">
+            <img class="cv-photo" src="<?= cv_e($cvPhoto) ?>" alt="<?= cv_e($profile['name']) ?>">
             <div class="cv-side-inner">
                 <div class="cv-side-box">
                     <p><?= cv_e(cv_text($profile['location'], $lang)) ?></p>

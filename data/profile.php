@@ -24,6 +24,7 @@ return [
     'cv' => 'docs/CV-Jose-Angel-Colmena-2026-texto-vectorial.pdf',
     'cv_download_name' => 'Jose-Angel-Colmena-Full-Stack-Developer-CV-2026.pdf',
     'photo' => 'images/jose_perfil.png',
+    'cv_photo' => 'images/perfil_joseangel_linkedin.jpg',
     'golf_photo' => 'images/joseangel_golf.png',
     'skills' => [
         '.NET / C#', 'Laravel / PHP', 'Angular', 'Python / Odoo', 'PostgreSQL / SQL', 'Shopify Liquid', 'SAP', 'GitHub'

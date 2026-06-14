@@ -138,6 +138,99 @@ if (pageLoader) {
     });
 }
 
+const heroTypeLine = document.querySelector('[data-typewriter]');
+if (heroTypeLine) {
+    const text = heroTypeLine.getAttribute('data-typewriter') || heroTypeLine.textContent.trim();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+        heroTypeLine.textContent = text;
+    } else {
+        heroTypeLine.textContent = '';
+        let index = 0;
+
+        const typeNextCharacter = () => {
+            heroTypeLine.textContent = text.slice(0, index + 1);
+            index += 1;
+
+            if (index >= text.length) return;
+
+            const char = text[index - 1];
+            const delay = ['.', ','].includes(char) ? 420 : (char === ' ' ? 110 : 95 + Math.random() * 50);
+            window.setTimeout(typeNextCharacter, delay);
+        };
+
+        window.setTimeout(typeNextCharacter, 900);
+    }
+}
+
+const heroStackButtons = document.querySelectorAll('[data-hero-stack]');
+const heroStackBurst = document.getElementById('heroStackBurst');
+if (heroStackButtons.length && heroStackBurst) {
+    let hideStackTimer = null;
+    let flashTimer = null;
+
+    const hideHeroStack = () => {
+        heroStackBurst.classList.remove('is-active', 'is-flashing');
+        heroStackButtons.forEach((button) => button.classList.remove('is-active'));
+    };
+
+    const showHeroStack = (button) => {
+        const items = (button.getAttribute('data-hero-stack') || '')
+            .split('|')
+            .map((item) => item.trim())
+            .filter(Boolean);
+
+        if (!items.length) return;
+
+        window.clearTimeout(hideStackTimer);
+        window.clearTimeout(flashTimer);
+        heroStackBurst.replaceChildren();
+
+        items.forEach((item, index) => {
+            const [label, href = '#projects'] = item.split('::').map((part) => part.trim());
+            const rawHref = href || '#projects';
+            const pill = document.createElement('a');
+            pill.textContent = label;
+            pill.href = rawHref;
+            pill.style.setProperty('--delay', `${index * 0.045}s`);
+
+            if (/^https?:\/\//i.test(rawHref)) {
+                pill.target = '_blank';
+                pill.rel = 'noopener noreferrer';
+            }
+
+            if (rawHref.startsWith('#')) {
+                pill.addEventListener('click', (event) => {
+                    const target = document.querySelector(rawHref);
+                    if (!target) return;
+                    event.preventDefault();
+                    hideHeroStack();
+                    smoothScrollToNode(target, 900);
+                });
+            }
+
+            heroStackBurst.appendChild(pill);
+        });
+
+        heroStackButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+        heroStackBurst.setAttribute('aria-label', `${button.textContent.trim()}: ${items.map((item) => item.split('::')[0].trim()).join(', ')}`);
+        heroStackBurst.classList.remove('is-active', 'is-flashing');
+        void heroStackBurst.offsetWidth;
+        heroStackBurst.classList.add('is-active', 'is-flashing');
+
+        flashTimer = window.setTimeout(() => {
+            heroStackBurst.classList.remove('is-flashing');
+        }, 680);
+
+        hideStackTimer = window.setTimeout(hideHeroStack, 5000);
+    };
+
+    heroStackButtons.forEach((button) => {
+        button.addEventListener('click', () => showHeroStack(button));
+    });
+}
+
 const pythonOdooChip = Array.from(document.querySelectorAll('.skill-cloud span'))
     .find((chip) => chip.textContent.trim() === 'Python / Odoo');
 

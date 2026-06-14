@@ -16,7 +16,9 @@ function app_run_portfolio_migrations(PDO $pdo): void
 {
     $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_meta (meta_key VARCHAR(80) PRIMARY KEY, meta_value TEXT NOT NULL)');
 
-    $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_profile (id VARCHAR(16) PRIMARY KEY, name VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, phone VARCHAR(80) NOT NULL, linkedin VARCHAR(255) NOT NULL, cv VARCHAR(255) NOT NULL, cv_download_name VARCHAR(255) NOT NULL, photo VARCHAR(255) NOT NULL, golf_photo VARCHAR(255) NOT NULL, updated_at VARCHAR(32) NOT NULL)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_profile (id VARCHAR(16) PRIMARY KEY, name VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, phone VARCHAR(80) NOT NULL, linkedin VARCHAR(255) NOT NULL, cv VARCHAR(255) NOT NULL, cv_download_name VARCHAR(255) NOT NULL, photo VARCHAR(255) NOT NULL, cv_photo VARCHAR(255) NOT NULL DEFAULT \'\', golf_photo VARCHAR(255) NOT NULL, updated_at VARCHAR(32) NOT NULL)');
+    app_ensure_column($pdo, 'portfolio_profile', 'cv_photo', "VARCHAR(255) NOT NULL DEFAULT ''");
+    app_backfill_profile_cv_photo($pdo);
     $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_profile_i18n (profile_id VARCHAR(16) NOT NULL, lang VARCHAR(5) NOT NULL, role TEXT NOT NULL, location TEXT NOT NULL, age TEXT NOT NULL, bio TEXT NOT NULL, hobby_title TEXT NOT NULL, hobby_text TEXT NOT NULL, PRIMARY KEY (profile_id, lang))');
     $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_texts (text_key VARCHAR(80) NOT NULL, lang VARCHAR(5) NOT NULL, text_value TEXT NOT NULL, PRIMARY KEY (text_key, lang))');
 
@@ -42,6 +44,11 @@ function app_run_portfolio_migrations(PDO $pdo): void
 
     $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_projects (id VARCHAR(16) PRIMARY KEY, name VARCHAR(180) NOT NULL, logo VARCHAR(40) NOT NULL, url VARCHAR(255) NOT NULL, sort_order INT NOT NULL DEFAULT 0, is_active INT NOT NULL DEFAULT 1)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_project_i18n (project_id VARCHAR(16) NOT NULL, lang VARCHAR(5) NOT NULL, type TEXT NOT NULL, description TEXT NOT NULL, PRIMARY KEY (project_id, lang))');
+
+    $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_hero_cards (id VARCHAR(16) PRIMARY KEY, name VARCHAR(80) NOT NULL, label VARCHAR(120) NOT NULL, sort_order INT NOT NULL DEFAULT 0, is_active INT NOT NULL DEFAULT 1)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS portfolio_hero_card_items (id VARCHAR(16) PRIMARY KEY, card_id VARCHAR(16) NOT NULL, label VARCHAR(120) NOT NULL, url VARCHAR(255) NOT NULL DEFAULT \'\', sort_order INT NOT NULL DEFAULT 0, is_active INT NOT NULL DEFAULT 1)');
+    app_backfill_hero_cards($pdo);
+    app_backfill_hero_typewriter($pdo);
 }
 
 function app_column_exists(PDO $pdo, string $table, string $column): bool
@@ -80,6 +87,46 @@ function app_default_skill_years(): array
         'SAP' => '1 año',
         'GitHub' => '2 años',
     ];
+}
+
+function app_backfill_profile_cv_photo(PDO $pdo): void
+{
+    $stmt = $pdo->prepare("UPDATE portfolio_profile SET cv_photo = :cv_photo WHERE id = 'main' AND (cv_photo IS NULL OR cv_photo = '')");
+    $stmt->execute(['cv_photo' => 'images/perfil_joseangel_linkedin.jpg']);
+}
+
+function app_backfill_hero_cards(PDO $pdo): void
+{
+    $stmt = $pdo->query("SELECT COUNT(*) FROM portfolio_hero_cards");
+    if ((int) $stmt->fetchColumn() > 0) return;
+
+    $cards = [
+        ['name' => 'fullstack', 'label' => 'Full Stack', 'items' => 'Laravel / PHP::#experience|.NET / C#::#experience|Angular::#experience|SQL / APIs::#services'],
+        ['name' => 'erp', 'label' => 'ERP', 'items' => 'Odoo::#experience|SAP::#experience|Automatizaciones::#services|Procesos internos::#services'],
+        ['name' => 'ecommerce', 'label' => 'E-commerce', 'items' => 'Shopify::#experience|SticNow::https://sticnow.com|Checkout::#services|Conversión::#projects'],
+        ['name' => 'logistica', 'label' => 'Logística', 'items' => 'Paso Seguro::https://pasoseguro.pro|Proyecto Logístico::/proyecto-logistica/index.php?lang=es|Trazabilidad::#projects|Dashboards::#services'],
+        ['name' => 'producto', 'label' => 'Producto', 'items' => 'Jacoto Fotografía::https://jacotofotografia.com|Landings::#services|SEO técnico::#projects|Analítica::#contact'],
+    ];
+
+    foreach ($cards as $index => $card) {
+        $id = app_uid();
+        app_upsert($pdo, 'portfolio_hero_cards', ['id'], ['id' => $id, 'name' => $card['name'], 'label' => $card['label'], 'sort_order' => $index, 'is_active' => 1]);
+        $parts = array_values(array_filter(array_map('trim', explode('|', $card['items']))));
+        foreach ($parts as $itemIndex => $part) {
+            [$itemLabel, $itemUrl] = array_pad(array_map('trim', explode('::', $part)), 2, '#projects');
+            app_upsert($pdo, 'portfolio_hero_card_items', ['id'], ['id' => app_uid(), 'card_id' => $id, 'label' => $itemLabel, 'url' => $itemUrl, 'sort_order' => $itemIndex, 'is_active' => 1]);
+        }
+    }
+}
+
+function app_backfill_hero_typewriter(PDO $pdo): void
+{
+    foreach (['es', 'en'] as $lang) {
+        $text = $lang === 'es'
+            ? 'Hola, soy José Angel. Desarrollo soluciones, aplicaciones top y webs que venden.'
+            : 'Hi, I\'m José Angel. I build solutions, top apps, and websites that sell.';
+        app_upsert($pdo, 'portfolio_texts', ['text_key', 'lang'], ['text_key' => 'hero_typewriter', 'lang' => $lang, 'text_value' => $text]);
+    }
 }
 
 function app_experience_duration(?string $startDate, ?string $endDate, string $lang = 'es'): string
@@ -231,6 +278,7 @@ function app_seed_portfolio_content(PDO $pdo): void
         'cv' => $profile['cv'],
         'cv_download_name' => $profile['cv_download_name'],
         'photo' => $profile['photo'],
+        'cv_photo' => $profile['cv_photo'] ?? 'images/perfil_joseangel_linkedin.jpg',
         'golf_photo' => $profile['golf_photo'],
         'updated_at' => app_now(),
     ]);
@@ -360,6 +408,7 @@ function app_portfolio_profile_from_db(PDO $pdo): array
         'cv' => $base['cv'],
         'cv_download_name' => $base['cv_download_name'],
         'photo' => $base['photo'],
+        'cv_photo' => $base['cv_photo'] ?: 'images/perfil_joseangel_linkedin.jpg',
         'golf_photo' => $base['golf_photo'],
         'skills' => [],
         'skill_details' => [],
@@ -457,6 +506,22 @@ function app_portfolio_profile_from_db(PDO $pdo): array
     }
 
     return $profile;
+}
+
+function app_portfolio_hero_cards(PDO $pdo): array
+{
+    $cards = [];
+    $stmt = $pdo->query('SELECT * FROM portfolio_hero_cards WHERE is_active = 1 ORDER BY sort_order ASC');
+    foreach ($stmt->fetchAll() as $row) {
+        $items = [];
+        $itemStmt = $pdo->prepare('SELECT * FROM portfolio_hero_card_items WHERE card_id = :id AND is_active = 1 ORDER BY sort_order ASC');
+        $itemStmt->execute(['id' => $row['id']]);
+        foreach ($itemStmt->fetchAll() as $item) {
+            $items[] = ['label' => $item['label'], 'url' => $item['url']];
+        }
+        $cards[] = ['name' => $row['name'], 'label' => $row['label'], 'items' => $items];
+    }
+    return $cards;
 }
 
 function app_portfolio_translations_from_db(PDO $pdo, array $fallback): array
