@@ -9,6 +9,7 @@ Professional bilingual portfolio for Jose Angel Colmena Tomas.
 - Component-based PHP structure
 - Recruiter-focused experience timeline
 - Downloadable CV with professional filename
+- Dynamic CV/PDF generation from current portfolio data
 - Hidden admin access prepared for live portfolio editing
 - Secure PHP/MySQL admin bootstrap for Hostalia
 
@@ -23,6 +24,7 @@ Professional bilingual portfolio for Jose Angel Colmena Tomas.
 ## Project Structure
 
 - `index.php` main entry
+- `cv.php` dynamic printable CV generated from portfolio data
 - `admin/` private administration entry
 - `app/` internal PHP helpers for database, sessions and auth
 - `.env.example` safe template for local database credentials
@@ -57,6 +59,7 @@ Editable areas:
 - Services.
 - Featured projects.
 - Experience entries, tags and key projects.
+- Experience start/end dates for automatic duration calculation.
 
 When the admin tables are empty, current content is seeded from:
 
@@ -64,6 +67,21 @@ When the admin tables are empty, current content is seeded from:
 - `data/translations.php`
 
 English fields are editable. If an English field is left empty in a CRUD form, the Spanish value is copied as a safe fallback so the public site never renders empty required text. API-based automatic translation is still a future enhancement.
+
+## Dynamic CV
+
+- The original static PDF remains available through `Descargar CV`.
+- The new `Generar PDF` button opens `cv.php?lang=<lang>&print=1` in a new tab.
+- `cv.php` builds a CV layout from the current portfolio data: profile, contact, skills, studies, services, experience and featured projects.
+- The page is A4 print-optimized and automatically opens the browser print dialog so it can be saved as PDF.
+- Print CSS preserves the same two-column visual layout from the preview, including backgrounds and timeline styling.
+- Skills include an editable `years_label` field that appears next to each stack item in the CV.
+- The CV sidebar includes extra details such as English B2 and driving licence B.
+- The first CV page shows only the first two experience entries; remaining jobs continue on dedicated pages to avoid broken page cuts.
+- Internal or empty project URLs are normalized to full portfolio URLs in the CV.
+- `Paso Seguro` is included as a featured project and is backfilled into existing seeded databases if missing.
+- Experience duration is calculated from editable start/end dates. Empty end date means current date. Any extra days round up to one additional month.
+- No server-side PDF library is required, which keeps the feature compatible with Hostalia shared hosting.
 
 ## Admin Security
 

@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS portfolio_texts (
 CREATE TABLE IF NOT EXISTS portfolio_skills (
     id VARCHAR(16) PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
+    years_label VARCHAR(80) NOT NULL DEFAULT '',
     sort_order INT NOT NULL DEFAULT 0,
     is_active INT NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -97,6 +98,8 @@ CREATE TABLE IF NOT EXISTS portfolio_study_i18n (
 CREATE TABLE IF NOT EXISTS portfolio_experiences (
     id VARCHAR(16) PRIMARY KEY,
     company VARCHAR(180) NOT NULL,
+    start_date VARCHAR(10) NOT NULL DEFAULT '',
+    end_date VARCHAR(10) NOT NULL DEFAULT '',
     sort_order INT NOT NULL DEFAULT 0,
     is_active INT NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

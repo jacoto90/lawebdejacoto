@@ -5,7 +5,13 @@
         <div class="timeline">
             <?php foreach ($profile['experience'] as $job): ?>
                 <article class="timeline-item">
-                    <p class="timeline-period"><?= htmlspecialchars($job['period'][$lang] ?? $job['period']['es']) ?></p>
+                    <?php $duration = app_experience_duration($job['start_date'] ?? '', $job['end_date'] ?? '', $lang); ?>
+                    <p class="timeline-period">
+                        <?= htmlspecialchars($job['period'][$lang] ?? $job['period']['es']) ?>
+                        <?php if ($duration !== ''): ?>
+                            <span class="timeline-duration">· <?= htmlspecialchars($duration) ?></span>
+                        <?php endif; ?>
+                    </p>
                     <h4><?= htmlspecialchars($job['company']) ?></h4>
                     <p class="timeline-title"><?= htmlspecialchars($job['title'][$lang] ?? $job['title']['es']) ?></p>
                     <p><?= htmlspecialchars($job['summary'][$lang] ?? $job['summary']['es']) ?></p>

@@ -16,7 +16,7 @@
             <p class="hero-text"><?= htmlspecialchars($profile['bio'][$lang] ?? $profile['bio']['es']) ?></p>
             <div class="hero-actions">
                 <a href="<?= htmlspecialchars($urlFor('projects')) ?>" class="btn btn-primary"><?= htmlspecialchars($t['hero_view_projects']) ?></a>
-                <a href="<?= htmlspecialchars($profile['cv']) ?>" class="btn btn-ghost" download="<?= htmlspecialchars($profile['cv_download_name']) ?>"><?= htmlspecialchars($t['hero_download_cv']) ?></a>
+                <a href="cv.php?lang=<?= htmlspecialchars($lang) ?>&print=1" class="btn btn-ghost" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars($t['hero_generate_cv_pdf'] ?? 'Generar PDF') ?></a>
             </div>
             <div class="highlight-grid">
                 <?php foreach ($profile['highlights'] as $highlight): ?>

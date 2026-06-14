@@ -243,6 +243,16 @@ return [
             ],
             'url' => 'https://contentgeneratorpro.com/',
         ],
+        [
+            'name' => 'Paso Seguro',
+            'type' => ['es' => 'Proyecto de seguridad operativa', 'en' => 'Operational safety project'],
+            'logo' => 'PS',
+            'description' => [
+                'es' => 'Proyecto orientado a control preventivo, trazabilidad y comunicación clara de estados para reforzar decisiones seguras en operación.',
+                'en' => 'Project focused on preventive control, traceability, and clear status communication to support safer operational decisions.',
+            ],
+            'url' => 'https://pasoseguro.pro',
+        ],
     ],
     'services' => [
         [
