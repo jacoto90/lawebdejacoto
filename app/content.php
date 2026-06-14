@@ -138,7 +138,11 @@ function app_ensure_paso_seguro_project(PDO $pdo): void
     $stmt = $pdo->prepare('SELECT id FROM portfolio_projects WHERE name = :name LIMIT 1');
     $stmt->execute(['name' => 'Paso Seguro']);
     $existingId = $stmt->fetchColumn();
-    $projectId = $existingId !== false ? (string) $existingId : 'pasoseguro';
+    if ($existingId !== false) {
+        return;
+    }
+
+    $projectId = 'pasoseguro';
 
     app_upsert($pdo, 'portfolio_projects', ['id'], [
         'id' => $projectId,
