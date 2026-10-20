@@ -97,14 +97,19 @@ function app_backfill_profile_cv_photo(PDO $pdo): void
 
 function app_backfill_hero_cards(PDO $pdo): void
 {
+    $seeded = $pdo->query("SELECT meta_value FROM portfolio_meta WHERE meta_key = 'hero_cards_seeded'")->fetchColumn();
+    if ($seeded !== false) return;
     $stmt = $pdo->query("SELECT COUNT(*) FROM portfolio_hero_cards");
-    if ((int) $stmt->fetchColumn() > 0) return;
+    if ((int) $stmt->fetchColumn() > 0) {
+        app_upsert($pdo, 'portfolio_meta', ['meta_key'], ['meta_key' => 'hero_cards_seeded', 'meta_value' => date(DATE_ATOM)]);
+        return;
+    }
 
     $cards = [
         ['name' => 'fullstack', 'label' => 'Full Stack', 'items' => 'Laravel / PHP::#experience|.NET / C#::#experience|Angular::#experience|SQL / APIs::#services'],
         ['name' => 'erp', 'label' => 'ERP', 'items' => 'Odoo::#experience|SAP::#experience|Automatizaciones::#services|Procesos internos::#services'],
         ['name' => 'ecommerce', 'label' => 'E-commerce', 'items' => 'Shopify::#experience|SticNow::https://sticnow.com|Checkout::#services|Conversión::#projects'],
-        ['name' => 'logistica', 'label' => 'Logística', 'items' => 'Paso Seguro::https://pasoseguro.pro|Proyecto Logístico::/proyecto-logistica/index.php?lang=es|Trazabilidad::#projects|Dashboards::#services'],
+        ['name' => 'logistica', 'label' => 'Logística', 'items' => 'Proyecto Logístico::/proyecto-logistica/index.php?lang=%lang%|Trazabilidad::#projects|Dashboards::#services'],
         ['name' => 'producto', 'label' => 'Producto', 'items' => 'Jacoto Fotografía::https://jacotofotografia.com|Landings::#services|SEO técnico::#projects|Analítica::#contact'],
     ];
 
@@ -117,11 +122,17 @@ function app_backfill_hero_cards(PDO $pdo): void
             app_upsert($pdo, 'portfolio_hero_card_items', ['id'], ['id' => app_uid(), 'card_id' => $id, 'label' => $itemLabel, 'url' => $itemUrl, 'sort_order' => $itemIndex, 'is_active' => 1]);
         }
     }
+    app_upsert($pdo, 'portfolio_meta', ['meta_key'], ['meta_key' => 'hero_cards_seeded', 'meta_value' => date(DATE_ATOM)]);
 }
 
 function app_backfill_hero_typewriter(PDO $pdo): void
 {
     foreach (['es', 'en'] as $lang) {
+        $existing = $pdo->prepare('SELECT COUNT(*) FROM portfolio_texts WHERE text_key = :key AND lang = :lang');
+        $existing->execute(['key' => 'hero_typewriter', 'lang' => $lang]);
+        if ((int) $existing->fetchColumn() > 0) {
+            continue;
+        }
         $text = $lang === 'es'
             ? 'Hola, soy José Angel. Desarrollo soluciones, aplicaciones top y webs que venden.'
             : 'Hi, I\'m José Angel. I build solutions, top apps, and websites that sell.';
@@ -180,45 +191,15 @@ function app_experience_duration(?string $startDate, ?string $endDate, string $l
     return implode(' y ', $parts);
 }
 
-function app_ensure_paso_seguro_project(PDO $pdo): void
-{
-    $stmt = $pdo->prepare('SELECT id FROM portfolio_projects WHERE name = :name LIMIT 1');
-    $stmt->execute(['name' => 'Paso Seguro']);
-    $existingId = $stmt->fetchColumn();
-    if ($existingId !== false) {
-        return;
-    }
-
-    $projectId = 'pasoseguro';
-
-    app_upsert($pdo, 'portfolio_projects', ['id'], [
-        'id' => $projectId,
-        'name' => 'Paso Seguro',
-        'logo' => 'PS',
-        'url' => 'https://pasoseguro.pro',
-        'sort_order' => 99,
-        'is_active' => 1,
-    ]);
-    app_upsert($pdo, 'portfolio_project_i18n', ['project_id', 'lang'], [
-        'project_id' => $projectId,
-        'lang' => 'es',
-        'type' => 'Proyecto de seguridad operativa',
-        'description' => 'Proyecto orientado a control preventivo, trazabilidad y comunicación clara de estados para reforzar decisiones seguras en operación.',
-    ]);
-    app_upsert($pdo, 'portfolio_project_i18n', ['project_id', 'lang'], [
-        'project_id' => $projectId,
-        'lang' => 'en',
-        'type' => 'Operational safety project',
-        'description' => 'Project focused on preventive control, traceability, and clear status communication to support safer operational decisions.',
-    ]);
-}
-
 function app_backfill_skill_years(PDO $pdo): void
 {
+    if (!app_portfolio_is_seeded($pdo)) return;
+    if ($pdo->query("SELECT meta_value FROM portfolio_meta WHERE meta_key = 'skill_years_seeded'")->fetchColumn() !== false) return;
     $stmt = $pdo->prepare('UPDATE portfolio_skills SET years_label = :years_label WHERE name = :name AND (years_label IS NULL OR years_label = \'\')');
     foreach (app_default_skill_years() as $name => $yearsLabel) {
         $stmt->execute(['years_label' => $yearsLabel, 'name' => $name]);
     }
+    app_upsert($pdo, 'portfolio_meta', ['meta_key'], ['meta_key' => 'skill_years_seeded', 'meta_value' => date(DATE_ATOM)]);
 }
 
 function app_portfolio_is_seeded(PDO $pdo): bool
@@ -262,7 +243,6 @@ function app_upsert(PDO $pdo, string $table, array $keys, array $data): void
 function app_seed_portfolio_content(PDO $pdo): void
 {
     if (app_portfolio_is_seeded($pdo)) {
-        app_ensure_paso_seguro_project($pdo);
         return;
     }
 
@@ -304,7 +284,7 @@ function app_seed_portfolio_content(PDO $pdo): void
 
     foreach ($profile['skills'] as $index => $skill) {
         $id = app_uid();
-        app_upsert($pdo, 'portfolio_skills', ['id'], ['id' => $id, 'name' => $skill, 'sort_order' => $index, 'is_active' => 1]);
+        app_upsert($pdo, 'portfolio_skills', ['id'], ['id' => $id, 'name' => $skill, 'years_label' => app_default_skill_years()[$skill] ?? '', 'sort_order' => $index, 'is_active' => 1]);
     }
 
     foreach ($profile['highlights'] as $index => $highlight) {
@@ -331,7 +311,7 @@ function app_seed_portfolio_content(PDO $pdo): void
 
     foreach ($profile['experience'] as $index => $job) {
         $id = app_uid();
-        app_upsert($pdo, 'portfolio_experiences', ['id'], ['id' => $id, 'company' => $job['company'], 'start_date' => '', 'end_date' => '', 'sort_order' => $index, 'is_active' => 1]);
+        app_upsert($pdo, 'portfolio_experiences', ['id'], ['id' => $id, 'company' => $job['company'], 'start_date' => $job['start_date'] ?? '', 'end_date' => $job['end_date'] ?? '', 'sort_order' => $index, 'is_active' => 1]);
         foreach (['es', 'en'] as $lang) {
             app_upsert($pdo, 'portfolio_experience_i18n', ['experience_id', 'lang'], [
                 'experience_id' => $id,

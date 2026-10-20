@@ -590,7 +590,7 @@ $cvPhoto = $profile['cv_photo'] ?? $profile['photo'];
                                     <h3><?= cv_e($job['company']) ?></h3>
                                     <p class="cv-job-title"><?= cv_e(cv_text($job['title'], $lang)) ?></p>
                                     <ul>
-                                        <li><?= cv_e(cv_first_words(cv_text($job['summary'], $lang), 26)) ?></li>
+                                        <li><?= cv_e(!empty($job['start_date']) && empty($job['end_date']) ? cv_text($job['summary'], $lang) : cv_first_words(cv_text($job['summary'], $lang), 26)) ?></li>
                                         <?php foreach (array_slice(($job['projects'] ?? []), 0, 2) as $project): ?>
                                             <li><?= cv_e(cv_first_words((string) ($project[$lang] ?? $project['es'] ?? ''), 24)) ?></li>
                                         <?php endforeach; ?>

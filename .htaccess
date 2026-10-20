@@ -70,7 +70,7 @@ DirectoryIndex index.php
     RewriteRule .* - [F,L]
 
     # Internal PHP/config files are include-only and must never be served directly
-    RewriteRule ^(app|config|storage)(/|$) - [F,L]
+    RewriteRule ^(app|config|storage|tools|tests)(/|$) - [F,L]
 
     # Clean routes (/, /sobre-mi, /en/about, etc.)
     RewriteCond %{REQUEST_FILENAME} !-f

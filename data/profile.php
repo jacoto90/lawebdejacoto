@@ -27,7 +27,7 @@ return [
     'cv_photo' => 'images/perfil_joseangel_linkedin.jpg',
     'golf_photo' => 'images/joseangel_golf.png',
     'skills' => [
-        '.NET / C#', 'Laravel / PHP', 'Angular', 'Python / Odoo', 'PostgreSQL / SQL', 'Shopify Liquid', 'SAP', 'GitHub'
+        '.NET / C#', 'Laravel / PHP', 'Angular', 'Python / Odoo', 'PostgreSQL / SQL', 'Shopify Liquid', 'SAP', 'ABAP', 'APIs', 'Docker', 'GitHub'
     ],
     'studies' => [
         [
@@ -47,7 +47,7 @@ return [
             'label' => ['es' => 'proyectos', 'en' => 'projects'],
         ],
         [
-            'metric' => '5+',
+            'metric' => '6+',
             'label' => ['es' => 'años tech', 'en' => 'tech years'],
         ],
         [
@@ -58,7 +58,21 @@ return [
     'experience' => [
         [
             'period' => ['es' => '2026 - Actualidad', 'en' => '2026 - Present'],
+            'company' => 'Fustes Esteba',
+            'start_date' => '2026-09-14',
+            'end_date' => '',
+            'title' => ['es' => 'Analista de Aplicaciones IT', 'en' => 'IT Applications Analyst'],
+            'summary' => [
+                'es' => 'Trabajo como Programador TIC en Fustes Esteba, desarrollando y manteniendo aplicaciones de gestión integradas con SAP. Participo en proyectos de migración de datos, automatización de procesos y desarrollo de soluciones con ABAP, APIs, Laravel, bases de datos y Docker. También colaboro en el mantenimiento, mejora y despliegue de herramientas internas para optimizar los procesos de la empresa.',
+                'en' => 'I work as an IT developer at Fustes Esteba, developing and maintaining business applications integrated with SAP. I contribute to data migration projects, process automation and solutions built with ABAP, APIs, Laravel, databases and Docker. I also help maintain, improve and deploy internal tools to streamline company operations.',
+            ],
+            'tags' => ['SAP', 'ABAP', 'APIs', 'Laravel', 'Bases de datos', 'Docker', 'Automatización'],
+        ],
+        [
+            'period' => ['es' => '2026', 'en' => '2026'],
             'company' => 'THE ANIMALS OBSERVATORY',
+            'start_date' => '2026-01-07',
+            'end_date' => '2026-07-09',
             'title' => ['es' => 'Desarrollador Full Stack · Software y E-commerce', 'en' => 'Full Stack Developer · Software & E-commerce'],
             'summary' => [
                 'es' => 'Herramientas internas en Laravel/PHP, soporte PLM, desarrollo en Shopify Liquid y soporte IT operativo con validación en producción.',
@@ -243,16 +257,6 @@ return [
                 'en' => 'Premium WordPress plugin focused on AI content automation and SEO editorial workflow integration.',
             ],
             'url' => 'https://contentgeneratorpro.com/',
-        ],
-        [
-            'name' => 'Paso Seguro',
-            'type' => ['es' => 'Proyecto de seguridad operativa', 'en' => 'Operational safety project'],
-            'logo' => 'PS',
-            'description' => [
-                'es' => 'Proyecto orientado a control preventivo, trazabilidad y comunicación clara de estados para reforzar decisiones seguras en operación.',
-                'en' => 'Project focused on preventive control, traceability, and clear status communication to support safer operational decisions.',
-            ],
-            'url' => 'https://pasoseguro.pro',
         ],
     ],
     'services' => [

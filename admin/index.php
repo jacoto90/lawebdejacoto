@@ -122,89 +122,42 @@ if ($pdo instanceof PDO) {
     $hasUsers = admin_has_users($pdo);
     $currentUser = admin_current_user($pdo);
 }
+if (is_array($currentUser)) {
+    header('Location: /admin/content.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel JACOTO</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Acceso · Jacoto Studio</title>
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/css/studio.css?v=<?= filemtime(APP_BASE_PATH . '/assets/css/studio.css') ?>">
+    <script src="/assets/js/studio.js?v=<?= filemtime(APP_BASE_PATH . '/assets/js/studio.js') ?>" defer></script>
 </head>
-<body class="admin-page">
-<main class="admin-shell">
-    <section class="admin-card">
-        <p class="eyebrow">Acceso privado</p>
-        <h1>Panel JACOTO</h1>
-
-        <?php if (!$isConfigured): ?>
-            <div class="admin-alert admin-alert-warning">
-                Falta la configuración de base de datos. Para local, copia <code>.env.example</code> como <code>.env</code> y rellena tus datos MySQL. Para Hostalia también puedes usar <code>config/database.php</code>.
-            </div>
-        <?php endif; ?>
-
-        <?php foreach ($errors as $error): ?>
-            <div class="admin-alert admin-alert-error"><?= e($error) ?></div>
-        <?php endforeach; ?>
-
-        <?php if ($notice): ?>
-            <div class="admin-alert admin-alert-success"><?= e($notice) ?></div>
-        <?php endif; ?>
-
-        <?php if ($pdo instanceof PDO && is_array($currentUser)): ?>
-            <div class="admin-dashboard">
-                <p>Sesión iniciada como <strong><?= e((string) $currentUser['username']) ?></strong>.</p>
-                <p class="admin-muted">Base segura activa: usuario admin, sesiones protegidas, CSRF y bloqueo de intentos.</p>
-                <div class="admin-next-box">
-                    <h2>Contenido editable</h2>
-                    <p>Gestiona perfil, textos, skills, estudios, experiencia, servicios y proyectos desde base de datos.</p>
-                </div>
-                <a class="btn btn-primary" href="/admin/content.php">Editar portfolio</a>
-                <form method="post" action="/admin/logout.php">
-                    <input type="hidden" name="csrf_token" value="<?= e(app_csrf_token()) ?>">
-                    <button class="btn btn-ghost" type="submit">Cerrar sesión</button>
-                </form>
-            </div>
-        <?php elseif ($pdo instanceof PDO && !$hasUsers): ?>
-            <p class="admin-muted">Crea el primer administrador. Este registro solo está disponible mientras no exista ningún usuario admin.</p>
-            <form class="admin-form" method="post" action="/admin/" autocomplete="off" novalidate>
-                <input type="hidden" name="action" value="setup">
-                <input type="hidden" name="csrf_token" value="<?= e(app_csrf_token()) ?>">
-                <label>
-                    Clave privada de setup
-                    <input type="password" name="setup_key" required autocomplete="off">
-                </label>
-                <label>
-                    Usuario
-                    <input type="text" name="username" minlength="3" maxlength="32" pattern="[a-zA-Z0-9._-]{3,32}" required autocomplete="username">
-                </label>
-                <label>
-                    Contraseña
-                    <input type="password" name="password" minlength="12" required autocomplete="new-password">
-                </label>
-                <label>
-                    Repetir contraseña
-                    <input type="password" name="password_confirm" minlength="12" required autocomplete="new-password">
-                </label>
-                <p class="admin-help">Mínimo 12 caracteres, mayúscula, minúscula, número y símbolo.</p>
-                <button class="btn btn-primary" type="submit">Crear administrador</button>
-            </form>
-        <?php elseif ($pdo instanceof PDO): ?>
-            <form class="admin-form" method="post" action="/admin/" autocomplete="off" novalidate>
-                <input type="hidden" name="action" value="login">
-                <input type="hidden" name="csrf_token" value="<?= e(app_csrf_token()) ?>">
-                <label>
-                    Usuario
-                    <input type="text" name="username" required autocomplete="username">
-                </label>
-                <label>
-                    Contraseña
-                    <input type="password" name="password" required autocomplete="current-password">
-                </label>
-                <button class="btn btn-primary" type="submit">Entrar</button>
+<body>
+<main class="studio-auth">
+    <section class="auth-story"><a class="studio-brand" href="/">jacoto<span>STUDIO / 01</span></a><div><h1>Detrás de<br>cada <span>detalle.</span></h1><p>Tu historia, tus proyectos y tu próxima versión. Un espacio para crear con intención.</p></div><small>PORTFOLIO INDEPENDIENTE / GIRONA</small></section>
+    <section class="auth-panel"><div class="auth-card">
+        <span class="studio-eyebrow">ACCESO PRIVADO</span><h2><?= $pdo instanceof PDO && !$hasUsers ? 'Tu estudio empieza aquí.' : 'Bienvenido de nuevo.' ?></h2><p>Entra para dar forma a tu portfolio.</p>
+        <?php if (!$isConfigured): ?><div class="studio-notice is-error">Configura la base de datos en .env o config/database.php para activar el estudio.</div><?php endif; ?>
+        <?php foreach ($errors as $error): ?><div class="studio-notice is-error" role="alert"><?= e($error) ?></div><?php endforeach; ?>
+        <?php if ($notice): ?><div class="studio-notice" role="status"><?= e($notice) ?></div><?php endif; ?>
+        <?php if ($pdo instanceof PDO): ?>
+            <form method="post" action="/admin/">
+                <input type="hidden" name="action" value="<?= $hasUsers ? 'login' : 'setup' ?>"><input type="hidden" name="csrf_token" value="<?= e(app_csrf_token()) ?>">
+                <?php if (!$hasUsers): ?><label>Clave privada de configuración<input type="password" name="setup_key" required autocomplete="off"></label><?php endif; ?>
+                <label>Usuario<input type="text" name="username" value="<?= e((string) ($_POST['username'] ?? '')) ?>" required autocomplete="username" autocapitalize="none" spellcheck="false" <?= $hasUsers ? '' : 'minlength="3" maxlength="32" pattern="[a-zA-Z0-9._-]{3,32}"' ?>></label>
+                <label>Contraseña<span class="password-field"><input type="password" name="password" required autocomplete="<?= $hasUsers ? 'current-password' : 'new-password' ?>" <?= $hasUsers ? '' : 'minlength="12"' ?>><button type="button" data-password-toggle aria-label="Mostrar contraseña" aria-pressed="false">Ver</button></span></label>
+                <?php if (!$hasUsers): ?><label>Repetir contraseña<input type="password" name="password_confirm" minlength="12" required autocomplete="new-password"></label><p class="admin-help">Mínimo 12 caracteres con mayúscula, minúscula, número y símbolo.</p><?php endif; ?>
+                <button class="studio-button primary" type="submit"><?= $hasUsers ? 'Entrar al estudio' : 'Crear administrador' ?> <span aria-hidden="true">↗</span></button>
             </form>
         <?php endif; ?>
-    </section>
+        <a class="auth-back" href="/">← Volver al portfolio</a><div class="auth-note">Tu espacio de trabajo. Cada cambio, en su sitio.</div>
+    </div></section>
 </main>
 </body>
 </html>

@@ -10,7 +10,7 @@ Professional bilingual portfolio for Jose Angel Colmena Tomas.
 - Recruiter-focused experience timeline
 - Downloadable CV with professional filename
 - Dynamic CV/PDF generation from current portfolio data
-- Hidden admin access prepared for live portfolio editing
+- Jacoto Studio with inline autosave, searchable editors and responsive navigation
 - Secure PHP/MySQL admin bootstrap for Hostalia
 - Editorial portfolio with self-hosted Vina Sans / Manrope, light and dark modes
 - WebP project previews, native navigation and reduced-motion support
@@ -18,10 +18,10 @@ Professional bilingual portfolio for Jose Angel Colmena Tomas.
 ## Editorial Portfolio
 
 The public portfolio uses `assets/css/portfolio.css` and `assets/js/portfolio.js`.
-`main.css` and `main.js` continue to serve the admin and logistics showcase.
+The studio uses `studio.css` and `studio.js`; the logistics showcase keeps its existing assets.
 Existing database-managed profile data, translations, hero specialties and CV
 generation are shared with the new presentation. Additional bilingual presentation
-copy lives in `data/editorial.php`.
+copy defaults live in `data/editorial.php` and can be overridden in the studio.
 
 Fonts are self-hosted in `assets/fonts/`, with their SIL Open Font License files.
 Optimized images and project previews live in `assets/images/`. The portrait and
@@ -56,13 +56,18 @@ language switching. The hidden admin entry remains three clicks on Python / Odoo
 
 ## Admin Panel Status
 
-The first admin phases are implemented.
+Jacoto Studio provides a dashboard, section navigation, expandable editors, ES/EN tabs,
+search and published/hidden filters. Each block saves automatically after editing and
+before closing or navigating. The sticky toolbar also supports Ctrl/⌘ + S.
+Pending drafts are retained locally for up to 30 days. Failed saves remain visible;
+revision checks prevent stale tabs from overwriting newer edits. Closing the browser
+uses best-effort saving and draft recovery rather than claiming an unconfirmed save.
 
 - Hidden access: tap/click 3 times on the `Python / Odoo` skill chip.
 - Direct admin URL: `/admin/`.
 - First visit with an empty admin table shows the initial admin registration form.
 - Once one admin user exists, registration is closed and only login is available.
-- Authenticated users can open `/admin/content.php` from the dashboard.
+- Authenticated users go directly to `/admin/content.php`.
 - The public portfolio reads from the database when editable content exists.
 - If database access fails, the public portfolio falls back to the original PHP arrays.
 
@@ -79,6 +84,8 @@ Editable areas:
 - Featured projects.
 - Experience entries, tags and key projects.
 - Experience start/end dates for automatic duration calculation.
+- Hero specialties and their links.
+- Editorial headlines and calls to action.
 
 When the admin tables are empty, current content is seeded from:
 
@@ -89,7 +96,7 @@ English fields are editable. If an English field is left empty in a CRUD form, t
 
 ## Dynamic CV
 
-- The original static PDF remains available through `Descargar CV`.
+- The downloadable PDF was refreshed with the current Fustes Esteba role and archived-project removal.
 - The new `Generar PDF` button opens `cv.php?lang=<lang>&print=1` in a new tab.
 - `cv.php` builds a CV layout from the current portfolio data: profile, contact, skills, studies, services, experience and featured projects.
 - The page is A4 print-optimized and automatically opens the browser print dialog so it can be saved as PDF.
@@ -97,8 +104,9 @@ English fields are editable. If an English field is left empty in a CRUD form, t
 - Skills include an editable `years_label` field that appears next to each stack item in the CV.
 - The CV sidebar includes extra details such as English B2 and driving licence B.
 - The first CV page shows only the first two experience entries; remaining jobs continue on dedicated pages to avoid broken page cuts.
+- Current-role responsibilities are shown in full; previous roles retain compact summaries.
 - Internal or empty project URLs are normalized to full portfolio URLs in the CV.
-- `Paso Seguro` is included as a featured project and is backfilled into existing seeded databases if missing.
+- Fustes Esteba is the current role. Paso Seguro is archived temporarily and is no longer automatically recreated.
 - Experience duration is calculated from editable start/end dates. Empty end date means current date. Any extra days round up to one additional month.
 - No server-side PDF library is required, which keeps the feature compatible with Hostalia shared hosting.
 
@@ -189,6 +197,19 @@ Created tables:
 - `portfolio_service_i18n`
 - `portfolio_projects`
 - `portfolio_project_i18n`
+- `portfolio_editor_versions`
+
+## Studio verification and content update
+
+Run `php tests/studio.php` for isolated SQLite transactional regressions.
+The one-time role update is CLI-only and archives duplicate Fustes entries and Paso Seguro
+while preserving their content. Run it with a private backup path outside the web root:
+
+```bash
+php tools/update-current-role.php /absolute/project/root /private/content-before-studio.json
+```
+
+The script records a migration marker so subsequent runs leave later edits intact.
 
 ## Next Admin Phases
 

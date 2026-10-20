@@ -74,6 +74,13 @@ $urlFor = static function (string $routeKey = 'home', ?string $forceLang = null)
 
 $t = $translations[$lang];
 $editorial = (require __DIR__ . '/data/editorial.php')[$lang];
+foreach ($editorial as $key => $value) {
+    if (is_array($value)) {
+        foreach ($value as $part => $text) $editorial[$key][$part] = $t['editorial_' . $key . '_' . $part] ?? $text;
+    } else {
+        $editorial[$key] = $t['editorial_' . $key] ?? $value;
+    }
+}
 $assetVersion = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/' . $path);
 $imageFor = static function (string $path): string {
     $optimized = [

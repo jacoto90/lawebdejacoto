@@ -109,6 +109,9 @@ main:focus { outline: none; }
 .tiny-cross { font-size: 27px; line-height: 1; font-weight: 400; }
 .hero-name { font-size: 15px; font-weight: 750; }
 .hero-role { max-width: 440px; font-size: 12px; margin-top: 4px; color: var(--muted); }
+.current-position { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 13px; font-size: 11px; color: var(--muted); }
+.current-position strong { color: var(--ink); font-weight: 650; }
+.current-position:hover strong { text-decoration: underline; text-underline-offset: 4px; }
 .hero-portrait { position: relative; padding-top: 4px; margin-inline: 12% 0; }
 .portrait-frame { position: relative; overflow: hidden; background: #c8c9bc; aspect-ratio: 4 / 5.5; }
 .portrait-frame::after { content: ""; pointer-events: none; position: absolute; inset: 0; background: linear-gradient(transparent 60%, #171c1955); }
