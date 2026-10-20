@@ -7,7 +7,11 @@ require __DIR__ . '/app/content.php';
 $profile = app_public_profile(__DIR__ . '/data/profile.php');
 $translations = app_public_translations(__DIR__ . '/data/translations.php');
 $heroCards = [];
-try { $pdo = app_db(); $heroCards = app_portfolio_hero_cards($pdo); } catch (Throwable $e) { $heroCards = []; }
+try {
+    if (app_database_is_configured()) {
+        $heroCards = app_portfolio_hero_cards(app_db());
+    }
+} catch (Throwable $e) { $heroCards = []; }
 $routeSlugs = [
     'home' => ['es' => '', 'en' => ''],
     'about' => ['es' => 'sobre-mi', 'en' => 'about'],
@@ -69,8 +73,15 @@ $urlFor = static function (string $routeKey = 'home', ?string $forceLang = null)
 };
 
 $t = $translations[$lang];
-$heroCards = [];
-try { $pdo = app_db(); $heroCards = app_portfolio_hero_cards($pdo); } catch (Throwable $e) { $heroCards = []; }
+$editorial = (require __DIR__ . '/data/editorial.php')[$lang];
+$assetVersion = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/' . $path);
+$imageFor = static function (string $path): string {
+    $optimized = [
+        'images/perfil_joseangel_linkedin.jpg' => 'assets/images/portrait.webp',
+        'images/joseangel_golf.png' => 'assets/images/golf.webp',
+    ];
+    return $optimized[ltrim($path, '/')] ?? $path;
+};
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
@@ -79,27 +90,34 @@ try { $pdo = app_db(); $heroCards = app_portfolio_hero_cards($pdo); } catch (Thr
     <base href="/">
     <title><?= htmlspecialchars($profile['name']) ?> · Portfolio</title>
     <meta name="description" content="<?= htmlspecialchars($t['meta_description']) ?>">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="canonical" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey)) ?>">
+    <link rel="alternate" hreflang="es" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey, 'es')) ?>">
+    <link rel="alternate" hreflang="en" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey, 'en')) ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?= htmlspecialchars($profile['name']) ?> · Portfolio">
+    <meta property="og:description" content="<?= htmlspecialchars($t['meta_description']) ?>">
+    <meta property="og:url" content="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey)) ?>">
+    <meta name="theme-color" content="#f2f0e9">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/fonts/vina-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <script>try{const t=localStorage.getItem('lawebdejacoto_theme');document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){}</script>
+    <link rel="stylesheet" href="<?= htmlspecialchars($assetVersion('assets/css/portfolio.css')) ?>">
+    <noscript><style>@media(max-width:900px){.site-header{position:relative}.nav-wrap{flex-wrap:wrap}.main-nav{position:static;visibility:visible;opacity:1;pointer-events:auto;transform:none;height:auto;width:100%;order:3;padding:10px 0 20px;flex-direction:row;flex-wrap:wrap;gap:12px}.main-nav>a{font:600 12px Manrope,sans-serif;border:0}.menu-btn,.theme-toggle{display:none}}</style></noscript>
 </head>
-<body data-scroll-target="<?= htmlspecialchars($targetIds[$currentRouteKey] ?? 'top') ?>">
-<div id="pageLoader" class="page-loader" aria-hidden="true">
-    <div class="loader-card">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
+<body data-scroll-target="<?= htmlspecialchars($targetIds[$currentRouteKey] ?? 'top') ?>" data-language="<?= htmlspecialchars($lang) ?>">
+<a class="skip-link" href="#main"><?= htmlspecialchars($editorial['skip']) ?></a>
 <?php require __DIR__ . '/components/header.php'; ?>
-<main>
+<main id="main" tabindex="-1">
     <?php require __DIR__ . '/components/hero.php'; ?>
+    <?php require __DIR__ . '/components/projects.php'; ?>
     <?php require __DIR__ . '/components/about.php'; ?>
     <?php require __DIR__ . '/components/experience.php'; ?>
     <?php require __DIR__ . '/components/services.php'; ?>
-    <?php require __DIR__ . '/components/projects.php'; ?>
     <?php require __DIR__ . '/components/hobby.php'; ?>
     <?php require __DIR__ . '/components/contact.php'; ?>
 </main>
 <?php require __DIR__ . '/components/footer.php'; ?>
-<script src="assets/js/main.js"></script>
+<script src="<?= htmlspecialchars($assetVersion('assets/js/portfolio.js')) ?>" defer></script>
 </body>
 </html>

@@ -12,6 +12,25 @@ Professional bilingual portfolio for Jose Angel Colmena Tomas.
 - Dynamic CV/PDF generation from current portfolio data
 - Hidden admin access prepared for live portfolio editing
 - Secure PHP/MySQL admin bootstrap for Hostalia
+- Editorial portfolio with self-hosted Vina Sans / Manrope, light and dark modes
+- WebP project previews, native navigation and reduced-motion support
+
+## Editorial Portfolio
+
+The public portfolio uses `assets/css/portfolio.css` and `assets/js/portfolio.js`.
+`main.css` and `main.js` continue to serve the admin and logistics showcase.
+Existing database-managed profile data, translations, hero specialties and CV
+generation are shared with the new presentation. Additional bilingual presentation
+copy lives in `data/editorial.php`.
+
+Fonts are self-hosted in `assets/fonts/`, with their SIL Open Font License files.
+Optimized images and project previews live in `assets/images/`. The portrait and
+golf WebP mappings apply only to the original image paths; custom admin images
+continue to use their configured paths. There is no frontend build step, external
+font request, video download or animation framework.
+
+Clean section routes work on direct visits, browser back/forward navigation and
+language switching. The hidden admin entry remains three clicks on Python / Odoo.
 
 ## Stack
 

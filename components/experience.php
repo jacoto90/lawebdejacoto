@@ -1,10 +1,11 @@
 <?php /** @var array $profile */ /** @var array $t */ /** @var string $lang */ ?>
-<section class="section" id="experience">
+<section class="section experience-section" id="experience" aria-labelledby="experienceTitle">
     <div class="container">
-        <h3><?= htmlspecialchars($t['experience_title']) ?></h3>
+        <div class="section-kicker micro"><span>03 / <?= htmlspecialchars($editorial['experience_label']) ?></span><span>2009 — <?= date('Y') ?></span></div>
+        <div class="section-heading" data-reveal><h2 class="display-title" id="experienceTitle"><?= htmlspecialchars($t['experience_title']) ?><span class="title-dot">.</span></h2></div>
         <div class="timeline">
             <?php foreach ($profile['experience'] as $job): ?>
-                <article class="timeline-item">
+                <article class="timeline-item" data-reveal>
                     <?php $duration = app_experience_duration($job['start_date'] ?? '', $job['end_date'] ?? '', $lang); ?>
                     <p class="timeline-period">
                         <?= htmlspecialchars($job['period'][$lang] ?? $job['period']['es']) ?>
@@ -12,7 +13,8 @@
                             <span class="timeline-duration">· <?= htmlspecialchars($duration) ?></span>
                         <?php endif; ?>
                     </p>
-                    <h4><?= htmlspecialchars($job['company']) ?></h4>
+                    <div class="timeline-content">
+                    <h3><?= htmlspecialchars($job['company']) ?></h3>
                     <p class="timeline-title"><?= htmlspecialchars($job['title'][$lang] ?? $job['title']['es']) ?></p>
                     <p><?= htmlspecialchars($job['summary'][$lang] ?? $job['summary']['es']) ?></p>
                     <?php if (!empty($job['projects'])): ?>
@@ -41,6 +43,7 @@
                         <?php foreach ($job['tags'] as $tag): ?>
                             <span class="chip"><?= htmlspecialchars($tag) ?></span>
                         <?php endforeach; ?>
+                    </div>
                     </div>
                 </article>
             <?php endforeach; ?>
