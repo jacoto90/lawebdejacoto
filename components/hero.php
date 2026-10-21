@@ -18,9 +18,23 @@ foreach ($profile['experience'] as $position) {
 ?>
 <section class="hero container" id="top" aria-labelledby="heroTitle">
     <div class="hero-topline micro"><span><i class="status-dot" aria-hidden="true"></i><?= htmlspecialchars($t['hero_eyebrow']) ?></span><span><?= htmlspecialchars($profile['location'][$lang] ?? $profile['location']['es']) ?> <span aria-hidden="true">↗</span></span></div>
+    <div class="hero-scroll-scene">
     <div class="hero-stage">
         <div class="hero-title-wrap">
-            <h1 class="hero-title" id="heroTitle"><span><?= htmlspecialchars($editorial['headline'][0]) ?></span><span class="hero-middle"><?= htmlspecialchars($editorial['headline'][1]) ?><svg class="hero-asterisk" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 0v100M0 50h100M14.6 14.6l70.8 70.8M14.6 85.4l70.8-70.8" stroke="currentColor" stroke-width="15"/></svg></span><span><?= htmlspecialchars($editorial['headline'][2]) ?></span></h1>
+            <div class="hero-type-space">
+            <h1 class="hero-title" id="heroTitle">
+                <span class="hero-opening"><?= htmlspecialchars($editorial['headline'][0]) ?></span>
+                <span class="hero-middle"><span class="hero-connector"><?= htmlspecialchars($editorial['headline'][1]) ?></span><svg class="hero-simplicity" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false">
+                    <g class="simplicity-lines" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path class="simplicity-line" d="M30 38h40"/>
+                        <path class="simplicity-line" d="M30 50h40"/>
+                        <path class="simplicity-line" d="M30 62h40"/>
+                    </g>
+                    <path class="simplicity-check" d="m30 50 14 14 28-28" pathLength="1" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg></span>
+                <span class="hero-ending"><span><?php $heroEnding = $editorial['headline'][2]; ?><?= htmlspecialchars(str_ends_with($heroEnding, '.') ? substr($heroEnding, 0, -1) : $heroEnding) ?><?php if (str_ends_with($heroEnding, '.')): ?><span class="hero-ending-dot">.</span><?php endif; ?></span></span>
+            </h1>
+            </div>
             <div class="hero-identity"><span class="tiny-cross" aria-hidden="true">+</span><div><p class="hero-name"><?= htmlspecialchars($profile['name']) ?></p><p class="hero-role"><?= htmlspecialchars($profile['role'][$lang] ?? $profile['role']['es']) ?></p><?php if ($currentPosition): ?><a class="current-position" href="<?= htmlspecialchars($urlFor('experience')) ?>" data-section="experience"><i class="status-dot" aria-hidden="true"></i><?= htmlspecialchars($lang === 'es' ? 'Actualmente en' : 'Currently at') ?> <strong><?= htmlspecialchars($currentPosition['company']) ?></strong> <span aria-hidden="true">↗</span></a><?php endif; ?></div></div>
         </div>
         <figure class="hero-portrait">
@@ -28,6 +42,7 @@ foreach ($profile['experience'] as $position) {
             <figcaption><span><?= htmlspecialchars($profile['age'][$lang] ?? $profile['age']['es']) ?></span><span><?= htmlspecialchars($t['hero_open_remote']) ?> <i class="status-dot" aria-hidden="true"></i></span></figcaption>
             <a class="portrait-badge" href="<?= htmlspecialchars($urlFor('contact')) ?>" data-section="contact" aria-label="<?= htmlspecialchars($t['nav_contact']) ?>"><span aria-hidden="true">↗</span></a>
         </figure>
+    </div>
     </div>
     <div class="hero-bottom">
         <a class="scroll-link micro" href="<?= htmlspecialchars($urlFor('projects')) ?>" data-section="projects"><span class="circle-arrow" aria-hidden="true">↓</span><?= htmlspecialchars($editorial['scroll']) ?></a>

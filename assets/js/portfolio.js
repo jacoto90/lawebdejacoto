@@ -87,7 +87,7 @@
     const initialTarget = location.hash.slice(1) || document.body.dataset.scrollTarget;
     if (initialTarget && initialTarget !== 'top') {
         // Font metrics settle before resolving a clean deep link's final position.
-        document.fonts.ready.then(() => goToSection(initialTarget, false));
+        document.fonts.ready.then(() => { measureHero(); goToSection(initialTarget, false); });
     }
 
     const applyTheme = (theme) => {
@@ -145,10 +145,45 @@
         tapTimer = setTimeout(() => { taps = 0; }, 1400);
     });
 
+    // A short native-scroll scene: transforms never change the document's layout.
+    const hero = document.querySelector('.hero');
+    const heroScene = hero?.querySelector('.hero-scroll-scene');
+    const heroStage = hero?.querySelector('.hero-stage');
+    const pinnedHero = window.matchMedia('(min-width: 901px) and (min-height: 780px)');
+    let heroStart = 0;
+    let heroRange = 320;
+    let heroCanPin = false;
+    let lastHeroProgress = -1;
+    const updateHero = () => {
+        if (!heroScene) return;
+        const progress = reducedMotion.matches ? 0 : Math.max(0, Math.min(1, (window.scrollY - heroStart) / heroRange));
+        if (progress === lastHeroProgress) return;
+        lastHeroProgress = progress;
+        const eased = progress * progress * (3 - 2 * progress);
+        const animated = !reducedMotion.matches;
+        hero.style.setProperty('--hero-type-scale', animated ? (heroCanPin ? 1.10 - .24 * eased : 1.035 - .095 * eased).toFixed(4) : '1');
+        hero.style.setProperty('--hero-identity-y', animated && heroCanPin ? `${-36 * eased}px` : '0px');
+        hero.style.setProperty('--hero-portrait-scale', animated && heroCanPin ? (.94 + .06 * eased).toFixed(4) : '1');
+        hero.style.setProperty('--hero-portrait-y', animated && heroCanPin ? `${14 * (1 - eased)}px` : '0px');
+        hero.style.setProperty('--hero-underline', animated ? (.18 + .82 * eased).toFixed(4) : '1');
+    };
+    const measureHero = () => {
+        if (!heroScene) return;
+        const headerHeight = header?.offsetHeight || 0;
+        heroCanPin = pinnedHero.matches && heroStage.offsetHeight + headerHeight + 48 < window.innerHeight;
+        hero.classList.toggle('is-scroll-ready', heroCanPin && !reducedMotion.matches);
+        hero.style.setProperty('--hero-header-height', `${headerHeight}px`);
+        hero.style.setProperty('--hero-stage-height', `${heroStage.offsetHeight}px`);
+        heroStart = Math.max(0, heroScene.getBoundingClientRect().top + window.scrollY - headerHeight - 24);
+        heroRange = heroCanPin && !reducedMotion.matches ? Math.max(1, heroScene.offsetHeight - heroStage.offsetHeight) : Math.min(360, window.innerHeight * .55);
+        lastHeroProgress = -1;
+        updateHero();
+    };
     let framePending = false;
     const updateProgress = () => {
         const range = document.documentElement.scrollHeight - window.innerHeight;
         header?.style.setProperty('--progress', range > 0 ? Math.min(1, Math.max(0, window.scrollY / range)) : 0);
+        updateHero();
         framePending = false;
     };
     window.addEventListener('scroll', () => {
@@ -156,5 +191,13 @@
         framePending = true;
         requestAnimationFrame(updateProgress);
     }, { passive: true });
+    window.addEventListener('resize', measureHero, { passive: true });
+    reducedMotion.addEventListener('change', measureHero);
+    if (heroScene) {
+        measureHero();
+        document.fonts.ready.then(measureHero);
+        if ('ResizeObserver' in window) new ResizeObserver(measureHero).observe(heroStage);
+        window.addEventListener('pageshow', measureHero);
+    }
     updateProgress();
 })();
