@@ -9,6 +9,7 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
     const count = section.querySelectorAll('[data-project-index]').length;
+    const tones = ['apricot', 'lavender', 'sky', 'rose', 'butter', 'mint'];
     const lanes = [...section.querySelectorAll('.project-lane')].map((element, index) => ({
         element, track: element.querySelector('.project-track'), original: element.querySelector('.project-set'),
         direction: index === 0 ? -1 : 1, width: 0, x: 0, nudge: 0, velocity: 0,
@@ -79,11 +80,15 @@
         if (!card) return;
         ['--mag-x', '--mag-y', '--tilt-x', '--tilt-y'].forEach(property => card.style.removeProperty(property));
     };
-    function cloneSet(original) {
+    function cloneSet(original, toneShift = 0) {
         const clone = original.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         clone.querySelectorAll('a, button').forEach(link => link.tabIndex = -1);
         clone.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+        clone.querySelectorAll('.project-card').forEach(card => {
+            const tone = Math.max(0, tones.indexOf(card.dataset.projectTone));
+            card.dataset.projectTone = tones[(tone + toneShift) % tones.length];
+        });
         return clone;
     }
     function measure() {
@@ -111,12 +116,16 @@
             lane.nudge = 0;
             lane.velocity = 0;
             if (!kinetic || !lane.original.children.length) { lane.width = 0; return; }
-            lane.width = lane.original.getBoundingClientRect().width;
+            // The loop includes two colorways, so wrapping never changes a visible card's color.
+            lane.width = parseFloat(getComputedStyle(lane.original).width) * 2;
             if (!lane.width) return;
-            // One preceding copy plus enough trailing copies to fill ultrawide screens.
-            lane.track.prepend(cloneSet(lane.original));
+            const toneShift = lane.original.children.length % tones.length || 2;
+            // One preceding cycle, the accessible original + its alternate colorway,
+            // then enough complete cycles to fill ultrawide screens.
+            lane.track.prepend(cloneSet(lane.original), cloneSet(lane.original, toneShift));
+            lane.track.append(cloneSet(lane.original, toneShift));
             const trailing = Math.ceil(lane.element.clientWidth / lane.width) + 1;
-            for (let i = 0; i < trailing; i++) lane.track.append(cloneSet(lane.original));
+            for (let i = 0; i < trailing; i++) lane.track.append(cloneSet(lane.original), cloneSet(lane.original, toneShift));
             lane.x = -lane.width * (1 + phase);
             const focusedCard = lane.original.contains(document.activeElement) ? document.activeElement.closest('.project-card') : null;
             if (focusedCard) lane.x = -lane.width - focusedCard.offsetLeft + (lane.element.clientWidth - focusedCard.offsetWidth) / 2;
@@ -129,7 +138,7 @@
         if (!kinetic) return;
         lanes.forEach(lane => {
             const card = lane.original.firstElementChild;
-            if (card) lane.nudge += -direction * (card.offsetWidth + parseFloat(getComputedStyle(lane.original).gap));
+            if (card) lane.nudge += -direction * (parseFloat(getComputedStyle(card).width) + parseFloat(getComputedStyle(lane.original).gap));
         });
         wake();
     };

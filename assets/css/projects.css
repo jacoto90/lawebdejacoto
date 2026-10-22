@@ -22,9 +22,16 @@
 .project-lane, .project-track, .project-set { display: contents; }
 .project-set[aria-hidden="true"] { display: none; }
 .projects-section .project-card { grid-column: auto; min-width: 0; position: relative; }
+.project-card[data-project-tone="apricot"] { --tile-bg: #ffd5ba; --tile-ink: #492c25; --tile-accent: #b45035; }
+.project-card[data-project-tone="lavender"] { --tile-bg: #e2d4ff; --tile-ink: #3b2a53; --tile-accent: #7953b6; }
+.project-card[data-project-tone="sky"] { --tile-bg: #c9e8ff; --tile-ink: #203e57; --tile-accent: #346eaa; }
+.project-card[data-project-tone="rose"] { --tile-bg: #ffd4e2; --tile-ink: #542c40; --tile-accent: #ac416b; }
+.project-card[data-project-tone="butter"] { --tile-bg: #ffedac; --tile-ink: #4b3b1c; --tile-accent: #916720; }
+.project-card[data-project-tone="mint"] { --tile-bg: #cef0e1; --tile-ink: #24473d; --tile-accent: #327e65; }
 .project-card-shell { display: block; height: 100%; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 75%, transparent); border-radius: 15px; background: var(--paper); box-shadow: 0 12px 22px -16px #1f281b35; transform: perspective(1000px) translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform .55s var(--ease), box-shadow .5s, border-color .4s; }
 .project-card:hover .project-card-shell { border-color: color-mix(in srgb, var(--ink) 35%, var(--line)); box-shadow: 0 25px 40px -20px #1f281b55; }
-.projects-section .project-card .project-visual { height: 245px; aspect-ratio: auto; border-radius: 0; }
+.projects-section .project-card .project-visual { height: 245px; aspect-ratio: auto; border-radius: 0; background: radial-gradient(ellipse at 20% 0%, #ffffff55, transparent 70%), var(--tile-bg); color: var(--tile-ink); }
+.projects-section .project-logistics .project-visual::before { background-image: linear-gradient(var(--tile-accent) 1px, transparent 1px), linear-gradient(90deg, var(--tile-accent) 1px, transparent 1px); opacity: .1; }
 .projects-section .project-card .project-visual-top { inset: 18px 20px auto; font-size: 7px; letter-spacing: .05em; }
 .projects-section .project-card .project-screen { width: 82%; transform: rotate(-5deg) translateY(46px); border-radius: 6px; transition: transform .7s var(--ease); }
 .projects-section .project-card .project-screen img { aspect-ratio: 1.4222; object-fit: cover; object-position: top; }
@@ -32,7 +39,7 @@
 .projects-section .project-card .project-visual:hover .project-screen { transform: rotate(0) translateY(37px) scale(1.035); }
 .projects-section .browser-chrome { padding: 7px 10px; }
 .projects-section .browser-chrome span { font-size: 6px; }
-.projects-section .project-card .project-open { right: 14px; bottom: 14px; width: 34px; height: 34px; font-size: 20px; box-shadow: 0 4px 15px #0002; transition: transform .45s var(--ease), background .2s; }
+.projects-section .project-card .project-open { right: 14px; bottom: 14px; width: 34px; height: 34px; font-size: 20px; background: var(--tile-accent); color: #fff; box-shadow: 0 4px 15px #0002; transition: transform .45s var(--ease), background .2s; }
 .projects-section .project-card .project-visual:hover .project-open { transform: translate(2px, -2px); }
 .projects-section .project-card .project-info { display: block; padding: 19px 21px 22px; }
 .projects-section .project-card .project-type { font-size: 7px; letter-spacing: .06em; color: var(--muted); }
@@ -42,17 +49,18 @@
 .projects-section .project-card .project-info > p { margin-top: 10px; max-width: none; font-size: 10px; line-height: 1.65; color: var(--muted); }
 .projects-section .content-art { padding: 25px; gap: 12px; }
 .projects-section .content-art strong { font-size: 49px; margin-top: 14px; }
+.projects-section .content-art em { color: var(--tile-accent); }
 .projects-section .content-art .micro { font-size: 6px; }
 .projects-section .code-bracket { font-size: 130px; }
 .projects-section .ai-cursor { font-size: 21px; }
 .projects-section .custom-art { font-size: 90px; }
-.project-invitation .project-card-shell { background: #dfe9c9; color: #293d29; min-height: 386px; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; position: relative; }
-.project-invitation .project-card-shell::before { content: ''; position: absolute; width: 230px; height: 230px; border: 1px solid #829a642a; border-radius: 50%; top: 45px; right: -80px; box-shadow: 0 0 0 36px #829a640c, 0 0 0 72px #829a6409; pointer-events: none; }
+.project-invitation .project-card-shell { background: var(--tile-bg); color: var(--tile-ink); min-height: 386px; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; position: relative; }
+.project-invitation .project-card-shell::before { content: ''; position: absolute; width: 230px; height: 230px; border: 1px solid color-mix(in srgb, var(--tile-accent) 18%, transparent); border-radius: 50%; top: 45px; right: -80px; box-shadow: 0 0 0 36px color-mix(in srgb, var(--tile-accent) 5%, transparent), 0 0 0 72px color-mix(in srgb, var(--tile-accent) 3%, transparent); pointer-events: none; }
 .invitation-top { display: flex; justify-content: space-between; font-size: 8px; z-index: 1; }
 .invitation-top > span:last-child { font-size: 20px; }
 .invitation-art { display: flex; justify-content: flex-end; align-items: center; margin-block: 25px; z-index: 1; }
 .invitation-art h3 { font: italic 400 52px/.98 Georgia, serif; letter-spacing: -.06em; text-align: right; }
-.invitation-bottom { border-top: 1px solid #829a644d; padding-top: 20px; z-index: 1; }
+.invitation-bottom { border-top: 1px solid color-mix(in srgb, var(--tile-accent) 25%, transparent); padding-top: 20px; z-index: 1; }
 .invitation-bottom > p { font-size: 11px; margin-bottom: 8px; }
 .invitation-bottom strong { display: flex; justify-content: space-between; gap: 15px; font-size: 17px; letter-spacing: -.03em; font-weight: 600; }
 .projects-footer { display: flex; align-items: center; gap: 25px; padding-top: 35px; }

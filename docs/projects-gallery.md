@@ -16,10 +16,15 @@ y de la navegación por Tab. Todos los enlaces visibles siguen siendo navegables
 - Flechas para desplazar las filas y «Ver todos» para volver a una cuadrícula fija.
 - Movimiento reducido y ausencia de JavaScript: cuadrícula completa sin clones.
 - Animaciones detenidas fuera de pantalla o con la pestaña oculta.
+- Seis fondos pastel alternados: albaricoque, lavanda, azul, rosa, amarillo y
+  menta. Cada bucle contiene dos variantes de color de los mismos proyectos,
+  manteniendo la continuidad visual al reiniciar el recorrido.
 
 El contenido sigue procediendo de `profile['projects']`. La tarjeta de invitación
 final enlaza a Contacto y no se cuenta como proyecto. Los enlaces internos se
 abren en la misma pestaña; los externos conservan su pestaña nueva.
+Las miniaturas y sus variantes responsive llevan versión por fecha de archivo
+para mostrar las capturas actualizadas aunque el navegador conserve las anteriores.
 
 ## Archivos
 

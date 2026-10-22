@@ -3,6 +3,7 @@
 $projectItems = array_values($profile['projects']);
 $projectSplit = (int) ceil(count($projectItems) / 2);
 $projectLanes = [array_slice($projectItems, 0, $projectSplit, true), array_slice($projectItems, $projectSplit, null, true)];
+$projectTones = ['apricot', 'lavender', 'sky', 'rose', 'butter', 'mint'];
 $projectVisuals = [
     'MB' => ['class' => 'logistics', 'image' => 'assets/images/logistics.webp', 'label' => 'SYSTEMS / .NET / ANGULAR'],
     'JF' => ['class' => 'photography', 'image' => 'assets/images/photography.webp', 'label' => 'PHOTOGRAPHY / DIGITAL EXPERIENCE'],
@@ -41,12 +42,12 @@ $projectVisuals = [
                             $projectTarget = str_starts_with($projectUrl, '/') && !str_starts_with($projectUrl, '//') ? '' : ' target="_blank" rel="noopener noreferrer"';
                             $visual = $projectVisuals[$project['logo'] ?? ''] ?? ['class' => 'custom', 'image' => '', 'label' => 'DIGITAL / DEVELOPMENT'];
                             ?>
-                            <article class="project-card project-<?= htmlspecialchars($visual['class']) ?>" data-project-index="<?= $index ?>" style="--card-order:<?= $index ?>">
+                            <article class="project-card project-<?= htmlspecialchars($visual['class']) ?>" data-project-index="<?= $index ?>" data-project-tone="<?= $projectTones[$index % count($projectTones)] ?>" style="--card-order:<?= $index ?>">
                                 <div class="project-card-shell">
                                     <a class="project-visual" href="<?= htmlspecialchars($projectUrl) ?>"<?= $projectTarget ?> aria-label="<?= htmlspecialchars($t['projects_visit'] . ': ' . $project['name']) ?>" draggable="false">
                                         <div class="project-visual-top micro"><span><?= htmlspecialchars($visual['label']) ?></span><span>J—<?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span></div>
                                         <?php if ($visual['image'] !== ''): ?>
-                                            <div class="project-screen"><div class="browser-chrome" aria-hidden="true"><i></i><i></i><i></i><span><?= htmlspecialchars(parse_url($projectUrl, PHP_URL_HOST) ?: 'lawebdejacoto.com') ?></span></div><img src="<?= htmlspecialchars($visual['image']) ?>" srcset="<?= htmlspecialchars(str_replace('.webp', '-640.webp', $visual['image'])) ?> 640w, <?= htmlspecialchars($visual['image']) ?> 1280w" sizes="(max-width: 600px) 74vw, (max-width: 1000px) 340px, 440px" width="1280" height="900" loading="lazy" decoding="async" draggable="false" alt="<?= htmlspecialchars($editorial['preview'] . ' · ' . $project['name']) ?>"></div>
+                                            <div class="project-screen"><div class="browser-chrome" aria-hidden="true"><i></i><i></i><i></i><span><?= htmlspecialchars(parse_url($projectUrl, PHP_URL_HOST) ?: 'lawebdejacoto.com') ?></span></div><img src="<?= htmlspecialchars($assetVersion($visual['image'])) ?>" srcset="<?= htmlspecialchars($assetVersion(str_replace('.webp', '-640.webp', $visual['image']))) ?> 640w, <?= htmlspecialchars($assetVersion($visual['image'])) ?> 1280w" sizes="(max-width: 600px) 74vw, (max-width: 1000px) 340px, 440px" width="1280" height="900" loading="lazy" decoding="async" draggable="false" alt="<?= htmlspecialchars($editorial['preview'] . ' · ' . $project['name']) ?>"></div>
                                         <?php elseif ($visual['class'] === 'content'): ?>
                                             <div class="content-art" aria-hidden="true"><span class="code-bracket">{</span><div><span class="micro">CONTENT GENERATOR PRO</span><strong>Ideas.<br>Content.<br><em>Impact.</em></strong><span class="ai-cursor">_</span></div><span class="code-bracket">}</span></div>
                                         <?php else: ?>
@@ -59,7 +60,7 @@ $projectVisuals = [
                             </article>
                         <?php endforeach; ?>
                         <?php if ($laneIndex === 1): ?>
-                            <article class="project-card project-invitation" style="--card-order:5"><a class="project-card-shell" href="<?= htmlspecialchars($urlFor('contact')) ?>" data-section="contact" draggable="false"><div class="invitation-top micro"><span>NEXT / PROJECT</span><span aria-hidden="true">↗</span></div><div class="invitation-art"><h3><?= nl2br(htmlspecialchars(str_replace('\\n', "\n", $editorial['work_invitation']))) ?></h3></div><div class="invitation-bottom"><p><?= htmlspecialchars($editorial['work_invitation_note']) ?></p><strong><?= htmlspecialchars($editorial['work_invitation_link']) ?> <span aria-hidden="true">↗</span></strong></div></a></article>
+                            <article class="project-card project-invitation" data-project-tone="<?= $projectTones[count($projectItems) % count($projectTones)] ?>" style="--card-order:<?= count($projectItems) ?>"><a class="project-card-shell" href="<?= htmlspecialchars($urlFor('contact')) ?>" data-section="contact" draggable="false"><div class="invitation-top micro"><span>NEXT / PROJECT</span><span aria-hidden="true">↗</span></div><div class="invitation-art"><h3><?= nl2br(htmlspecialchars(str_replace('\\n', "\n", $editorial['work_invitation']))) ?></h3></div><div class="invitation-bottom"><p><?= htmlspecialchars($editorial['work_invitation_note']) ?></p><strong><?= htmlspecialchars($editorial['work_invitation_link']) ?> <span aria-hidden="true">↗</span></strong></div></a></article>
                         <?php endif; ?>
                     </div></div>
                 </div>
