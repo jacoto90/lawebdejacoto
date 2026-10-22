@@ -1,0 +1,117 @@
+/* An editorial opening sequence. All content is visible before enhancement. */
+.hero { --hero-cinema-progress: 0; }
+.hero-scroll-scene { margin-top: 44px; }
+.hero-stage { position: relative; isolation: isolate; row-gap: 0; }
+.hero-scenography { position: absolute; z-index: 0; inset: -18px -18px -20px; overflow: hidden; pointer-events: none; }
+.hero-title-wrap { transform: translateZ(0); }
+.hero-portrait, .hero-sequence { z-index: 1; }
+.hero-scenography::before { content: ''; position: absolute; inset: 0; opacity: .35; background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 25% 100%; mask-image: linear-gradient(transparent, #000 15%, #000 65%, transparent); }
+.hero-orbit { position: absolute; width: 54%; top: 4%; left: 31%; color: #85975c; opacity: .28; transform: translate3d(calc(var(--hero-cinema-progress) * -80px), calc(var(--hero-cinema-progress) * 45px), 0) rotate(calc(-28deg + var(--hero-cinema-progress) * 100deg)) scale(calc(1 - var(--hero-cinema-progress) * .15)); }
+.hero-orbit ellipse { transform-origin: 300px 300px; transform: rotate(calc(var(--orbit-angle) * (1 - var(--hero-cinema-progress)))) scaleX(calc(1 + (var(--orbit-scale) - 1) * var(--hero-cinema-progress))); }
+.hero-scene-coordinate { position: absolute; left: 56%; top: 0; font: 500 8px/1.2 Manrope, sans-serif; letter-spacing: .12em; color: var(--muted); writing-mode: vertical-rl; }
+.hero-scene-axis { position: absolute; top: 52%; left: 55%; width: 22px; height: 22px; opacity: .5; }
+.hero-scene-axis::before, .hero-scene-axis::after { content: ''; position: absolute; background: var(--muted); }
+.hero-scene-axis::before { left: 10px; width: 1px; height: 22px; }
+.hero-scene-axis::after { top: 10px; height: 1px; width: 22px; }
+.hero-direction { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; font-size: 8px; letter-spacing: .1em; color: var(--muted); }
+.hero-direction-line { width: 28px; height: 1px; background: currentColor; }
+.hero-title { position: relative; }
+.hero-opening > span { display: block; }
+.hero-opening { translate: calc(var(--hero-cinema-progress) * 16px) 0; }
+.hero-ending { translate: calc(var(--hero-cinema-progress) * -5px) 0; }
+.hero-middle { position: relative; }
+.hero-connector { background: var(--paper); padding-inline: .08em; }
+.hero-portrait { margin: 34px 3% 0 12%; padding-top: 0; }
+.portrait-mat { position: absolute; z-index: -1; inset: -34px -25px 36px -35px; background: #252b22; color: #d5f478; transform: rotate(calc(4deg - var(--hero-cinema-progress) * 7deg)); box-shadow: 0 20px 50px -30px #18221560; overflow: hidden; }
+.portrait-mat::before { content: ''; position: absolute; inset: 0; opacity: .12; background-image: linear-gradient(#d5f478 1px, transparent 1px), linear-gradient(90deg, #d5f478 1px, transparent 1px); background-size: 35px 35px; }
+.portrait-mat-label { position: absolute; top: 12px; left: 18px; font-size: 6px; letter-spacing: .18em; }
+.portrait-mat-bottom { position: absolute; bottom: 15px; left: 12px; font-size: 5px; letter-spacing: .12em; writing-mode: vertical-rl; rotate: 180deg; }
+.portrait-edition { position: absolute; bottom: 40px; left: -14px; color: transparent; -webkit-text-stroke: 1px #d5f47860; font: 400 180px/.8 var(--display); }
+.portrait-surface { transform: perspective(1200px) translate3d(var(--hero-magnet-x, 0px), var(--hero-magnet-y, 0px), 0) rotateX(var(--hero-tilt-x, 0deg)) rotateY(var(--hero-tilt-y, 0deg)) rotate(calc(-3deg + var(--hero-cinema-progress) * 5deg)); }
+.portrait-frame { border: 5px solid var(--paper); }
+.portrait-frame > img { scale: calc(1.07 - var(--hero-cinema-progress) * .07); }
+.portrait-film-edge { position: absolute; right: -12px; top: 20%; color: #e7edd9; font-size: 5px; letter-spacing: .2em; writing-mode: vertical-rl; pointer-events: none; }
+.hero-portrait figcaption { position: relative; margin: 42px -10px 0; font-size: 9px; color: var(--muted); }
+.portrait-badge { width: 72px; height: 72px; left: -36px; background: var(--accent); box-shadow: 0 8px 24px #18221520; }
+.hero-sequence { grid-column: 1 / -1; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-block: 22px 23px; margin-top: 25px; }
+.hero-sequence-caption { font-size: 8px; color: var(--muted); }
+.hero-sequence-steps { display: flex; gap: clamp(24px, 5vw, 90px); padding: 0; list-style: none; }
+.hero-sequence-steps li { display: flex; align-items: baseline; gap: 12px; color: var(--muted); font-size: 11px; transition: color .4s; }
+.hero-sequence-steps .micro { font-size: 7px; opacity: .6; }
+.hero[data-chapter="0"] .hero-sequence-steps li:nth-child(1), .hero[data-chapter="1"] .hero-sequence-steps li:nth-child(2), .hero[data-chapter="2"] .hero-sequence-steps li:nth-child(3) { color: var(--ink); }
+.hero-sequence-track { position: absolute; height: 1px; bottom: 0; left: 0; right: 0; background: var(--line); }
+.hero-sequence-track > span { display: block; width: 100%; height: 2px; margin-top: -1px; background: #7e914d; transform: scaleX(calc(.06 + var(--hero-cinema-progress) * .94)); transform-origin: left; }
+.hero-replay { display: flex; align-items: center; gap: 9px; padding: 8px 0 8px 12px; border: 0; background: none; font-size: 7px; color: var(--muted); }
+.hero-replay[hidden] { display: none; }
+.hero-replay > :first-child { font-size: 24px; line-height: 1; transition: rotate .5s var(--ease); }
+.hero-replay:hover { color: var(--ink); }
+.hero-replay:hover > :first-child { rotate: -90deg; }
+[data-theme="dark"] .hero-orbit { color: #c9ed83; opacity: .2; }
+[data-theme="dark"] .portrait-mat { background: #313e28; }
+
+/* Masked typography, a photographic aperture and an unfolding wire sculpture. */
+@media (prefers-reduced-motion: no-preference) {
+    .hero.is-photo-pending .portrait-frame { clip-path: inset(0 50%); }
+    .hero.is-cinema-entering .hero-opening { animation: cinema-line-mask 1.45s .08s both; }
+    .hero.is-cinema-entering .hero-opening > span { animation: cinema-type-rise 1.45s .08s var(--ease) both; }
+    .hero.is-cinema-entering .hero-middle { animation: cinema-connector 1.3s .42s var(--ease) both; }
+    .hero.is-cinema-entering .hero-ending { animation: cinema-line-mask 1.5s .3s both; }
+    .hero.is-cinema-entering .hero-ending > span { animation: cinema-type-rise 1.5s .3s var(--ease) both; }
+    .hero.is-cinema-entering .hero-orbit { animation: cinema-orbit 2.4s .1s var(--ease) both; }
+    .hero.is-cinema-entering .hero-direction, .hero.is-cinema-entering .hero-identity { animation: cinema-details 1s .85s var(--ease) both; }
+    .hero.is-cinema-entering .portrait-mat { animation: cinema-mat 1.7s .2s var(--ease) both; }
+    .hero.is-photo-entering .portrait-frame { animation: cinema-aperture 1.7s .18s var(--ease) both; }
+    .hero.is-photo-entering .portrait-frame > img { animation: cinema-photo 2s .18s var(--ease) both; }
+    .hero.is-photo-entering .portrait-badge, .hero.is-photo-entering figcaption, .hero.is-photo-entering .portrait-film-edge { animation: cinema-details 1s 1s var(--ease) both; }
+    .hero.is-motion-suspended .hero-orbit { animation-play-state: paused; }
+}
+@keyframes cinema-line-mask { from { clip-path: inset(-15% -15% 115% -15%); } to { clip-path: inset(-15% -15% -15% -15%); } }
+@keyframes cinema-type-rise { from { transform: translate3d(0, 110%, 0) rotate(7deg); } to { transform: translate3d(0, 0, 0) rotate(0); } }
+@keyframes cinema-connector { from { opacity: 0; transform: translateX(-55px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes cinema-details { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
+@keyframes cinema-aperture { 0% { clip-path: inset(0 50%); } 35% { clip-path: inset(0 43%); } 100% { clip-path: inset(0 0); } }
+@keyframes cinema-photo { from { transform: scale(1.4) translateY(5%); filter: grayscale(1) contrast(1.4); } to { transform: scale(1); filter: grayscale(1) contrast(1); } }
+@keyframes cinema-mat { from { opacity: 0; translate: -15px 45px; rotate: -8deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
+@keyframes cinema-orbit { from { opacity: 0; scale: .35; rotate: -100deg; } to { opacity: .28; scale: 1; rotate: 0deg; } }
+@media (min-width: 901px) and (min-height: 780px) and (prefers-reduced-motion: no-preference) {
+    .hero.is-scroll-ready .hero-scroll-scene { height: calc(var(--hero-stage-height) + clamp(260px, 42svh, 460px)); }
+}
+@media (max-width: 1000px) {
+    .hero-direction { font-size: 6px; gap: 8px; }
+    .hero-portrait { margin-left: 5%; margin-right: 4%; }
+    .portrait-mat { inset: -25px -18px 36px -20px; }
+    .portrait-mat-label { font-size: 5px; top: 9px; }
+    .hero-sequence-caption { max-width: 110px; font-size: 7px; }
+    .hero-sequence-steps { gap: 24px; }
+    .hero-sequence-steps li { gap: 6px; font-size: 10px; }
+}
+@media (max-width: 600px) {
+    .hero-title { letter-spacing: 0; }
+    .hero-scroll-scene { margin-top: 30px; }
+    .hero-direction { font-size: 6px; margin-bottom: 18px; letter-spacing: .06em; }
+    .hero-direction-line { width: 18px; }
+    .hero-scenography { inset: 0 -10px -15px; }
+    .hero-scenography::before { background-size: 50% 100%; opacity: .25; }
+    .hero-orbit { width: 110%; left: 8%; top: 16%; opacity: .2; }
+    .hero-scene-coordinate { left: auto; right: 4px; top: 2px; font-size: 6px; }
+    .hero-scene-axis { top: 41%; left: 5%; }
+    .hero-portrait { margin: 58px 5% 0 20%; }
+    .portrait-mat { inset: -27px -16px 30px -28px; }
+    .portrait-edition { font-size: 125px; }
+    .portrait-frame { border-width: 3px; }
+    .portrait-badge { width: 60px; height: 60px; left: -30px; font-size: 36px; }
+    .portrait-film-edge { right: -10px; font-size: 4px; }
+    .hero-portrait figcaption { margin-top: 36px; font-size: 8px; }
+    .hero-sequence { margin-top: 12px; padding-block: 25px 20px; gap: 16px; flex-wrap: wrap; }
+    .hero-sequence-caption { max-width: none; font-size: 7px; }
+    .hero-sequence-steps { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
+    .hero-sequence-steps li { font-size: 10px; }
+    .hero-replay { font-size: 6px; }
+    .hero-replay > :first-child { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-opening, .hero-ending { translate: none; }
+    .portrait-surface { transform: none; }
+    .portrait-frame > img { scale: 1; }
+    .hero-replay { display: none; }
+}

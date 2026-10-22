@@ -1,335 +1,95 @@
 <?php
-$profile = require __DIR__ . '/../data/profile.php';
-$translations = require __DIR__ . '/../data/translations.php';
-$lang = $_GET['lang'] ?? 'es';
-if (!isset($translations[$lang])) {
-    $lang = 'es';
-}
-$mainCssVersion = filemtime(__DIR__ . '/../assets/css/main.css');
-$headlineMobileLines = null;
-if ($lang === 'es') {
-    $headlineMobileLines = [
-        'Timeline de',
-        'operaciones',
-        'logísticas',
-        'y control',
-        'de tiempos',
-        'en muelles',
-    ];
-}
-$heroComicBubbles = $lang === 'es'
-    ? ['Muelle listo', 'Sync cloud', 'KPI en vivo']
-    : ['Dock ready', 'Cloud sync', 'Live KPIs'];
-$assetWithVersion = static function (string $webPath): string {
-    $relativePath = ltrim(str_replace('/', DIRECTORY_SEPARATOR, $webPath), DIRECTORY_SEPARATOR);
-    $absolutePath = __DIR__ . '/../' . $relativePath;
-    if (!is_file($absolutePath)) {
-        return $webPath;
-    }
-    return $webPath . '?v=' . rawurlencode((string) filemtime($absolutePath));
-};
-
-$copy = [
-    'es' => [
-        'title' => 'Proyecto Logístico MEIBIT',
-        'eyebrow' => 'Muestra de proyecto',
-        'headline' => 'Timeline de operaciones logísticas y control de tiempos en muelles',
-        'subheadline' => 'De tablet en muelle a dashboard en la nube, con lectura clara para usuario de operación.',
-        'project_summary' => 'Este proyecto se basa en el control de tiempos desde que un camión llega a la zona, se retiene y sigue los procesos de descarga contemplando posibles alertas y toda la información operativa. Con ello reforzamos la seguridad del proceso mediante KPIs claros y accionables.',
-        'nav_overview' => 'Visión',
-        'nav_timeline' => 'Timeline',
-        'nav_kpi' => 'KPIs',
-        'nav_value' => 'Valor',
-        'nav_contact' => 'Contacto',
-        'kpi_label_1' => 'Eficiencia media',
-        'kpi_label_2' => 'Alertas críticas',
-        'kpi_label_3' => 'Tiempo medio sesión',
-        'kpi_value_1' => '94%',
-        'kpi_value_2' => '3',
-        'kpi_value_3' => '37 min',
-        'timeline_title' => 'Recorrido del usuario',
-        'timeline_intro' => 'Cada fase muestra qué ve el usuario y cómo pasa la información entre muelle, nube y panel final.',
-        'step_1_title' => 'Tablet en muelle + sensores',
-        'step_1_text' => 'El operario registra la sesión en tablet y los sensores confirman eventos de forma automática.',
-        'step_1_caption' => 'Inicio operativo en muelle.',
-        'step_2_title' => 'Sincronización cloud',
-        'step_2_text' => 'Los datos suben a la nube para compartir estado en tiempo real con coordinación y oficina.',
-        'step_2_caption' => 'Datos sincronizados para todos.',
-        'step_3_title' => 'Vista UIX completa',
-        'step_3_text' => 'En la vista UIX se resume toda la operativa: estado de muelles, actividad, alertas y trazabilidad.',
-        'step_3_caption' => 'Operación consolidada en dashboard.',
-        'kpi_title' => 'Zona KPI interactiva',
-        'kpi_intro' => 'Toca la zona superior o inferior de la imagen para abrir cada infográfico.',
-        'modal_title_1' => 'Infográfico KPI 1',
-        'modal_title_2' => 'Infográfico KPI 2',
-        'kpi_info_title' => 'Qué representan estos gráficos',
-        'kpi_info_1' => 'Tiempos de proceso por etapa para detectar donde se concentra cada demora.',
-        'kpi_info_2' => 'Responsable operativo de cada sesión para entender quién la llevó a cargo.',
-        'kpi_info_3' => 'Comparativa visual entre rendimiento esperado y resultado real en cada bloque.',
-        'chips_title' => 'Serie completa de control',
-        'chips_intro' => 'Abajo se agrupan todos los bloques que utiliza el usuario: KPIs, alertas, configuración y estadísticas.',
-        'value_title' => 'Qué aporta al día a día',
-        'value_intro' => 'Menos esperas, mejor decisión operativa y seguimiento simple para todo el equipo.',
-        'cta_title' => 'Proyecto listo para evolucionar',
-        'cta_text' => 'Puedes ampliar esta muestra con nuevos módulos o vídeo corto de operativa real.',
-        'cta_back' => 'Volver al portfolio',
-        'cta_mail' => 'Solicitar demo',
-    ],
-    'en' => [
-        'title' => 'MEIBIT Logistics Project',
-        'eyebrow' => 'Project showcase',
-        'headline' => 'Timeline of logistics operations and dock time control',
-        'subheadline' => 'From dock tablet to cloud dashboard, with clear reading for day-to-day operations users.',
-        'project_summary' => 'This project focuses on time control from truck arrival, retention, and guided unloading stages, including all relevant alerts and operational context. It strengthens process safety through clear and actionable KPI visibility.',
-        'nav_overview' => 'Overview',
-        'nav_timeline' => 'Timeline',
-        'nav_kpi' => 'KPIs',
-        'nav_value' => 'Value',
-        'nav_contact' => 'Contact',
-        'kpi_label_1' => 'Average efficiency',
-        'kpi_label_2' => 'Critical alerts',
-        'kpi_label_3' => 'Avg session time',
-        'kpi_value_1' => '94%',
-        'kpi_value_2' => '3',
-        'kpi_value_3' => '37 min',
-        'timeline_title' => 'User journey',
-        'timeline_intro' => 'Each stage shows what the user sees and how information moves across dock, cloud, and dashboard.',
-        'step_1_title' => 'Dock tablet + sensors',
-        'step_1_text' => 'The operator starts the session from the tablet while sensors validate events automatically.',
-        'step_1_caption' => 'Operational start at dock.',
-        'step_2_title' => 'Cloud sync',
-        'step_2_text' => 'Data is synced to the cloud so office and supervisors see real-time status.',
-        'step_2_caption' => 'Shared live visibility.',
-        'step_3_title' => 'Full UIX view',
-        'step_3_text' => 'The UIX view summarizes operations: dock status, activity, alerts, and process traceability.',
-        'step_3_caption' => 'Consolidated operation panel.',
-        'kpi_title' => 'Interactive KPI area',
-        'kpi_intro' => 'Tap the upper or lower area of the image to open each infographic.',
-        'modal_title_1' => 'KPI infographic 1',
-        'modal_title_2' => 'KPI infographic 2',
-        'kpi_info_title' => 'What these charts represent',
-        'kpi_info_1' => 'Process times by stage to quickly identify where delays are concentrated.',
-        'kpi_info_2' => 'Operational owner per session to understand who handled each flow.',
-        'kpi_info_3' => 'Visual comparison between expected performance and real outcomes.',
-        'chips_title' => 'Full control stack',
-        'chips_intro' => 'Below you can see all user-facing blocks: KPIs, alerts, configuration, and statistics.',
-        'value_title' => 'Day-to-day impact',
-        'value_intro' => 'Less waiting, better operational decisions, and simpler team-wide monitoring.',
-        'cta_title' => 'Ready to grow',
-        'cta_text' => 'You can extend this showcase with new modules or a short real-operation video.',
-        'cta_back' => 'Back to portfolio',
-        'cta_mail' => 'Request demo',
-    ],
-][$lang];
+declare(strict_types=1);
+$content = require __DIR__ . '/../data/logistica.php';
+$requested = $_GET['lang'] ?? 'es';
+$lang = is_string($requested) && isset($content[$requested]) ? $requested : 'es';
+$c = $content[$lang];
+$e = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+$lines = static fn(string $value): string => nl2br(htmlspecialchars(str_replace('\\n', "\n", $value), ENT_QUOTES, 'UTF-8'));
+$asset = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/../' . $path);
+$image = static fn(string $name): string => '/assets/images/logistica/' . $name . '.webp';
+$portfolio = '/?lang=' . $lang;
 ?>
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars($lang) ?>">
+<html lang="<?= $lang ?>">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($copy['title']) ?> · <?= htmlspecialchars($profile['name']) ?></title>
-    <meta name="description" content="<?= htmlspecialchars($copy['headline']) ?>">
-    <link rel="stylesheet" href="/assets/css/main.css?v=<?= urlencode((string) $mainCssVersion) ?>">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#080e17">
+    <title><?= $e($c['title']) ?> · Jacoto</title>
+    <meta name="description" content="<?= $e($c['description']) ?>">
+    <meta property="og:title" content="<?= $e($c['title']) ?>">
+    <meta property="og:description" content="<?= $e($c['description']) ?>">
+    <meta property="og:image" content="https://lawebdejacoto.com/assets/images/logistics.webp">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="<?= $e($asset('assets/css/logistica.css')) ?>">
+    <script src="<?= $e($asset('assets/js/logistica.js')) ?>" defer></script>
 </head>
-<body class="logistic-page">
-<div id="pageLoader" class="page-loader" aria-hidden="true">
-    <div class="loader-card">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
-
+<body>
+<a class="skip-link" href="#main"><?= $e($c['skip']) ?></a>
 <header class="site-header">
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <div class="container nav-wrap">
-        <a class="brand" href="/">JACOTO</a>
-        <button class="menu-btn" type="button" id="menuBtn" aria-label="menu">Menu</button>
-        <nav class="main-nav" id="mainNav">
-            <a href="#top"><?= htmlspecialchars($copy['nav_overview']) ?></a>
-            <a href="#timeline"><?= htmlspecialchars($copy['nav_timeline']) ?></a>
-            <a href="#kpis"><?= htmlspecialchars($copy['nav_kpi']) ?></a>
-            <a href="#value"><?= htmlspecialchars($copy['nav_value']) ?></a>
-            <a href="<?= $lang === 'en' ? '/en' : '/' ?>" class="nav-portfolio">Portfolio</a>
-            <div class="lang-switch">
-                <div class="theme-segment" id="themeSegment" role="radiogroup" aria-label="Theme">
-                    <button class="theme-opt" data-theme-val="light" aria-label="Light mode" role="radio" aria-checked="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                    </button>
-                    <button class="theme-opt" data-theme-val="dark" aria-label="Dark mode" role="radio" aria-checked="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    </button>
-                </div>
-                <a href="?lang=es" class="<?= $lang === 'es' ? 'active' : '' ?>">ES</a>
-                <a href="?lang=en" class="<?= $lang === 'en' ? 'active' : '' ?>">EN</a>
-            </div>
-        </nav>
+    <div class="shell header-inner">
+        <a class="wordmark" href="<?= $portfolio ?>#projects" aria-label="<?= $e($c['back']) ?>">jacoto<span>✳</span><span class="brand-divider"></span><span class="project-brand">MEIBIT<span class="mono">CASE STUDY / 01</span></span></a>
+        <button class="menu-button" aria-expanded="false" aria-controls="project-nav" hidden><?= $e($c['menu']) ?> <span aria-hidden="true">☰</span></button>
+        <nav id="project-nav" aria-label="<?= $e($c['menu']) ?>"><?php foreach ($c['nav'] as $id => $label): ?><a href="#<?= $id ?>"><?= $e($label) ?></a><?php endforeach; ?></nav>
+        <div class="header-tools"><div class="languages"><a href="?lang=es" lang="es" hreflang="es" <?= $lang === 'es' ? 'aria-current="true"' : '' ?>>ES</a><span>/</span><a href="?lang=en" lang="en" hreflang="en" <?= $lang === 'en' ? 'aria-current="true"' : '' ?>>EN</a></div><button class="theme-button" aria-label="<?= $e($c['theme']) ?>" aria-pressed="false" hidden>◐</button></div>
     </div>
+    <div class="reading-progress" aria-hidden="true"></div>
 </header>
-
-<main class="logistic-main" id="top">
-    <section class="hero logistic-hero section">
-        <div class="container logistic-wrap-narrow">
-            <div class="logistic-hero-top">
-                <div class="logistic-hero-copy">
-                    <p class="eyebrow"><?= htmlspecialchars($copy['eyebrow']) ?></p>
-                    <h1 class="logistic-headline">
-                        <?php if (is_array($headlineMobileLines)): ?>
-                            <span class="logistic-headline-default"><?= htmlspecialchars($copy['headline']) ?></span>
-                            <span class="logistic-headline-mobile" aria-hidden="true">
-                                <?php foreach ($headlineMobileLines as $line): ?>
-                                    <span><?= htmlspecialchars($line) ?></span>
-                                <?php endforeach; ?>
-                            </span>
-                        <?php else: ?>
-                            <?= htmlspecialchars($copy['headline']) ?>
-                        <?php endif; ?>
-                    </h1>
-                    <p class="logistic-intro"><?= htmlspecialchars($copy['subheadline']) ?></p>
-                </div>
-                <div class="logistic-hero-art" aria-hidden="true">
-                    <div class="hero-timeline-ornament">
-                        <div class="hero-line"></div>
-                        <span class="hero-dot dot-1">01</span>
-                        <span class="hero-dot dot-2">02</span>
-                        <span class="hero-dot dot-3">03</span>
-                        <span class="hero-comic-bubble bubble-1"><?= htmlspecialchars($heroComicBubbles[0]) ?></span>
-                        <span class="hero-comic-bubble bubble-2"><?= htmlspecialchars($heroComicBubbles[1]) ?></span>
-                        <span class="hero-comic-bubble bubble-3"><?= htmlspecialchars($heroComicBubbles[2]) ?></span>
-                    </div>
+<main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="shell">
+            <div class="hero-topline mono"><span><i class="status-dot"></i><?= $e($c['eyebrow']) ?></span><span>MEIBIT / .NET + ANGULAR</span></div>
+            <div class="hero-layout">
+                <div class="hero-copy"><h1 id="hero-title"><?= $e($c['headline'][0]) ?><br><span><?= $e($c['headline'][1]) ?></span></h1><p class="hero-intro"><?= $e($c['intro']) ?></p><div class="actions"><a class="button primary" href="#overview"><?= $e($c['explore']) ?> <span aria-hidden="true">↗</span></a><a class="text-link" href="#platform"><?= $e($c['view']) ?> <span aria-hidden="true">↓</span></a></div><p class="project-credit"><span><?= $e($c['project_for']) ?></span><strong>MEIBIT</strong></p></div>
+                <div class="hero-visual">
+                    <div class="visual-coordinate mono" aria-hidden="true">SYS.01 / DOCK OPERATIONS</div>
+                    <figure class="terminal-frame"><div class="frame-bar mono"><span><i></i><i></i><i></i></span><span><?= $e($c['device']) ?></span><span aria-hidden="true">↗</span></div><a class="media-link terminal-image" href="/images/proyecto_logistica/imagen1.jpg" data-lightbox data-title="<?= $e($c['device']) ?>" aria-label="<?= $e($c['zoom'] . ': ' . $c['device']) ?>"><img src="<?= $image('imagen1') ?>" width="1078" height="1006" alt="<?= $e($c['device_alt']) ?>" fetchpriority="high"><span class="image-expand" aria-hidden="true">↗</span></a></figure>
+                    <div class="signal-bridge" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="floating-session"><div class="mono">SESSION TRACE <span>05 / 10</span></div><img src="<?= $image('imagen4') ?>" width="954" height="1632" alt="<?= $e($c['session_alt']) ?>"><span class="floating-caption mono"><?= $e($c['capture']) ?></span></div>
+                    <p class="visual-note mono"><span aria-hidden="true">└─</span> <?= $e($c['hero_note']) ?></p>
                 </div>
             </div>
-            <p class="project-summary-note"><?= htmlspecialchars($copy['project_summary']) ?></p>
+            <dl class="tech-rail"><?php foreach ($c['meta'] as [$label, $value]): ?><div><dt class="mono"><?= $e($label) ?></dt><dd><?= $e($value) ?></dd></div><?php endforeach; ?></dl>
         </div>
     </section>
 
-    <section class="section logistic-section" id="timeline">
-        <div class="container logistic-wrap-narrow">
-            <h3><?= htmlspecialchars($copy['timeline_title']) ?></h3>
-            <p class="logistic-lead"><?= htmlspecialchars($copy['timeline_intro']) ?></p>
+    <section class="section" id="overview" aria-labelledby="overview-title"><div class="shell">
+        <div class="section-heading" data-reveal><p class="eyebrow"><?= $e($c['overview_kicker']) ?></p><h2 id="overview-title"><?= $e($c['overview_title']) ?></h2></div>
+        <div class="overview-grid" data-reveal><article class="context-block"><span class="mono">/ A</span><h3><?= $e($c['challenge_label']) ?></h3><p><?= $e($c['challenge']) ?></p></article><article class="context-block"><span class="mono">/ B</span><h3><?= $e($c['solution_label']) ?></h3><p><?= $e($c['solution']) ?></p></article><aside class="contribution"><p class="mono"><?= $e($c['contribution']) ?></p><ul><?php foreach ($c['contributions'] as $item): ?><li><?= $e($item) ?></li><?php endforeach; ?></ul></aside></div>
+    </div></section>
 
-            <div class="timeline-stage">
-                <ol class="project-timeline-list" id="projectTimeline">
-                    <li class="timeline-point is-active" data-visual-src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/imagen1.jpg')) ?>" data-visual-alt="<?= htmlspecialchars($copy['step_1_caption']) ?>">
-                        <div class="timeline-dot">01</div>
-                        <div class="timeline-content">
-                            <h4><?= htmlspecialchars($copy['step_1_title']) ?></h4>
-                            <p><?= htmlspecialchars($copy['step_1_text']) ?></p>
-                            <figure class="timeline-mobile-image">
-                                <img src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/imagen1.jpg')) ?>" alt="<?= htmlspecialchars($copy['step_1_caption']) ?>" loading="lazy">
-                            </figure>
-                        </div>
-                    </li>
+    <section class="section architecture" id="architecture" aria-labelledby="architecture-title"><div class="shell">
+        <div class="section-heading split-heading" data-reveal><div><p class="eyebrow"><?= $e($c['architecture_kicker']) ?></p><h2 id="architecture-title"><?= $lines($c['architecture_title']) ?></h2></div><p><?= $e($c['architecture_intro']) ?></p></div>
+        <div class="architecture-flow" data-reveal><?php foreach ($c['architecture'] as $index => [$number, $title, $tech, $description]): ?><article class="architecture-node"><div class="node-top mono"><span><?= $number ?> / <?= $e($c['flow_labels'][$index]) ?></span><span class="node-symbol" aria-hidden="true"><?= ['⌘', '⇄', '▥'][$index] ?></span></div><h3><?= $e($title) ?></h3><p class="node-tech mono"><?= $e($tech) ?></p><p><?= $e($description) ?></p></article><?php endforeach; ?></div>
+    </div></section>
 
-                    <li class="timeline-point">
-                        <div class="timeline-dot">02</div>
-                        <div class="timeline-content">
-                            <h4><?= htmlspecialchars($copy['step_2_title']) ?></h4>
-                            <p><?= htmlspecialchars($copy['step_2_text']) ?></p>
-                            <div class="cloud-sync-visual" aria-hidden="true">
-                                <div class="cloud-shape"></div>
-                                <span class="cloud-pulse pulse-a"></span>
-                                <span class="cloud-pulse pulse-b"></span>
-                                <span class="cloud-pulse pulse-c"></span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="timeline-point" data-visual-src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/imagen4.jpg')) ?>" data-visual-alt="<?= htmlspecialchars($copy['step_3_caption']) ?>">
-                        <div class="timeline-dot">03</div>
-                        <div class="timeline-content">
-                            <h4><?= htmlspecialchars($copy['step_3_title']) ?></h4>
-                            <p><?= htmlspecialchars($copy['step_3_text']) ?></p>
-                            <div class="uix-image-sequence" aria-label="Secuencia visual UIX">
-                                <figure class="uix-shot frame-1">
-                                    <img src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/imagen3.jpg')) ?>" alt="UIX vista 1" loading="lazy">
-                                </figure>
-                                <figure class="uix-shot frame-2">
-                                    <img src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/imagen4.jpg')) ?>" alt="UIX vista 3" loading="lazy">
-                                </figure>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-
-            </div>
+    <section class="section" id="timeline" aria-labelledby="timeline-title"><div class="shell">
+        <div class="section-heading split-heading" data-reveal><div><p class="eyebrow"><?= $e($c['timeline_kicker']) ?></p><h2 id="timeline-title"><?= $lines($c['timeline_title']) ?></h2></div><p><?= $e($c['timeline_intro']) ?></p></div>
+        <div class="process-layout" data-reveal>
+            <div class="process-console"><div class="console-top mono"><span>PROCESS SEQUENCE</span><span>10 / EVENTS</span></div><ol class="stage-list"><?php foreach ($c['stages'] as $index => [$title, $text]): ?><li><button type="button" data-stage="<?= $index ?>" aria-pressed="<?= $index === 4 ? 'true' : 'false' ?>" aria-controls="stage-detail"><span class="stage-number mono"><?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span><span><?= $e($title) ?></span><span class="stage-marker" aria-hidden="true"></span></button><p class="stage-source"><?= $e($text) ?></p></li><?php endforeach; ?></ol></div>
+            <div class="process-detail"><div class="stage-detail" id="stage-detail" aria-live="polite" aria-atomic="true"><p class="eyebrow"><?= $e($c['stage_label']) ?> <span id="stage-count">05 / 10</span></p><h3 id="stage-title"><?= $e($c['stages'][4][0]) ?></h3><p id="stage-description"><?= $e($c['stages'][4][1]) ?></p><div class="stage-meter" aria-hidden="true"><?php for ($i = 0; $i < 10; $i++): ?><span class="<?= $i <= 4 ? 'filled' : '' ?>"></span><?php endfor; ?></div></div><div class="stage-controls" hidden><button type="button" data-step="-1" aria-label="<?= $e($c['previous']) ?>">←</button><span class="mono">EXPLORE THE FLOW</span><button type="button" data-step="1" aria-label="<?= $e($c['next']) ?>">→</button></div><figure class="process-image"><a class="media-link" href="/images/proyecto_logistica/imagen4.jpg" data-lightbox data-title="<?= $e($c['gallery'][2][1]) ?>" aria-label="<?= $e($c['zoom'] . ': ' . $c['gallery'][2][0]) ?>"><img src="<?= $image('imagen4') ?>" width="954" height="1632" loading="lazy" alt="<?= $e($c['session_alt']) ?>"><span class="image-expand" aria-hidden="true">↗</span></a><figcaption class="mono"><?= $e($c['capture']) ?></figcaption></figure><p class="stage-note"><?= $e($c['stage_note']) ?></p></div>
         </div>
-    </section>
+    </div></section>
 
-    <section class="section logistic-section" id="kpis">
-        <div class="container logistic-wrap-narrow">
-            <h3><?= htmlspecialchars($copy['kpi_title']) ?></h3>
-            <p class="logistic-lead"><?= htmlspecialchars($copy['kpi_intro']) ?></p>
-            <article class="card kpi-modal-card">
-                <div class="kpi-hotspot-image">
-                    <img src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/graficos1i2.jpg')) ?>" alt="Vista unificada de gráficos KPI" loading="lazy">
-                    <button class="kpi-zone kpi-zone-top" type="button" data-modal-src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/infografico1.jpg')) ?>" data-modal-title="<?= htmlspecialchars($copy['modal_title_1']) ?>" aria-label="<?= htmlspecialchars($copy['modal_title_1']) ?>"></button>
-                    <button class="kpi-zone kpi-zone-bottom" type="button" data-modal-src="<?= htmlspecialchars($assetWithVersion('/images/proyecto_logistica/infografico2.jpg')) ?>" data-modal-title="<?= htmlspecialchars($copy['modal_title_2']) ?>" aria-label="<?= htmlspecialchars($copy['modal_title_2']) ?>"></button>
-                </div>
-            </article>
+    <section class="section platform" id="platform" aria-labelledby="platform-title"><div class="shell">
+        <div class="section-heading split-heading" data-reveal><div><p class="eyebrow"><?= $e($c['platform_kicker']) ?></p><h2 id="platform-title"><?= $lines($c['platform_title']) ?></h2></div><p><?= $e($c['platform_intro']) ?></p></div>
+        <div class="gallery" data-reveal><div class="gallery-tabs" aria-label="<?= $e($c['nav']['platform']) ?>"><?php foreach ($c['gallery'] as $index => $item): ?><a href="#view-<?= $index ?>" id="tab-<?= $index ?>" data-gallery-tab="<?= $index ?>"><span class="mono">0<?= $index + 1 ?></span><?= $e($item[0]) ?></a><?php endforeach; ?></div>
+        <?php foreach ($c['gallery'] as $index => [$label, $title, $description, $file, $alt]): ?><article class="gallery-panel" id="view-<?= $index ?>"><div class="gallery-copy"><span class="mono panel-index">VIEW / 0<?= $index + 1 ?></span><h3><?= $e($title) ?></h3><p><?= $e($description) ?></p><a class="text-link" href="/images/proyecto_logistica/<?= $file ?>.jpg" data-lightbox data-title="<?= $e($title) ?>"><?= $e($c['zoom']) ?> ↗</a><span class="capture-label mono"><?= $e($c['capture']) ?></span></div><a class="gallery-image media-link" href="/images/proyecto_logistica/<?= $file ?>.jpg" data-lightbox data-title="<?= $e($title) ?>" aria-label="<?= $e($c['zoom'] . ': ' . $label) ?>"><img src="<?= $image($file) ?>" loading="lazy" alt="<?= $e($alt) ?>"><span class="image-expand" aria-hidden="true">↗</span></a></article><?php endforeach; ?></div>
+        <h3 class="modules-heading"><?= $e($c['modules_title']) ?></h3><div class="module-grid"><?php foreach ($c['modules'] as [$number, $title, $description]): ?><article data-reveal><span class="mono"><?= $number ?> /</span><h4><?= $e($title) ?></h4><p><?= $e($description) ?></p></article><?php endforeach; ?></div>
+    </div></section>
 
-            <h4 class="chips-title"><?= htmlspecialchars($copy['kpi_info_title']) ?></h4>
-            <ul class="kpi-info-list">
-                <li><?= htmlspecialchars($copy['kpi_info_1']) ?></li>
-                <li><?= htmlspecialchars($copy['kpi_info_2']) ?></li>
-                <li><?= htmlspecialchars($copy['kpi_info_3']) ?></li>
-            </ul>
+    <section class="section" id="kpis" aria-labelledby="kpi-title"><div class="shell">
+        <div class="section-heading split-heading" data-reveal><div><p class="eyebrow"><?= $e($c['kpi_kicker']) ?></p><h2 id="kpi-title"><?= $lines($c['kpi_title']) ?></h2></div><p><?= $e($c['kpi_intro']) ?></p></div>
+        <div class="report-grid"><?php foreach ($c['reports'] as [$title, $description, $file]): ?><article class="report-card" data-reveal><div class="report-heading"><div><span class="mono">SESSION REPORT</span><h3><?= $e($title) ?></h3></div><span aria-hidden="true">↗</span></div><a class="report-image media-link" href="/images/proyecto_logistica/<?= $file ?>.jpg" data-lightbox data-title="<?= $e($title . ' · ' . $description) ?>" aria-label="<?= $e($c['zoom'] . ': ' . $title) ?>"><img src="<?= $image($file) ?>" width="974" height="<?= $file === 'infografico1' ? '1388' : '1436' ?>" loading="lazy" alt="<?= $e($c['report_alt']) ?>"><span class="image-expand" aria-hidden="true">↗</span></a><div class="report-footer"><p><?= $e($description) ?></p><span class="mono"><?= $e($c['capture']) ?></span></div></article><?php endforeach; ?></div>
+        <div class="analytics-grid"><?php foreach ($c['analytics'] as [$title, $description]): ?><article><h3><?= $e($title) ?></h3><p><?= $e($description) ?></p></article><?php endforeach; ?></div><p class="export-note mono"><span aria-hidden="true">↓</span><?= $e($c['exports']) ?></p>
+    </div></section>
 
-            <h4 class="chips-title"><?= htmlspecialchars($copy['chips_title']) ?></h4>
-            <p class="logistic-lead"><?= htmlspecialchars($copy['chips_intro']) ?></p>
-            <div class="kpi-chip-cloud">
-                <span class="kpi-chip chip-blue">KPIs</span>
-                <span class="kpi-chip chip-amber">Alertas</span>
-                <span class="kpi-chip chip-slate">Configuración de usuario</span>
-                <span class="kpi-chip chip-cyan">Timeline muelles</span>
-                <span class="kpi-chip chip-green">Estadísticas</span>
-                <span class="kpi-chip chip-violet">Vista card</span>
-                <span class="kpi-chip chip-rose">Vista mapa</span>
-                <span class="kpi-chip chip-indigo">Rendimiento operario</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="section logistic-section" id="value">
-        <div class="container logistic-wrap-narrow">
-            <h3><?= htmlspecialchars($copy['value_title']) ?></h3>
-            <p class="logistic-lead"><?= htmlspecialchars($copy['value_intro']) ?></p>
-            <div class="cards three logistic-benefits">
-                <article class="card">
-                    <h4>Operación más fluida</h4>
-                    <p>La línea temporal facilita detectar bloqueos y reducir tiempos muertos durante la jornada.</p>
-                </article>
-                <article class="card">
-                    <h4>Lectura rápida</h4>
-                    <p>Todo se entiende de un vistazo: estado, alertas, indicadores y progreso de cada muelle.</p>
-                </article>
-                <article class="card">
-                    <h4>Control compartido</h4>
-                    <p>Mismo dato para operario, coordinador y oficina, sin perder contexto operativo.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
+    <section class="section value" id="value" aria-labelledby="value-title"><div class="shell"><div class="section-heading" data-reveal><p class="eyebrow"><?= $e($c['value_kicker']) ?></p><h2 id="value-title"><?= $lines($c['value_title']) ?></h2></div><div class="value-grid"><?php foreach ($c['values'] as $index => [$title, $description]): ?><article data-reveal><span class="value-number">0<?= $index + 1 ?></span><h3><?= $e($title) ?></h3><p><?= $e($description) ?></p></article><?php endforeach; ?></div></div></section>
+    <section class="section contact" id="contact" aria-labelledby="contact-title"><div class="shell" data-reveal><p class="eyebrow"><?= $e($c['contact_kicker']) ?></p><h2 id="contact-title"><?= $lines($c['contact_title']) ?></h2><p><?= $e($c['contact_intro']) ?></p><div class="actions"><a class="button primary" href="<?= $portfolio ?>#contact"><?= $e($c['contact_cta']) ?> ↗</a><a class="text-link" href="<?= $portfolio ?>#projects">← <?= $e($c['back']) ?></a></div></div></section>
 </main>
-
-<div class="media-modal" id="mediaModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Media modal">
-    <div class="media-modal-backdrop" data-modal-close></div>
-    <div class="media-modal-card">
-        <button type="button" class="media-modal-close" data-modal-close aria-label="Close">x</button>
-        <figure>
-            <img id="mediaModalImage" src="" alt="">
-            <figcaption id="mediaModalCaption"></figcaption>
-        </figure>
-    </div>
-</div>
-
-<footer class="site-footer">
-    <div class="container footer-wrap">
-        <p>&copy; 2026 <?= htmlspecialchars($profile['name']) ?> · <?= htmlspecialchars($translations[$lang]['footer_copy']) ?></p>
-    </div>
-</footer>
-
-<script src="/assets/js/main.js"></script>
+<footer><div class="shell"><a class="wordmark" href="<?= $portfolio ?>">jacoto<span>✳</span></a><span class="mono"><?= $e($c['footer']) ?></span><a href="#top" aria-label="<?= $e($c['nav']['overview']) ?>">↑</a></div></footer>
+<dialog class="lightbox" aria-labelledby="lightbox-title"><div class="lightbox-toolbar"><h2 id="lightbox-title"></h2><button type="button" class="lightbox-close" aria-label="<?= $e($c['close']) ?>">✕</button></div><div class="lightbox-image-wrap"><img alt="" id="lightbox-image"></div><a id="lightbox-original" class="text-link" target="_blank" rel="noopener noreferrer"><?= $e($c['original']) ?> ↗</a></dialog>
 </body>
 </html>

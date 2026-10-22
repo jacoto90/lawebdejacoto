@@ -101,6 +101,12 @@ main:focus { outline: none; }
 .hero-stage { display: grid; grid-template-columns: 1.55fr 1fr; align-items: start; gap: 4%; }
 .hero-title-wrap { position: relative; z-index: 2; min-width: 0; }
 .hero-type-space { padding-bottom: clamp(24px, 3.5vw, 50px); }
+.hero-title-motion, .portrait-surface { transform: perspective(1200px) translate3d(var(--hero-magnet-x, 0px), var(--hero-magnet-y, 0px), 0) rotateX(var(--hero-tilt-x, 0deg)) rotateY(var(--hero-tilt-y, 0deg)) rotate(var(--hero-turn, 0deg)); }
+.hero-title-motion { transform-origin: 45% 50%; }
+.portrait-surface { position: relative; transform-origin: 50% 55%; }
+@media (prefers-reduced-motion: no-preference) {
+    .hero.has-hero-motion .portrait-frame { box-shadow: 0 24px 38px -26px #18221555; }
+}
 .hero-title { font: 400 clamp(96px, 13.5vw, 224px)/.84 var(--display); letter-spacing: -.018em; text-transform: uppercase; transform: scale(var(--hero-type-scale, 1)); transform-origin: left top; }
 .hero-title > span { display: block; }
 .hero-title > .hero-opening { font-size: .72em; line-height: 1.06; }
@@ -303,12 +309,6 @@ main:focus { outline: none; }
 @media (prefers-reduced-motion: no-preference) {
     [data-reveal].will-reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s var(--ease), transform .85s var(--ease); }
     [data-reveal].will-reveal.is-visible { opacity: 1; transform: none; }
-    .hero-title > span { animation: title-arrive .85s var(--ease) both; }
-    .hero-title > span:nth-child(2) { animation-delay: .08s; }
-    .hero-title > span:nth-child(3) { animation-delay: .16s; }
-    .hero-portrait { animation: portrait-arrive 1s var(--ease) both; }
-    @keyframes title-arrive { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes portrait-arrive { from { opacity: 0; } to { opacity: 1; } }
 }
 
 @media (min-width: 1800px) {
@@ -494,5 +494,6 @@ main:focus { outline: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .hero-title-motion, .portrait-surface { transform: none; translate: none; }
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

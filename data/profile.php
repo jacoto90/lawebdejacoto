@@ -258,6 +258,16 @@ return [
             ],
             'url' => 'https://contentgeneratorpro.com/',
         ],
+        [
+            'name' => 'Paso Seguro',
+            'type' => ['es' => 'Proyecto propio · IoT / SaaS', 'en' => 'Personal project · IoT / SaaS'],
+            'logo' => 'PS',
+            'description' => [
+                'es' => 'Sistema de aviso peatonal para salidas de parking con señalización láser y plataforma de gestión de dispositivos. Explora la landing original adaptada al portfolio.',
+                'en' => 'Pedestrian warning system for parking exits with laser signage and a device-management platform. Explore the original landing adapted to this portfolio.',
+            ],
+            'url' => '/proyecto-paso-seguro/?lang=%lang%',
+        ],
     ],
     'services' => [
         [

@@ -110,6 +110,8 @@ $imageFor = static function (string $path): string {
     <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
     <script>try{const t=localStorage.getItem('lawebdejacoto_theme');document.documentElement.dataset.theme=t==='dark'?'dark':'light'}catch(e){}</script>
     <link rel="stylesheet" href="<?= htmlspecialchars($assetVersion('assets/css/portfolio.css')) ?>">
+    <link rel="stylesheet" href="<?= htmlspecialchars($assetVersion('assets/css/projects.css')) ?>">
+    <link rel="stylesheet" href="<?= htmlspecialchars($assetVersion('assets/css/hero-cinema.css')) ?>">
     <noscript><style>@media(max-width:900px){.site-header{position:relative}.nav-wrap{flex-wrap:wrap}.main-nav{position:static;visibility:visible;opacity:1;pointer-events:auto;transform:none;height:auto;width:100%;order:3;padding:10px 0 20px;flex-direction:row;flex-wrap:wrap;gap:12px}.main-nav>a{font:600 12px Manrope,sans-serif;border:0}.menu-btn,.theme-toggle{display:none}}</style></noscript>
 </head>
 <body data-scroll-target="<?= htmlspecialchars($targetIds[$currentRouteKey] ?? 'top') ?>" data-language="<?= htmlspecialchars($lang) ?>">
@@ -125,6 +127,8 @@ $imageFor = static function (string $path): string {
     <?php require __DIR__ . '/components/contact.php'; ?>
 </main>
 <?php require __DIR__ . '/components/footer.php'; ?>
+<script src="<?= htmlspecialchars($assetVersion('assets/js/projects.js')) ?>" defer></script>
 <script src="<?= htmlspecialchars($assetVersion('assets/js/portfolio.js')) ?>" defer></script>
+<script src="<?= htmlspecialchars($assetVersion('assets/js/hero-cinema.js')) ?>" defer></script>
 </body>
 </html>

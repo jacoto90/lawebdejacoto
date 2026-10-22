@@ -149,6 +149,9 @@
     const hero = document.querySelector('.hero');
     const heroScene = hero?.querySelector('.hero-scroll-scene');
     const heroStage = hero?.querySelector('.hero-stage');
+    const heroTitleMotion = hero?.querySelector('.hero-title-motion');
+    const portraitSurface = hero?.querySelector('.portrait-surface');
+    const heroChapters = hero?.querySelectorAll('.hero-sequence-steps li');
     const pinnedHero = window.matchMedia('(min-width: 901px) and (min-height: 780px)');
     let heroStart = 0;
     let heroRange = 320;
@@ -166,6 +169,15 @@
         hero.style.setProperty('--hero-portrait-scale', animated && heroCanPin ? (.94 + .06 * eased).toFixed(4) : '1');
         hero.style.setProperty('--hero-portrait-y', animated && heroCanPin ? `${14 * (1 - eased)}px` : '0px');
         hero.style.setProperty('--hero-underline', animated ? (.18 + .82 * eased).toFixed(4) : '1');
+        hero.style.setProperty('--hero-cinema-progress', eased.toFixed(4));
+        const chapter = Math.min(2, Math.floor(progress * 3));
+        hero.dataset.chapter = String(chapter);
+        heroChapters?.forEach((item, index) => {
+            if (index === chapter) item.setAttribute('aria-current', 'step');
+            else item.removeAttribute('aria-current');
+        });
+        heroTitleMotion?.style.setProperty('--hero-turn', animated ? `${(-.25 + .6 * eased).toFixed(3)}deg` : '0deg');
+        portraitSurface?.style.setProperty('--hero-turn', animated ? `${(-1.4 + 2.2 * eased).toFixed(3)}deg` : '0deg');
     };
     const measureHero = () => {
         if (!heroScene) return;
@@ -200,4 +212,82 @@
         window.addEventListener('pageshow', measureHero);
     }
     updateProgress();
+
+    // Independent surfaces preserve the measured native-scroll scene above.
+    if (heroTitleMotion && portraitSurface) {
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+        const surfaces = [
+            { element: heroTitleMotion, host: hero.querySelector('.hero-type-space'), distance: 7, tilt: 1.2 },
+            { element: portraitSurface, host: hero.querySelector('.hero-portrait'), distance: 11, tilt: 4 },
+        ].map(surface => ({ ...surface, x: 0, y: 0, targetX: 0, targetY: 0 }));
+        let visible = false;
+        let motionFrame = 0;
+        let lastTime = 0;
+        const canMove = () => visible && !document.hidden && !reducedMotion.matches;
+        const paint = surface => {
+            surface.element.style.setProperty('--hero-magnet-x', `${(surface.x * surface.distance).toFixed(3)}px`);
+            surface.element.style.setProperty('--hero-magnet-y', `${(surface.y * surface.distance).toFixed(3)}px`);
+            surface.element.style.setProperty('--hero-tilt-x', `${(-surface.y * surface.tilt).toFixed(3)}deg`);
+            surface.element.style.setProperty('--hero-tilt-y', `${(surface.x * surface.tilt).toFixed(3)}deg`);
+        };
+        const animate = now => {
+            motionFrame = 0;
+            if (!canMove()) { lastTime = 0; return; }
+            const dt = lastTime ? Math.min((now - lastTime) / 1000, .05) : 1 / 60;
+            lastTime = now;
+            const ease = 1 - Math.exp(-dt * 10);
+            let settling = false;
+            surfaces.forEach(surface => {
+                surface.x += (surface.targetX - surface.x) * ease;
+                surface.y += (surface.targetY - surface.y) * ease;
+                if (Math.abs(surface.targetX - surface.x) + Math.abs(surface.targetY - surface.y) < .001) {
+                    surface.x = surface.targetX;
+                    surface.y = surface.targetY;
+                } else settling = true;
+                paint(surface);
+            });
+            if (settling) motionFrame = requestAnimationFrame(animate);
+            else lastTime = 0;
+        };
+        const wake = () => {
+            if (!motionFrame && canMove()) motionFrame = requestAnimationFrame(animate);
+        };
+        const reset = () => {
+            cancelAnimationFrame(motionFrame);
+            motionFrame = 0;
+            lastTime = 0;
+            surfaces.forEach(surface => {
+                surface.x = surface.y = surface.targetX = surface.targetY = 0;
+                paint(surface);
+            });
+            hero.classList.toggle('is-motion-suspended', !canMove());
+        };
+        surfaces.forEach(surface => {
+            surface.host.addEventListener('pointermove', event => {
+                if (!canMove() || !finePointer.matches || event.pointerType !== 'mouse') return;
+                const box = surface.host.getBoundingClientRect();
+                surface.targetX = Math.max(-1, Math.min(1, (event.clientX - box.left) / box.width * 2 - 1));
+                surface.targetY = Math.max(-1, Math.min(1, (event.clientY - box.top) / box.height * 2 - 1));
+                wake();
+            }, { passive: true });
+            surface.host.addEventListener('pointerleave', () => {
+                surface.targetX = surface.targetY = 0;
+                wake();
+            });
+        });
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(entries => {
+                visible = entries[0].isIntersecting;
+                reset();
+            }).observe(heroStage);
+        } else visible = true;
+        hero.classList.add('has-hero-motion');
+        reset();
+        document.addEventListener('visibilitychange', reset);
+        reducedMotion.addEventListener('change', reset);
+        finePointer.addEventListener('change', reset);
+        window.addEventListener('blur', reset);
+        window.addEventListener('resize', reset, { passive: true });
+        window.addEventListener('pagehide', reset);
+    }
 })();
