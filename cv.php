@@ -3,6 +3,7 @@ define('APP_BASE_PATH', __DIR__);
 require __DIR__ . '/app/env.php';
 require __DIR__ . '/app/database.php';
 require __DIR__ . '/app/content.php';
+require __DIR__ . '/app/seo.php';
 
 $profile = app_public_profile(__DIR__ . '/data/profile.php');
 $translations = app_public_translations(__DIR__ . '/data/translations.php');
@@ -14,6 +15,7 @@ if (!in_array($lang, ['es', 'en'], true)) {
 
 $t = $translations[$lang] ?? $translations['es'];
 $print = isset($_GET['print']);
+$seo = app_seo_page('cv', $lang, $profile);
 
 function cv_e(string $value): string
 {
@@ -133,7 +135,7 @@ $cvPhoto = $profile['cv_photo'] ?? $profile['photo'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= cv_e($profile['name']) ?> · <?= cv_e($labels['title']) ?></title>
+    <?php require __DIR__ . '/components/seo-head.php'; ?>
     <style>
         :root {
             --navy: #0d2d46;
@@ -505,7 +507,7 @@ $cvPhoto = $profile['cv_photo'] ?? $profile['photo'];
 <article class="cv-page">
     <div class="cv-shell">
         <aside class="cv-side">
-            <img class="cv-photo" src="<?= cv_e($cvPhoto) ?>" alt="<?= cv_e($profile['name']) ?>">
+            <img class="cv-photo" src="<?= cv_e($cvPhoto) ?>" alt="<?= cv_e(($lang === 'es' ? 'Retrato de ' : 'Portrait of ') . $profile['name']) ?>">
             <div class="cv-side-inner">
                 <div class="cv-side-box">
                     <p><?= cv_e(cv_text($profile['location'], $lang)) ?></p>

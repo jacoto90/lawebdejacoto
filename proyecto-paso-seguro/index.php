@@ -7,19 +7,16 @@ $copy = $translations[$lang];
 $escape = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 $asset = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/../' . $path);
 $portfolio = '/?lang=' . $lang;
+require __DIR__ . '/../app/seo.php';
+$seo = app_seo_page('paso-seguro', $lang);
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $escape($copy['title']) ?></title>
-    <meta name="description" content="<?= $escape($copy['description']) ?>">
+    <?php require __DIR__ . '/../components/seo-head.php'; ?>
     <meta name="theme-color" content="#dc2626">
-    <meta property="og:title" content="<?= $escape($copy['title']) ?>">
-    <meta property="og:description" content="<?= $escape($copy['description']) ?>">
-    <meta property="og:image" content="https://lawebdejacoto.com/assets/images/paso-seguro/secuencia_4_pasoseguro.webp">
-    <meta property="og:type" content="website">
     <link rel="icon" href="/assets/images/paso-seguro/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="<?= $escape($asset('assets/css/paso-seguro.css')) ?>">
     <script src="<?= $escape($asset('assets/js/paso-seguro.js')) ?>" defer></script>
@@ -55,7 +52,7 @@ $portfolio = '/?lang=' . $lang;
                     <div class="simulation-shell">
                         <div class="frames" role="img" aria-label="<?= $escape($copy['scene_alt']) ?>">
                             <?php for ($frame = 1; $frame <= 6; $frame++): ?>
-                                <img src="/assets/images/paso-seguro/secuencia_<?= $frame ?>_pasoseguro.webp" width="1000" height="562" alt="" aria-hidden="true" class="frame<?= $frame === 1 ? ' is-active' : '' ?>" <?= $frame === 1 ? 'fetchpriority="high"' : 'decoding="async"' ?>>
+                                <img src="/<?= $escape(app_image_path('assets/images/paso-seguro/secuencia_' . $frame . '_pasoseguro.webp')) ?>" width="1000" height="562" alt="" aria-hidden="true" class="frame<?= $frame === 1 ? ' is-active' : '' ?>" <?= $frame === 1 ? 'fetchpriority="high"' : 'decoding="async"' ?>>
                             <?php endfor; ?>
                             <span class="preview-badge"><i></i><?= $escape($copy['preview']) ?></span>
                         </div>
@@ -74,7 +71,7 @@ $portfolio = '/?lang=' . $lang;
         <section class="section" id="problem" aria-labelledby="problem-title">
             <div class="container split" data-reveal>
                 <div><p class="eyebrow">01 / <?= $escape($copy['nav']['problem']) ?></p><h2 id="problem-title"><?= $escape($copy['problem']['title']) ?></h2><p class="section-description"><?= $escape($copy['problem']['description']) ?></p><p class="problem-note"><?= $escape($copy['problem']['note']) ?></p></div>
-                <figure class="picture"><img src="/assets/images/paso-seguro/stop_con_laser_caso_real.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="<?= $escape($copy['scene_alt']) ?>"><figcaption><?= $escape($copy['problem']['caption']) ?></figcaption></figure>
+                <figure class="picture"><img src="/<?= $escape(app_image_path('assets/images/paso-seguro/stop_con_laser_caso_real.webp')) ?>" width="1536" height="1024" loading="lazy" decoding="async" alt="<?= $escape($copy['scene_alt']) ?>"><figcaption><?= $escape($copy['problem']['caption']) ?></figcaption></figure>
             </div>
         </section>
         <section class="section muted" id="solution" aria-labelledby="solution-title">
@@ -91,7 +88,7 @@ $portfolio = '/?lang=' . $lang;
             <div class="container" data-reveal>
                 <div class="split installation-intro">
                     <div><p class="eyebrow">03 / <?= $escape($copy['nav']['installation']) ?></p><h2 id="installation-title"><?= $escape($copy['installation']['title']) ?></h2><p class="section-description"><?= $escape($copy['installation']['description']) ?></p></div>
-                    <img class="device-image" src="/assets/images/paso-seguro/stop_dispositivo.webp" width="1608" height="978" loading="lazy" decoding="async" alt="<?= $escape($copy['installation']['image_alt']) ?>">
+                    <img class="device-image" src="/<?= $escape(app_image_path('assets/images/paso-seguro/stop_dispositivo.webp')) ?>" width="1608" height="978" loading="lazy" decoding="async" alt="<?= $escape($copy['installation']['image_alt']) ?>">
                 </div>
                 <div class="cards">
                     <?php foreach ($copy['installation']['items'] as [$title, $description]): ?><article class="card"><span class="card-icon" aria-hidden="true">✓</span><h3><?= $escape($title) ?></h3><p><?= $escape($description) ?></p></article><?php endforeach; ?>

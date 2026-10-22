@@ -7,8 +7,10 @@ $c = $content[$lang];
 $e = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 $lines = static fn(string $value): string => nl2br(htmlspecialchars(str_replace('\\n', "\n", $value), ENT_QUOTES, 'UTF-8'));
 $asset = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/../' . $path);
-$image = static fn(string $name): string => '/assets/images/logistica/' . $name . '.webp';
+$image = static fn(string $name): string => '/' . app_image_path('assets/images/logistica/' . $name . '.webp');
 $portfolio = '/?lang=' . $lang;
+require __DIR__ . '/../app/seo.php';
+$seo = app_seo_page('logistics', $lang);
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -16,12 +18,8 @@ $portfolio = '/?lang=' . $lang;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#080e17">
-    <title><?= $e($c['title']) ?> · Jacoto</title>
-    <meta name="description" content="<?= $e($c['description']) ?>">
-    <meta property="og:title" content="<?= $e($c['title']) ?>">
-    <meta property="og:description" content="<?= $e($c['description']) ?>">
-    <meta property="og:image" content="https://lawebdejacoto.com/assets/images/logistics.webp">
-    <meta property="og:type" content="website">
+    <?php require __DIR__ . '/../components/seo-head.php'; ?>
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="<?= $e($asset('assets/css/logistica.css')) ?>">
     <script src="<?= $e($asset('assets/js/logistica.js')) ?>" defer></script>
 </head>

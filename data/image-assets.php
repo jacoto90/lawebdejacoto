@@ -1,0 +1,32 @@
+<?php
+
+// Original URLs remain redirectable; the pixel data is unchanged.
+return [
+    'assets/images/portrait.webp' => 'assets/images/jose-angel-colmena-desarrollador-web-girona.webp',
+    'assets/images/portrait-480.webp' => 'assets/images/jose-angel-colmena-desarrollador-web-girona-480.webp',
+    'assets/images/golf.webp' => 'assets/images/jose-angel-colmena-golf.webp',
+    'assets/images/golf-480.webp' => 'assets/images/jose-angel-colmena-golf-480.webp',
+    'assets/images/logistics.webp' => 'assets/images/proyecto-logistica-meibit.webp',
+    'assets/images/logistics-640.webp' => 'assets/images/proyecto-logistica-meibit-640.webp',
+    'assets/images/photography.webp' => 'assets/images/web-jacoto-fotografia.webp',
+    'assets/images/photography-640.webp' => 'assets/images/web-jacoto-fotografia-640.webp',
+    'assets/images/sticnow.webp' => 'assets/images/tienda-online-sticnow.webp',
+    'assets/images/sticnow-640.webp' => 'assets/images/tienda-online-sticnow-640.webp',
+    'assets/images/paso-seguro.webp' => 'assets/images/paso-seguro-aviso-peatonal.webp',
+    'assets/images/paso-seguro-640.webp' => 'assets/images/paso-seguro-aviso-peatonal-640.webp',
+    'assets/images/logistica/imagen1.webp' => 'assets/images/logistica/terminal-control-muelle-carga.webp',
+    'assets/images/logistica/imagen2.webp' => 'assets/images/logistica/portal-gestion-muelles.webp',
+    'assets/images/logistica/imagen3.webp' => 'assets/images/logistica/estados-muelles-alarmas.webp',
+    'assets/images/logistica/imagen4.webp' => 'assets/images/logistica/etapas-sesion-muelle-21.webp',
+    'assets/images/logistica/graficos1i2.webp' => 'assets/images/logistica/timeline-operaciones-muelles.webp',
+    'assets/images/logistica/infografico1.webp' => 'assets/images/logistica/informe-tiempos-proceso-17.webp',
+    'assets/images/logistica/infografico2.webp' => 'assets/images/logistica/informe-tiempos-proceso-18.webp',
+    'assets/images/paso-seguro/stop_con_laser_caso_real.webp' => 'assets/images/paso-seguro/aviso-laser-stop-salida-parking.webp',
+    'assets/images/paso-seguro/stop_dispositivo.webp' => 'assets/images/paso-seguro/proyector-senal-stop.webp',
+    'assets/images/paso-seguro/secuencia_1_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-1.webp',
+    'assets/images/paso-seguro/secuencia_2_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-2.webp',
+    'assets/images/paso-seguro/secuencia_3_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-3.webp',
+    'assets/images/paso-seguro/secuencia_4_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-4.webp',
+    'assets/images/paso-seguro/secuencia_5_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-5.webp',
+    'assets/images/paso-seguro/secuencia_6_pasoseguro.webp' => 'assets/images/paso-seguro/secuencia-aviso-peatonal-6.webp',
+];

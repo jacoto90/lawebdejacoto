@@ -62,6 +62,24 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Descriptive image filenames; retain existing indexed and bookmarked URLs.
+    RewriteRule ^assets/images/portrait(-480)?\.webp$ /assets/images/jose-angel-colmena-desarrollador-web-girona$1.webp [R=301,L]
+    RewriteRule ^assets/images/golf(-480)?\.webp$ /assets/images/jose-angel-colmena-golf$1.webp [R=301,L]
+    RewriteRule ^assets/images/logistics(-640)?\.webp$ /assets/images/proyecto-logistica-meibit$1.webp [R=301,L]
+    RewriteRule ^assets/images/photography(-640)?\.webp$ /assets/images/web-jacoto-fotografia$1.webp [R=301,L]
+    RewriteRule ^assets/images/sticnow(-640)?\.webp$ /assets/images/tienda-online-sticnow$1.webp [R=301,L]
+    RewriteRule ^assets/images/paso-seguro(-640)?\.webp$ /assets/images/paso-seguro-aviso-peatonal$1.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/imagen1\.webp$ /assets/images/logistica/terminal-control-muelle-carga.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/imagen2\.webp$ /assets/images/logistica/portal-gestion-muelles.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/imagen3\.webp$ /assets/images/logistica/estados-muelles-alarmas.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/imagen4\.webp$ /assets/images/logistica/etapas-sesion-muelle-21.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/graficos1i2\.webp$ /assets/images/logistica/timeline-operaciones-muelles.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/infografico1\.webp$ /assets/images/logistica/informe-tiempos-proceso-17.webp [R=301,L]
+    RewriteRule ^assets/images/logistica/infografico2\.webp$ /assets/images/logistica/informe-tiempos-proceso-18.webp [R=301,L]
+    RewriteRule ^assets/images/paso-seguro/stop_con_laser_caso_real\.webp$ /assets/images/paso-seguro/aviso-laser-stop-salida-parking.webp [R=301,L]
+    RewriteRule ^assets/images/paso-seguro/stop_dispositivo\.webp$ /assets/images/paso-seguro/proyector-senal-stop.webp [R=301,L]
+    RewriteRule ^assets/images/paso-seguro/secuencia_([1-6])_pasoseguro\.webp$ /assets/images/paso-seguro/secuencia-aviso-peatonal-$1.webp [R=301,L]
+
     # Redirect /index.php to clean root URL
     RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
     RewriteRule ^index\.php$ / [R=301,L]

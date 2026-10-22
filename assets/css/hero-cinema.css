@@ -86,28 +86,55 @@
     .hero-sequence-steps li { gap: 6px; font-size: 10px; }
 }
 @media (max-width: 600px) {
-    .hero-title { letter-spacing: 0; }
+    /* One editorial cover: headline, photograph, then the author's signature. */
+    .hero-title-wrap { display: contents; }
+    .hero-type-space { grid-row: 2; position: relative; z-index: 2; padding-bottom: 0; transform: translateZ(0); }
+    .hero-title { display: grid; grid-template-columns: .56em 1fr; width: 96%; letter-spacing: 0; }
+    .hero-title > .hero-opening { grid-column: 1 / -1; font-size: .88em; line-height: 1; }
+    .hero-ending { grid-column: 2; grid-row: 2; align-self: center; margin-top: -.06em; font-size: .92em; line-height: .9; text-align: left; }
+    .hero-ending > span::after { left: auto; right: .0425em; bottom: .18em; width: .065em; height: .065em; border-radius: 50%; background: #657345; transform: none; transform-origin: center bottom; }
+    [data-theme="dark"] .hero-ending > span::after { background: var(--accent); }
+    .hero-ending-dot { position: relative; display: inline-block; width: .15em; height: .15em; margin-left: .065em; border: .02em solid currentColor; overflow: hidden; text-indent: 100%; vertical-align: baseline; }
+    .hero-ending-dot::before { content: ''; position: absolute; inset: 0; background: currentColor; transform: scaleY(0); transform-origin: bottom; }
+    .hero-middle { grid-column: 1; grid-row: 2; top: 13px; left: 10px; flex-direction: column; justify-content: center; align-items: flex-start; gap: .04em; width: auto; margin: -.06em 0 0; padding: 0; }
+    .hero-middle::before { display: none; }
+    .hero-connector { width: 1.15em; padding: 0; font-size: .27em; line-height: .85; white-space: normal; }
+    .hero-simplicity { width: .16em; height: .16em; margin-left: .04em; }
     .hero-scroll-scene { margin-top: 30px; }
-    .hero-direction { font-size: 6px; margin-bottom: 18px; letter-spacing: .06em; }
+    .hero-direction { grid-row: 1; position: relative; z-index: 2; font-size: 6px; margin-bottom: 8px; letter-spacing: .06em; }
     .hero-direction-line { width: 18px; }
     .hero-scenography { inset: 0 -10px -15px; }
     .hero-scenography::before { background-size: 50% 100%; opacity: .25; }
-    .hero-orbit { width: 110%; left: 8%; top: 16%; opacity: .2; }
+    .hero-orbit { width: 100%; left: -24%; top: 25%; opacity: .2; }
     .hero-scene-coordinate { left: auto; right: 4px; top: 2px; font-size: 6px; }
-    .hero-scene-axis { top: 41%; left: 5%; }
-    .hero-portrait { margin: 58px 5% 0 20%; }
-    .portrait-mat { inset: -27px -16px 30px -28px; }
+    .hero-scene-axis { top: 48%; left: 5%; }
+    .hero-portrait { grid-row: 3; margin: calc(36px + .5cm) 6% 0 26%; }
+    .portrait-mat { inset: -16px -12px 27px -20px; }
+    .portrait-mat-label { top: 5px; left: 12px; font-size: 5px; }
     .portrait-edition { font-size: 125px; }
     .portrait-frame { border-width: 3px; }
     .portrait-badge { width: 60px; height: 60px; left: -30px; font-size: 36px; }
     .portrait-film-edge { right: -10px; font-size: 4px; }
-    .hero-portrait figcaption { margin-top: 36px; font-size: 8px; }
-    .hero-sequence { margin-top: 12px; padding-block: 25px 20px; gap: 16px; flex-wrap: wrap; }
+    .hero-portrait figcaption { margin: 24px -4px 0; font-size: 8px; }
+    .hero-identity { grid-row: 4; position: relative; z-index: 2; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .hero-sequence { grid-row: 5; margin-top: 8px; padding-block: 25px 20px; gap: 16px; flex-wrap: wrap; }
     .hero-sequence-caption { max-width: none; font-size: 7px; }
     .hero-sequence-steps { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
     .hero-sequence-steps li { font-size: 10px; }
     .hero-replay { font-size: 6px; }
     .hero-replay > :first-child { font-size: 21px; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+    .hero-ending-dot::before { animation: cinema-dot-pulse 4.5s ease-in-out infinite; }
+    .hero-ending > span::after { animation: cinema-dot-bounce 4.5s ease-in-out infinite; }
+}
+@keyframes cinema-dot-bounce {
+    0%, 100% { transform: translateY(-.18em) scale(.9, 1.05); }
+    45%, 55% { transform: translateY(0) scale(1.12, .88); }
+}
+@keyframes cinema-dot-pulse {
+    0%, 100% { transform: scaleY(0); }
+    45%, 55% { transform: scaleY(1); }
 }
 @media (prefers-reduced-motion: reduce) {
     .hero-opening, .hero-ending { translate: none; }

@@ -4,3 +4,5 @@ Disallow: /admin/
 Disallow: /app/
 Disallow: /config/
 Disallow: /storage/
+
+Sitemap: https://lawebdejacoto.com/sitemap.xml

@@ -3,6 +3,7 @@ define('APP_BASE_PATH', __DIR__);
 require __DIR__ . '/app/env.php';
 require __DIR__ . '/app/database.php';
 require __DIR__ . '/app/content.php';
+require __DIR__ . '/app/seo.php';
 
 $profile = app_public_profile(__DIR__ . '/data/profile.php');
 $translations = app_public_translations(__DIR__ . '/data/translations.php');
@@ -73,6 +74,8 @@ $urlFor = static function (string $routeKey = 'home', ?string $forceLang = null)
 };
 
 $t = $translations[$lang];
+$seo = app_seo_page($currentRouteKey, $lang, $profile);
+$seoCopy = (require __DIR__ . '/data/seo.php')[$lang];
 $editorial = (require __DIR__ . '/data/editorial.php')[$lang];
 foreach ($editorial as $key => $value) {
     if (is_array($value)) {
@@ -81,13 +84,16 @@ foreach ($editorial as $key => $value) {
         $editorial[$key] = $t['editorial_' . $key] ?? $value;
     }
 }
-$assetVersion = static fn(string $path): string => '/' . $path . '?v=' . filemtime(__DIR__ . '/' . $path);
+$assetVersion = static function (string $path): string {
+    $path = app_image_path($path);
+    return '/' . $path . '?v=' . filemtime(__DIR__ . '/' . $path);
+};
 $imageFor = static function (string $path): string {
     $optimized = [
         'images/perfil_joseangel_linkedin.jpg' => 'assets/images/portrait.webp',
         'images/joseangel_golf.png' => 'assets/images/golf.webp',
     ];
-    return $optimized[ltrim($path, '/')] ?? $path;
+    return app_image_path($optimized[ltrim($path, '/')] ?? $path);
 };
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -95,15 +101,7 @@ $imageFor = static function (string $path): string {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
-    <title><?= htmlspecialchars($profile['name']) ?> · Portfolio</title>
-    <meta name="description" content="<?= htmlspecialchars($t['meta_description']) ?>">
-    <link rel="canonical" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey)) ?>">
-    <link rel="alternate" hreflang="es" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey, 'es')) ?>">
-    <link rel="alternate" hreflang="en" href="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey, 'en')) ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="<?= htmlspecialchars($profile['name']) ?> · Portfolio">
-    <meta property="og:description" content="<?= htmlspecialchars($t['meta_description']) ?>">
-    <meta property="og:url" content="https://lawebdejacoto.com<?= htmlspecialchars($urlFor($currentRouteKey)) ?>">
+    <?php require __DIR__ . '/components/seo-head.php'; ?>
     <meta name="theme-color" content="#f2f0e9">
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/vina-sans-latin.woff2" as="font" type="font/woff2" crossorigin>

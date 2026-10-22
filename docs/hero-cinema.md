@@ -21,3 +21,12 @@ visible. Movimiento reducido presenta una portada estática y oculta la
 repetición. Las rutas internas abren directamente su sección; no ejecutan la
 entrada. Cambiar de pestaña o activar movimiento reducido termina la secuencia.
 La animación utiliza los assets locales, sin vídeos ni librerías adicionales.
+
+## Composición móvil
+
+Hasta 600 px, el titular forma un bloque compacto de dos líneas con «de lo»
+encajado junto a la segunda. La fotografía queda debajo y la identidad cierra
+la composición. El punto final es un cuadrado de borde verde: su relleno sube
+y baja en un ciclo de 4,5 segundos, coordinado con el rebote de una bolita.
+Movimiento reducido presenta ambos elementos estáticos. Los ajustes de esta
+composición se limitan al breakpoint móvil.
