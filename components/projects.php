@@ -3,13 +3,13 @@
 $projectItems = array_values($profile['projects']);
 $projectSplit = (int) ceil(count($projectItems) / 2);
 $projectLanes = [array_slice($projectItems, 0, $projectSplit, true), array_slice($projectItems, $projectSplit, null, true)];
-$projectTones = ['apricot', 'lavender', 'sky', 'rose', 'butter', 'mint'];
+$projectTones = ['apricot', 'leaf', 'sky', 'lavender', 'coral', 'orange'];
 $projectVisuals = [
-    'MB' => ['class' => 'logistics', 'image' => 'assets/images/logistics.webp', 'label' => 'SYSTEMS / .NET / ANGULAR'],
-    'JF' => ['class' => 'photography', 'image' => 'assets/images/photography.webp', 'label' => 'PHOTOGRAPHY / DIGITAL EXPERIENCE'],
-    'SN' => ['class' => 'commerce', 'image' => 'assets/images/sticnow.webp', 'label' => 'E-COMMERCE / DEVELOPMENT'],
-    'DS' => ['class' => 'content', 'image' => '', 'label' => 'WORDPRESS / AI / AUTOMATION'],
-    'PS' => ['class' => 'safety', 'image' => 'assets/images/paso-seguro.webp', 'label' => 'IoT / SAAS / LARAVEL / VUE'],
+    'MB' => ['class' => 'logistics', 'image' => 'assets/images/logistics.webp', 'label' => 'SYSTEMS / .NET / ANGULAR', 'tone' => 'sky'],
+    'JF' => ['class' => 'photography', 'image' => 'assets/images/photography.webp', 'label' => 'PHOTOGRAPHY / DIGITAL EXPERIENCE', 'tone' => 'apricot'],
+    'SN' => ['class' => 'commerce', 'image' => 'assets/images/sticnow.webp', 'label' => 'E-COMMERCE / DEVELOPMENT', 'tone' => 'leaf'],
+    'DS' => ['class' => 'content', 'image' => '', 'label' => 'WORDPRESS / AI / AUTOMATION', 'tone' => 'lavender'],
+    'PS' => ['class' => 'safety', 'image' => 'assets/images/paso-seguro.webp', 'label' => 'IoT / SAAS / LARAVEL / VUE', 'tone' => 'coral'],
 ];
 ?>
 <section class="section projects-section" id="projects" aria-labelledby="projectsTitle">
@@ -42,12 +42,12 @@ $projectVisuals = [
                             $projectTarget = str_starts_with($projectUrl, '/') && !str_starts_with($projectUrl, '//') ? '' : ' target="_blank" rel="noopener noreferrer"';
                             $visual = $projectVisuals[$project['logo'] ?? ''] ?? ['class' => 'custom', 'image' => '', 'label' => 'DIGITAL / DEVELOPMENT'];
                             ?>
-                            <article class="project-card project-<?= htmlspecialchars($visual['class']) ?>" data-project-index="<?= $index ?>" data-project-tone="<?= $projectTones[$index % count($projectTones)] ?>" style="--card-order:<?= $index ?>">
+                            <article class="project-card project-<?= htmlspecialchars($visual['class']) ?>" data-project-index="<?= $index ?>" data-project-tone="<?= $visual['tone'] ?? $projectTones[$index % count($projectTones)] ?>" style="--card-order:<?= $index ?>">
                                 <div class="project-card-shell">
                                     <a class="project-visual" href="<?= htmlspecialchars($projectUrl) ?>"<?= $projectTarget ?> aria-label="<?= htmlspecialchars($t['projects_visit'] . ': ' . $project['name']) ?>" draggable="false">
                                         <div class="project-visual-top micro"><span><?= htmlspecialchars($visual['label']) ?></span><span>J—<?= str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) ?></span></div>
                                         <?php if ($visual['image'] !== ''): ?>
-                                            <div class="project-screen"><div class="browser-chrome" aria-hidden="true"><i></i><i></i><i></i><span><?= htmlspecialchars(parse_url($projectUrl, PHP_URL_HOST) ?: 'lawebdejacoto.com') ?></span></div><img src="<?= htmlspecialchars($assetVersion($visual['image'])) ?>" srcset="<?= htmlspecialchars($assetVersion(str_replace('.webp', '-640.webp', $visual['image']))) ?> 640w, <?= htmlspecialchars($assetVersion($visual['image'])) ?> 1280w" sizes="(max-width: 600px) 74vw, (max-width: 1000px) 340px, 440px" width="1280" height="900" loading="lazy" decoding="async" draggable="false" alt="<?= htmlspecialchars($editorial['preview'] . ' · ' . $project['name']) ?>"></div>
+                                            <div class="project-screen"><div class="browser-chrome" aria-hidden="true"><i></i><i></i><i></i><span><?= htmlspecialchars(parse_url($projectUrl, PHP_URL_HOST) ?: 'lawebdejacoto.com') ?></span></div><img src="<?= htmlspecialchars($assetVersion($visual['image'])) ?>" srcset="<?= htmlspecialchars($assetVersion(str_replace('.webp', '-640.webp', $visual['image']))) ?> 640w, <?= htmlspecialchars($assetVersion($visual['image'])) ?> 1280w" sizes="(max-width: 600px) 62vw, (max-width: 1000px) 340px, 440px" width="1280" height="900" loading="lazy" decoding="async" draggable="false" alt="<?= htmlspecialchars($editorial['preview'] . ' · ' . $project['name']) ?>"></div>
                                         <?php elseif ($visual['class'] === 'content'): ?>
                                             <div class="content-art" aria-hidden="true"><span class="code-bracket">{</span><div><span class="micro">CONTENT GENERATOR PRO</span><strong>Ideas.<br>Content.<br><em>Impact.</em></strong><span class="ai-cursor">_</span></div><span class="code-bracket">}</span></div>
                                         <?php else: ?>

@@ -9,7 +9,6 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
     const count = section.querySelectorAll('[data-project-index]').length;
-    const tones = ['apricot', 'lavender', 'sky', 'rose', 'butter', 'mint'];
     const lanes = [...section.querySelectorAll('.project-lane')].map((element, index) => ({
         element, track: element.querySelector('.project-track'), original: element.querySelector('.project-set'),
         direction: index === 0 ? -1 : 1, width: 0, x: 0, nudge: 0, velocity: 0,
@@ -56,7 +55,7 @@
             } else lane.nudge = 0;
             if (Math.abs(lane.velocity) > 1) {
                 lane.x += lane.velocity * dt;
-                lane.velocity *= Math.exp(-dt * 5);
+                lane.velocity *= Math.exp(-dt * .72);
                 settling = true;
             } else lane.velocity = 0;
             // Focused original links stay in the visible copy, including at loop boundaries.
@@ -75,19 +74,20 @@
         cancelAnimationFrame(raf);
         raf = 0;
         previousTime = 0;
+        scrollImpulse = 0;
+        lanes.forEach(lane => { lane.velocity = 0; });
     }
     const resetMagnet = card => {
         if (!card) return;
         ['--mag-x', '--mag-y', '--tilt-x', '--tilt-y'].forEach(property => card.style.removeProperty(property));
     };
-    function cloneSet(original, toneShift = 0) {
+    function cloneSet(original, alternate = false) {
         const clone = original.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         clone.querySelectorAll('a, button').forEach(link => link.tabIndex = -1);
         clone.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
         clone.querySelectorAll('.project-card').forEach(card => {
-            const tone = Math.max(0, tones.indexOf(card.dataset.projectTone));
-            card.dataset.projectTone = tones[(tone + toneShift) % tones.length];
+            if (alternate) card.dataset.projectVariant = 'alternate';
         });
         return clone;
     }
@@ -119,13 +119,12 @@
             // The loop includes two colorways, so wrapping never changes a visible card's color.
             lane.width = parseFloat(getComputedStyle(lane.original).width) * 2;
             if (!lane.width) return;
-            const toneShift = lane.original.children.length % tones.length || 2;
             // One preceding cycle, the accessible original + its alternate colorway,
             // then enough complete cycles to fill ultrawide screens.
-            lane.track.prepend(cloneSet(lane.original), cloneSet(lane.original, toneShift));
-            lane.track.append(cloneSet(lane.original, toneShift));
+            lane.track.prepend(cloneSet(lane.original), cloneSet(lane.original, true));
+            lane.track.append(cloneSet(lane.original, true));
             const trailing = Math.ceil(lane.element.clientWidth / lane.width) + 1;
-            for (let i = 0; i < trailing; i++) lane.track.append(cloneSet(lane.original), cloneSet(lane.original, toneShift));
+            for (let i = 0; i < trailing; i++) lane.track.append(cloneSet(lane.original), cloneSet(lane.original, true));
             lane.x = -lane.width * (1 + phase);
             const focusedCard = lane.original.contains(document.activeElement) ? document.activeElement.closest('.project-card') : null;
             if (focusedCard) lane.x = -lane.width - focusedCard.offsetLeft + (lane.element.clientWidth - focusedCard.offsetWidth) / 2;
@@ -184,9 +183,10 @@
 
     lanes.forEach(lane => {
         lane.element.addEventListener('pointerdown', event => {
-            if (!kinetic || event.button !== 0 || !event.isPrimary) return;
-            drag = {lane, id: event.pointerId, startX: event.clientX, startY: event.clientY, lastX: event.clientX, time: performance.now(), active: false};
-            lane.velocity = 0;
+            if (!kinetic || drag || event.button !== 0 || !event.isPrimary) return;
+            drag = {lane, id: event.pointerId, startX: event.clientX, startY: event.clientY, lastX: event.clientX, time: performance.now(), active: false, gain: event.pointerType === 'touch' ? 1.55 : 1};
+            lanes.forEach(item => { item.velocity = 0; });
+            scrollImpulse = 0;
             lane.nudge = 0;
             resetMagnet(hovered);
             wake();
@@ -204,8 +204,9 @@
             if (!drag.active) return;
             event.preventDefault();
             const now = performance.now();
-            const delta = event.clientX - drag.lastX;
-            lane.velocity = Math.max(-900, Math.min(900, delta / Math.max(8, now - drag.time) * 1000));
+            const delta = (event.clientX - drag.lastX) * drag.gain;
+            const sample = Math.max(-2400, Math.min(2400, delta / Math.max(8, now - drag.time) * 1000));
+            lane.velocity += (sample - lane.velocity) * .5;
             lane.x += delta;
             wrap(lane);
             render(lane);
@@ -213,10 +214,31 @@
             drag.time = now;
         });
         const endDrag = event => {
+            // Touch starts with implicit capture on the image/link. Its loss bubbles
+            // when capture moves to the lane; that transfer is not the end of a drag.
+            if (event.type === 'lostpointercapture' && event.target !== lane.element) return;
             if (!drag || drag.lane !== lane || drag.id !== event.pointerId) return;
-            if (drag.active) suppressClickUntil = performance.now() + 350;
-            else lane.velocity = 0;
-            if (event.type === 'pointercancel') lane.velocity = 0;
+            if (drag.active) {
+                suppressClickUntil = performance.now() + 350;
+                // Keep a flick's direction all the way back to cruising speed.
+                // Holding before release dissipates the launch instead of firing a stale fling.
+                const recency = Math.exp(-Math.max(0, performance.now() - drag.time - 60) / 160);
+                const boost = drag.gain > 1 ? 1.6 : 1.15;
+                lane.velocity = Math.max(-2600, Math.min(2600, lane.velocity * boost * recency));
+                if (gallery.contains(document.activeElement)) document.activeElement.blur();
+                focused = false;
+            } else lane.velocity = 0;
+            if (paused || event.type !== 'pointerup') lane.velocity = 0;
+            if (Math.abs(lane.velocity) > 80) {
+                lane.direction = Math.sign(lane.velocity);
+                // The second row answers the gesture in the opposite direction.
+                lanes.forEach(other => {
+                    if (other === lane) return;
+                    other.direction = -lane.direction;
+                    other.velocity = -lane.velocity * .32;
+                    other.nudge = 0;
+                });
+            } else lane.velocity = 0;
             drag = null;
             lane.element.classList.remove('is-dragging');
             if (lane.element.hasPointerCapture(event.pointerId)) lane.element.releasePointerCapture(event.pointerId);
@@ -233,6 +255,7 @@
 
     gallery.addEventListener('focusin', event => {
         focused = true;
+        lanes.forEach(lane => { lane.velocity = 0; lane.nudge = 0; });
         if (kinetic) {
             const lane = lanes.find(item => item.original.contains(event.target));
             const card = event.target.closest('.project-card');
@@ -256,7 +279,7 @@
 
     if ('IntersectionObserver' in window) {
         new IntersectionObserver(entries => {
-            visible = entries[0].isIntersecting;
+            visible = entries[entries.length - 1].isIntersecting;
             if (!visible) stop();
             wake();
         }, {threshold: 0}).observe(gallery);

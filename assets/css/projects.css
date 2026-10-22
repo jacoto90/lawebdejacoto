@@ -22,15 +22,24 @@
 .project-lane, .project-track, .project-set { display: contents; }
 .project-set[aria-hidden="true"] { display: none; }
 .projects-section .project-card { grid-column: auto; min-width: 0; position: relative; }
-.project-card[data-project-tone="apricot"] { --tile-bg: #ffd5ba; --tile-ink: #492c25; --tile-accent: #b45035; }
-.project-card[data-project-tone="lavender"] { --tile-bg: #e2d4ff; --tile-ink: #3b2a53; --tile-accent: #7953b6; }
-.project-card[data-project-tone="sky"] { --tile-bg: #c9e8ff; --tile-ink: #203e57; --tile-accent: #346eaa; }
-.project-card[data-project-tone="rose"] { --tile-bg: #ffd4e2; --tile-ink: #542c40; --tile-accent: #ac416b; }
-.project-card[data-project-tone="butter"] { --tile-bg: #ffedac; --tile-ink: #4b3b1c; --tile-accent: #916720; }
-.project-card[data-project-tone="mint"] { --tile-bg: #cef0e1; --tile-ink: #24473d; --tile-accent: #327e65; }
+/* Keep the existing hues, shaded by 20%; the invitation uses the hero's brand greens. */
+.project-card[data-project-tone="apricot"] { --tile-bg: color-mix(in srgb, #e8ad8d 80%, #000); --tile-ink: #43271f; --tile-accent: #934329; }
+.project-card[data-project-tone="lavender"] { --tile-bg: color-mix(in srgb, #b9a2db 80%, #000); --tile-ink: #302240; --tile-accent: #5c397e; }
+.project-card[data-project-tone="sky"] { --tile-bg: color-mix(in srgb, #94bdd6 80%, #000); --tile-ink: #1e3548; --tile-accent: #2b5980; }
+.project-card[data-project-tone="coral"] { --tile-bg: color-mix(in srgb, #e79b98 80%, #000); --tile-ink: #4b222a; --tile-accent: #8f303c; }
+.project-card[data-project-tone="orange"] { --tile-bg: color-mix(in srgb, #e8a66e 80%, #000); --tile-ink: #452b1c; --tile-accent: #89471e; }
+.project-card[data-project-tone="leaf"] { --tile-bg: color-mix(in srgb, #a4c78c 80%, #000); --tile-ink: #243b25; --tile-accent: #3b6535; }
+.project-card[data-project-tone="apricot"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #d99578 80%, #000); }
+.project-card[data-project-tone="lavender"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #c6b0e3 80%, #000); }
+.project-card[data-project-tone="sky"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #8bc8c4 80%, #000); }
+.project-card[data-project-tone="coral"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #d98283 80%, #000); }
+.project-card[data-project-tone="orange"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #efba8c 80%, #000); }
+.project-card[data-project-tone="leaf"][data-project-variant="alternate"] { --tile-bg: color-mix(in srgb, #7fb38c 80%, #000); }
+.project-card.project-invitation { --tile-bg: var(--accent); --tile-ink: #252b22; --tile-accent: #252b22; }
+.project-card.project-invitation[data-project-variant="alternate"] { --tile-bg: #252b22; --tile-ink: var(--accent); --tile-accent: var(--accent); }
 .project-card-shell { display: block; height: 100%; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 75%, transparent); border-radius: 15px; background: var(--paper); box-shadow: 0 12px 22px -16px #1f281b35; transform: perspective(1000px) translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform .55s var(--ease), box-shadow .5s, border-color .4s; }
 .project-card:hover .project-card-shell { border-color: color-mix(in srgb, var(--ink) 35%, var(--line)); box-shadow: 0 25px 40px -20px #1f281b55; }
-.projects-section .project-card .project-visual { height: 245px; aspect-ratio: auto; border-radius: 0; background: radial-gradient(ellipse at 20% 0%, #ffffff55, transparent 70%), var(--tile-bg); color: var(--tile-ink); }
+.projects-section .project-card .project-visual { height: 245px; aspect-ratio: auto; border-radius: 0; background: radial-gradient(ellipse at 20% 0%, #ffffff26, transparent 70%), var(--tile-bg); color: var(--tile-ink); }
 .projects-section .project-logistics .project-visual::before { background-image: linear-gradient(var(--tile-accent) 1px, transparent 1px), linear-gradient(90deg, var(--tile-accent) 1px, transparent 1px); opacity: .1; }
 .projects-section .project-card .project-visual-top { inset: 18px 20px auto; font-size: 7px; letter-spacing: .05em; }
 .projects-section .project-card .project-screen { width: 82%; transform: rotate(-5deg) translateY(46px); border-radius: 6px; transition: transform .7s var(--ease); }
@@ -52,7 +61,7 @@
 .projects-section .content-art em { color: var(--tile-accent); }
 .projects-section .content-art .micro { font-size: 6px; }
 .projects-section .code-bracket { font-size: 130px; }
-.projects-section .ai-cursor { font-size: 21px; }
+.projects-section .ai-cursor { font-size: 21px; color: var(--tile-accent); }
 .projects-section .custom-art { font-size: 90px; }
 .project-invitation .project-card-shell { background: var(--tile-bg); color: var(--tile-ink); min-height: 386px; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; position: relative; }
 .project-invitation .project-card-shell::before { content: ''; position: absolute; width: 230px; height: 230px; border: 1px solid color-mix(in srgb, var(--tile-accent) 18%, transparent); border-radius: 50%; top: 45px; right: -80px; box-shadow: 0 0 0 36px color-mix(in srgb, var(--tile-accent) 5%, transparent), 0 0 0 72px color-mix(in srgb, var(--tile-accent) 3%, transparent); pointer-events: none; }
@@ -99,7 +108,7 @@
     .project-invitation .project-card-shell { min-height: 366px; }
 }
 @media (max-width: 600px) {
-    .projects-section { --tile-width: min(82vw, 350px); --tile-height: 325px; --tile-gap: 18px; padding-top: 60px; padding-bottom: 50px; }
+    .projects-section { --tile-width: min(72vw, 300px); --tile-height: 325px; --tile-gap: 16px; padding-top: 60px; padding-bottom: 50px; }
     .projects-heading { flex-direction: row; align-items: center; margin-top: 32px; gap: 20px; }
     .projects-heading-note { display: none; }
     .projects-pretitle { font-size: 21px; margin-bottom: 12px; }
@@ -116,21 +125,21 @@
     .project-lanes { grid-template-columns: 1fr; gap: 25px; }
     .projects-section.is-kinetic .project-gallery { margin-top: 0; padding-block: 28px 35px; }
     .is-kinetic .project-lanes { gap: 23px; transform: rotate(-2deg); }
-    .projects-section .project-card .project-visual { height: 200px; }
+    .projects-section .project-card .project-visual { height: 186px; }
     .projects-section .project-card .project-visual-top { inset: 14px 15px auto; font-size: 6px; }
     .projects-section .project-card .project-screen { width: 86%; }
-    .projects-section .project-card .project-info { padding: 16px 17px; }
+    .projects-section .project-card .project-info { padding: 14px 15px; }
     .projects-section .project-card .project-type { font-size: 6px; }
-    .projects-section .project-card .project-info h3 { font-size: 19px; margin-top: 7px; }
+    .projects-section .project-card .project-info h3 { font-size: 18px; margin-top: 7px; }
     .projects-section .project-card .project-info > p { font-size: 9px; margin-top: 8px; }
     .projects-section .project-card .project-open { width: 30px; height: 30px; font-size: 18px; right: 12px; bottom: 12px; }
-    .projects-section .content-art { padding: 20px; gap: 9px; }
-    .projects-section .content-art strong { font-size: 39px; margin-top: 10px; }
+    .projects-section .content-art { padding: 34px 16px 16px; gap: 9px; }
+    .projects-section .content-art strong { font-size: clamp(30px, 9vw, 39px); margin-top: 10px; }
     .projects-section .content-art .micro { font-size: 5px; }
     .projects-section .code-bracket { font-size: 100px; }
     .project-invitation .project-card-shell { min-height: 325px; padding: 22px; }
     .invitation-art { gap: 12px; margin-block: 20px; }
-    .invitation-art h3 { font-size: 44px; }
+    .invitation-art h3 { font-size: clamp(36px, 10vw, 44px); }
     .invitation-bottom strong { font-size: 16px; }
     .projects-footer { gap: 14px; padding-top: 20px; }
     .projects-footer .micro { font-size: 6px; letter-spacing: .035em; }
